@@ -5,10 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Drukhari Reference</title>
 </head>
-<body onmouseover="this.ownerDocument.lastHoveredElement = event.target.closest('.unit-table td.name') ? event.target.closest('tr.removable') : undefined;" onmouseleave="this.ownerDocument.lastHoveredElement = undefined;" onclick="
-this.ownerDocument.lastHoveredElement?.classList.toggle('crossed');
-this.ownerDocument.lastHoveredElement?.classList.toggle('print-display-none', this.ownerDocument.lastHoveredElement?.classList.contains('crossed'));
-">      
+<body onmouseover="this.ownerDocument.lastHoveredElement = event.target.closest('.unit-table td.name') ? event.target.closest('tr.removable') : undefined;" onmouseleave="this.ownerDocument.lastHoveredElement = undefined;" onclick="if (typeof window.cycleUnitState === 'function' && this.ownerDocument.lastHoveredElement) window.cycleUnitState(this.ownerDocument.lastHoveredElement);">      
 
 
 
@@ -3961,10 +3958,18 @@ tr.anchor-highlight.highlight-done {
 .crossed {
   text-decoration: line-through;
 }
+.unit-inactive {
+  opacity: 0.45;
+  color: #666;
+}
+.unit-inactive td {
+  color: inherit;
+}
 .removable {
   cursor: pointer;
 }
 @media print {
+    .unit-inactive { opacity: 0.5; }
     .print-display-none, .print-display-none * {
         display: none !important;
     }
@@ -4261,6 +4266,17 @@ body {
 } 
 </style>
 <script>
+window.cycleUnitState = function(el) {
+  if (!el || !el.classList) return;
+  if (el.classList.contains('crossed')) {
+    el.classList.remove('crossed', 'print-display-none');
+    el.classList.add('unit-inactive');
+  } else if (el.classList.contains('unit-inactive')) {
+    el.classList.remove('unit-inactive');
+  } else {
+    el.classList.add('crossed', 'print-display-none');
+  }
+};
 (function() {
   document.querySelectorAll('div[type="card"]').forEach(function(card) {
     var tbl = card.querySelector('table');
