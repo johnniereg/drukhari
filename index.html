@@ -3899,6 +3899,36 @@ html {
     -moz-column-break-inside: avoid;
     break-inside: avoid;
 }
+/* Collapse: hide data rows, keep header row; button top-right */
+.card-collapse-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  width: 22px;
+  height: 22px;
+  padding: 0;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 3px;
+  background: rgba(255,255,255,0.9);
+  cursor: pointer;
+  font-size: 14px;
+  line-height: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 2;
+  color: #333;
+}
+.card-collapse-btn:hover {
+  background: rgba(0,0,0,0.06);
+}
+*[type="card"].collapsed tbody tr:not(:first-child) {
+  display: none;
+}
+@media print {
+  .card-collapse-btn { display: none !important; }
+  *[type="card"].collapsed tbody tr:not(:first-child) { display: table-row !important; }
+}
 *[type="markdown"] {
   white-space: pre-wrap; 
   white-space-collapse: preserve-breaks;
@@ -4216,5 +4246,25 @@ html {
 body { 
   margin: 10px;  
 } 
-</style></body>
+</style>
+<script>
+(function() {
+  document.querySelectorAll('div[type="card"]').forEach(function(card) {
+    var tbl = card.querySelector('table');
+    if (!tbl || !tbl.querySelector('tbody')) return;
+    var btn = document.createElement('button');
+    btn.type = 'button';
+    btn.className = 'card-collapse-btn';
+    btn.setAttribute('aria-label', 'Collapse table');
+    btn.textContent = '\u2212';
+    btn.addEventListener('click', function() {
+      card.classList.toggle('collapsed');
+      btn.textContent = card.classList.contains('collapsed') ? '\u002B' : '\u2212';
+      btn.setAttribute('aria-label', card.classList.contains('collapsed') ? 'Expand table' : 'Collapse table');
+    });
+    card.insertBefore(btn, card.firstChild);
+  });
+})();
+</script>
+</body>
 </html>
