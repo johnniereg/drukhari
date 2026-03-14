@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Drukhari Reference</title>
 </head>
-<body onmouseover="this.ownerDocument.lastHoveredElement = event.target.closest('.removable');" onmouseleave="this.ownerDocument.lastHoveredElement = undefined;" onclick="
+<body onmouseover="this.ownerDocument.lastHoveredElement = event.target.closest('.unit-table td.name') ? event.target.closest('tr.removable') : undefined;" onmouseleave="this.ownerDocument.lastHoveredElement = undefined;" onclick="
 this.ownerDocument.lastHoveredElement?.classList.toggle('crossed');
 this.ownerDocument.lastHoveredElement?.classList.toggle('print-display-none', this.ownerDocument.lastHoveredElement?.classList.contains('crossed'));
 ">      
@@ -543,7 +543,7 @@ this.ownerDocument.lastHoveredElement?.classList.toggle('print-display-none', th
          
           <td class="data" type="markdown">2</td> 
          
-          <td class="notes data" type="markdown">Aethersails, Masters of the Shadowed Sky, Speed of the Kill, Vanguard of the City</td>
+          <td class="notes data" type="markdown">Aethersails, Masters of the Shadowed Sky, Speed of the Kill, Vanguard of the Dark City</td>
          
           <td class="notes data" type="markdown">Splinter Racks</td> 
         
@@ -3098,6 +3098,30 @@ this.ownerDocument.lastHoveredElement?.classList.toggle('print-display-none', th
       
         
           <td class="name">
+            <span class="profile-name">Archon's Retinue</span>
+            <span class="data" type="markdown">If this unit has a Leader unit attached to it during the Declare Battle Formations step, that Leader unit gains the Scouts 7" ability.</span>
+          </td>
+        
+      
+      
+    </tr>
+  
+    <tr class="removable">
+      
+        
+          <td class="name">
+            <span class="profile-name">Archon's Will</span>
+            <span class="data" type="markdown">At the start of the first battle round, select one objective marker on the battlefield. Until the end of the battle, while this unit is within range of that objective marker, unless this unit is Battle-shocked, models in this unit have a 5+ Invulnerable Save and an Objective Control characteristic of 3.</span>
+          </td>
+        
+      
+      
+    </tr>
+  
+    <tr class="removable">
+      
+        
+          <td class="name">
             <span class="profile-name">Bloody Spectacle</span>
             <span class="data" type="markdown">Each time this model makes a melee attack that targets a <span style="font-variant: small-caps;"><strong>Character</strong></span> unit, you can re-roll the Hit roll and you can re-roll the Wound roll. Each time this model's unit destroys a <span style="font-variant: small-caps;"><strong>Character</strong></span> model, you gain 1CP.</span>
           </td>
@@ -3596,31 +3620,6 @@ this.ownerDocument.lastHoveredElement?.classList.toggle('print-display-none', th
       
     </tr>
   
-    <tr class="removable">
-      
-        
-          <td class="name">
-            <span class="profile-name">Archon's Retinue</span>
-            <span class="data" type="markdown">If this unit has a Leader unit attached to it during the Declare Battle Formations step, that Leader unit gains the Scouts 7" ability.</span>
-          </td>
-        
-      
-      
-    </tr>
-  
-    <tr class="removable">
-      
-        
-          <td class="name">
-            <span class="profile-name">Archon's Will</span>
-            <span class="data" type="markdown">At the start of the first battle round, select one objective marker on the battlefield. Until the end of the battle, while this unit is within range of that objective marker, unless this unit is Battle-shocked, models in this unit have a 5+ Invulnerable Save and an Objective Control characteristic of 3.</span>
-          </td>
-        
-      
-      
-    </tr>
-
-  
   
     <tr class="removable">
       
@@ -3918,9 +3917,26 @@ html {
 *[type="card"].collapsed tbody tr:not(:first-child) {
   display: none;
 }
+/* Temporary highlight when jumping to an ability/pain from Unit table */
+tr.anchor-highlight {
+  background: rgba(255, 235, 59, 0.45);
+  transition: background 0.5s ease-out;
+}
+tr.anchor-highlight.highlight-done {
+  background: transparent;
+}
+.ability-link, .pain-link {
+  color: #1a5fb4;
+  text-decoration: none;
+}
+.ability-link:hover, .pain-link:hover {
+  text-decoration: underline;
+}
 @media print {
   .card-collapse-btn { display: none !important; }
   *[type="card"].collapsed tbody tr:not(:first-child) { display: table-row !important; }
+  .anchor-highlight, .anchor-highlight.highlight-done { background: transparent !important; }
+  a[href^="#ability-"], a[href^="#pain-"] { color: inherit; text-decoration: none; }
 }
 *[type="markdown"] {
   white-space: pre-wrap; 
@@ -4260,6 +4276,100 @@ body {
       btn.setAttribute('aria-label', card.classList.contains('collapsed') ? 'Expand table' : 'Collapse table');
     });
     card.insertBefore(btn, card.firstChild);
+  });
+})();
+
+(function() {
+  function slug(s) {
+    return (s || '').replace(/\s*\([^)]*\)\s*/g, '').trim().toLowerCase().replace(/\s+/g, '-').replace(/[^a-z0-9-]/g, '');
+  }
+  function escapeHtml(s) {
+    var div = document.createElement('div');
+    div.textContent = s;
+    return div.innerHTML;
+  }
+  function getFirstHeaderText(table) {
+    var th = table && table.querySelector('tbody tr:first-child th');
+    return th ? (th.textContent || '').trim() : '';
+  }
+  var cards = document.querySelectorAll('div[type="card"]');
+  var abilitiesTable = null, painTable = null;
+  cards.forEach(function(card) {
+    var t = card.querySelector('table');
+    if (!t) return;
+    var h = getFirstHeaderText(t);
+    if (h === 'Abilities') abilitiesTable = t;
+    else if (h === 'Pain') painTable = t;
+  });
+  if (abilitiesTable) {
+    abilitiesTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+      var nameEl = tr.querySelector('.profile-name');
+      if (nameEl) { tr.id = 'ability-' + slug(nameEl.textContent); }
+    });
+  }
+  if (painTable) {
+    painTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+      var nameEl = tr.querySelector('.profile-name');
+      if (nameEl) { tr.id = 'pain-' + slug(nameEl.textContent); }
+    });
+  }
+  var unitTable = document.querySelector('.unit-table');
+  if (unitTable) {
+    var headerRow = unitTable.querySelector('tbody tr:first-child');
+    var headers = headerRow ? headerRow.querySelectorAll('th') : [];
+    var abilitiesCol = -1, painCol = -1;
+    for (var i = 0; i < headers.length; i++) {
+      var t = (headers[i].textContent || '').trim();
+      if (t === 'Abilities') abilitiesCol = i;
+      else if (t === 'Pain') painCol = i;
+    }
+    unitTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+      var cells = tr.querySelectorAll('td');
+      if (abilitiesCol >= 0 && cells[abilitiesCol]) {
+        var text = (cells[abilitiesCol].textContent || '').trim();
+        var parts = text.split(',').map(function(p) { return p.trim(); }).filter(Boolean);
+        cells[abilitiesCol].innerHTML = parts.map(function(p) {
+          return '<a href="#ability-' + slug(p) + '" class="ability-link">' + escapeHtml(p) + '</a>';
+        }).join(', ');
+      }
+      if (painCol >= 0 && cells[painCol]) {
+        var text = (cells[painCol].textContent || '').trim();
+        var parts = text.split(',').map(function(p) { return p.trim(); }).filter(Boolean);
+        cells[painCol].innerHTML = parts.map(function(p) {
+          return '<a href="#pain-' + slug(p) + '" class="pain-link">' + escapeHtml(p) + '</a>';
+        }).join(', ');
+      }
+    });
+  }
+  var idAliases = { 'ability-damaged': 'ability-damaged-1-4-wounds-remaining' };
+  var currentHighlight = { el: null, timeout: null };
+  function clearCurrentHighlight() {
+    if (currentHighlight.el) {
+      clearTimeout(currentHighlight.timeout);
+      currentHighlight.el.classList.remove('anchor-highlight', 'highlight-done');
+      currentHighlight.el = null;
+      currentHighlight.timeout = null;
+    }
+  }
+  document.addEventListener('click', function(e) {
+    var a = e.target.closest('a[href^="#ability-"], a[href^="#pain-"]');
+    if (!a) return;
+    e.preventDefault();
+    var id = a.getAttribute('href').slice(1);
+    var el = document.getElementById(id) || (idAliases[id] ? document.getElementById(idAliases[id]) : null);
+    if (el) {
+      clearCurrentHighlight();
+      el.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      el.classList.add('anchor-highlight');
+      currentHighlight.el = el;
+      currentHighlight.timeout = setTimeout(function() {
+        el.classList.add('highlight-done');
+        el.classList.remove('anchor-highlight');
+        setTimeout(function() { el.classList.remove('highlight-done'); }, 600);
+        currentHighlight.el = null;
+        currentHighlight.timeout = null;
+      }, 10000);
+    }
   });
 })();
 </script>
