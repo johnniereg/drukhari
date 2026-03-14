@@ -429,7 +429,7 @@
          
           <td class="notes data" type="markdown">Mind Like a Steel Trap, Precognisant</td>
          
-          <td class="notes data" type="markdown">Archon of the Poisoned Tongue</td> 
+          <td class="notes data" type="markdown">Poisoned Tongue</td> 
         
       
     </tr>
@@ -540,7 +540,7 @@
          
           <td class="data" type="markdown">2</td> 
          
-          <td class="notes data" type="markdown">Aethersails, Masters of the Shadowed Sky, Speed of the Kill, Vanguard of the Dark City, Deadly Demise D3</td>
+          <td class="notes data" type="markdown">Aethersails, Masters..., Speed..., Vanguard..., Deadly Demise D3</td>
          
           <td class="notes data" type="markdown">Splinter Racks</td> 
         
@@ -3969,7 +3969,59 @@ tr.anchor-highlight.highlight-done {
 .removable {
   cursor: pointer;
 }
+.back-to-top-btn {
+  position: fixed;
+  bottom: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid rgba(0,0,0,0.15);
+  border-radius: 50%;
+  background: rgba(255,255,255,0.95);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+  cursor: pointer;
+  font-size: 18px;
+  line-height: 1;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  color: #333;
+}
+.back-to-top-btn.visible {
+  display: flex;
+}
+.back-to-top-btn:hover {
+  background: rgba(0,0,0,0.06);
+}
+th.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+  padding-right: 1.25em;
+  min-width: 2.25em;
+  white-space: nowrap;
+}
+th.sortable:hover {
+  background-color: #1e2d3a;
+  color: #fff;
+}
+th.sortable .sort-indicator {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 1em;
+  text-align: center;
+  font-size: 0.7em;
+  opacity: 0.8;
+  line-height: 1;
+}
+th.sorted-asc .sort-indicator::after { content: '▲'; }
+th.sorted-desc .sort-indicator::after { content: '▼'; }
 @media print {
+    .back-to-top-btn { display: none !important; }
     tr.unit-inactive { display: none !important; }
     .print-display-none, .print-display-none * {
         display: none !important;
@@ -3997,6 +4049,7 @@ tr.anchor-highlight.highlight-done {
 }
 /* Mobile-friendly: horizontal scroll, auto column widths to prevent overlap */
 @media screen and (max-width: 768px) {
+    html { font-size: 14px; }
     body {
         margin: 0;
         padding: 8px;
@@ -4006,8 +4059,6 @@ tr.anchor-highlight.highlight-done {
         -webkit-text-size-adjust: 100%;
     }
     div[type="card"] {
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
         margin-top: 20px;
         margin-bottom: 1rem;
         border-radius: 6px;
@@ -4015,6 +4066,10 @@ tr.anchor-highlight.highlight-done {
     }
     div[type="card"]:first-of-type {
         margin-top: 0;
+    }
+    .card-table-wrap {
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
     }
     div[type="card"] table {
         margin-bottom: 0;
@@ -4293,6 +4348,10 @@ window.cycleUnitState = function(el) {
       btn.setAttribute('aria-label', card.classList.contains('collapsed') ? 'Expand table' : 'Collapse table');
     });
     card.insertBefore(btn, card.firstChild);
+    var wrap = document.createElement('div');
+    wrap.className = 'card-table-wrap';
+    tbl.parentNode.insertBefore(wrap, tbl);
+    wrap.appendChild(tbl);
   });
 })();
 
@@ -4340,6 +4399,8 @@ window.cycleUnitState = function(el) {
       if (t === 'Abilities') abilitiesCol = i;
       else if (t === 'Pain') painCol = i;
     }
+    var abilityHrefMap = { 'Masters...': 'ability-masters-of-the-shadowed-sky', 'Speed...': 'ability-speed-of-the-kill', 'Vanguard...': 'ability-vanguard-of-the-dark-city' };
+    var painHrefMap = { 'Poisoned Tongue': 'pain-archon-of-the-poisoned-tongue' };
     unitTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
       var cells = tr.querySelectorAll('td');
       if (abilitiesCol >= 0 && cells[abilitiesCol]) {
@@ -4347,14 +4408,16 @@ window.cycleUnitState = function(el) {
         var parts = text.split(',').map(function(p) { return p.trim(); }).filter(Boolean);
         cells[abilitiesCol].innerHTML = parts.map(function(p) {
           if (/^Deadly Demise\b/i.test(p)) return '<a href="#keyword-deadly-demise" class="ability-link">' + escapeHtml(p) + '</a>';
-          return '<a href="#ability-' + slug(p) + '" class="ability-link">' + escapeHtml(p) + '</a>';
+          var href = abilityHrefMap[p] ? '#' + abilityHrefMap[p] : '#ability-' + slug(p);
+          return '<a href="' + href + '" class="ability-link">' + escapeHtml(p) + '</a>';
         }).join(', ');
       }
       if (painCol >= 0 && cells[painCol]) {
         var text = (cells[painCol].textContent || '').trim();
         var parts = text.split(',').map(function(p) { return p.trim(); }).filter(Boolean);
         cells[painCol].innerHTML = parts.map(function(p) {
-          return '<a href="#pain-' + slug(p) + '" class="pain-link">' + escapeHtml(p) + '</a>';
+          var href = painHrefMap[p] ? '#' + painHrefMap[p] : '#pain-' + slug(p);
+          return '<a href="' + href + '" class="pain-link">' + escapeHtml(p) + '</a>';
         }).join(', ');
       }
     });
@@ -4478,7 +4541,10 @@ window.cycleUnitState = function(el) {
       tbody.appendChild(tr);
     });
     table.appendChild(tbody);
-    card.appendChild(table);
+    var wrap = document.createElement('div');
+    wrap.className = 'card-table-wrap';
+    card.appendChild(wrap);
+    wrap.appendChild(table);
     var firstStyle = document.querySelector('style');
     if (firstStyle && firstStyle.parentNode) firstStyle.parentNode.insertBefore(card, firstStyle);
     function linkifyKeywordsColumn(tbl) {
@@ -4506,6 +4572,19 @@ window.cycleUnitState = function(el) {
     linkifyKeywordsColumn(rangedTable);
     linkifyKeywordsColumn(meleeTable);
   }
+  var backToTopBtn = document.createElement('button');
+  backToTopBtn.type = 'button';
+  backToTopBtn.className = 'back-to-top-btn';
+  backToTopBtn.setAttribute('aria-label', 'Scroll back to top');
+  backToTopBtn.innerHTML = '\u2191';
+  backToTopBtn.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    backToTopBtn.classList.remove('visible');
+  });
+  window.addEventListener('scroll', function() {
+    if (window.scrollY < 80) backToTopBtn.classList.remove('visible');
+  });
+  document.body.appendChild(backToTopBtn);
   document.addEventListener('click', function(e) {
     var a = e.target.closest('a[href^="#ability-"], a[href^="#pain-"], a[href^="#keyword-"]');
     if (!a) return;
@@ -4524,8 +4603,122 @@ window.cycleUnitState = function(el) {
         currentHighlight.el = null;
         currentHighlight.timeout = null;
       }, 10000);
+      backToTopBtn.classList.add('visible');
     }
   });
+})();
+
+(function() {
+  function findTableByFirstHeader(text) {
+    var cards = document.querySelectorAll('div[type="card"]');
+    for (var c = 0; c < cards.length; c++) {
+      var t = cards[c].querySelector('table');
+      if (!t) continue;
+      var th = t.querySelector('tbody tr:first-child th');
+      if (th && (th.textContent || '').trim() === text) return t;
+    }
+    return null;
+  }
+  function parseNum(s) {
+    var t = (s || '').replace(/"/g, '').trim();
+    var m = t.match(/(-?\d+)/);
+    return m ? parseInt(m[1], 10) : 0;
+  }
+  function parseAP(s) {
+    var n = parseNum(s);
+    return -n;
+  }
+  function parseD(s) {
+    var t = (s || '').trim().toUpperCase();
+    var dm = t.match(/^D(\d+)$/);
+    if (dm) return (parseInt(dm[1], 10) + 1) / 2;
+    return parseNum(s) || 0;
+  }
+  function unitsFirst(s) {
+    var part = (s || '').split(',')[0];
+    return (part || '').trim();
+  }
+  function getSortKey(tableId, colIndex, cellText) {
+    var text = (cellText || '').trim();
+    if (tableId === 'unit') {
+      if (colIndex === 0) return text.toLowerCase();
+      if (colIndex === 3) return parseNum(text);
+      return parseNum(text);
+    }
+    if (tableId === 'ranged') {
+      if (colIndex === 0) return text.toLowerCase();
+      if (colIndex === 1) return unitsFirst(text).toLowerCase();
+      if (colIndex === 6) return parseAP(text);
+      if (colIndex === 7) return parseD(text);
+      return parseNum(text);
+    }
+    if (tableId === 'melee') {
+      if (colIndex === 0) return text.toLowerCase();
+      if (colIndex === 1) return unitsFirst(text).toLowerCase();
+      if (colIndex === 5) return parseAP(text);
+      if (colIndex === 6) return parseD(text);
+      return parseNum(text);
+    }
+    return text;
+  }
+  function sortTable(table, tableId, sortableCols, colIndex, dir) {
+    var tbody = table.querySelector('tbody');
+    if (!tbody) return;
+    var headerRow = tbody.querySelector('tr:first-child');
+    var rows = [].slice.call(tbody.querySelectorAll('tr.removable'));
+    rows.sort(function(a, b) {
+      var aCell = a.querySelectorAll('td')[colIndex];
+      var bCell = b.querySelectorAll('td')[colIndex];
+      var aText = aCell ? (aCell.textContent || '').trim() : '';
+      var bText = bCell ? (bCell.textContent || '').trim() : '';
+      var aKey = getSortKey(tableId, colIndex, aText);
+      var bKey = getSortKey(tableId, colIndex, bText);
+      var aNum = typeof aKey === 'number', bNum = typeof bKey === 'number';
+      var cmp = 0;
+      if (aNum && bNum) cmp = aKey < bKey ? -1 : aKey > bKey ? 1 : 0;
+      else cmp = String(aKey).localeCompare(String(bKey), undefined, { numeric: true });
+      return dir === 'asc' ? cmp : -cmp;
+    });
+    rows.forEach(function(r) { tbody.appendChild(r); });
+  }
+  function setupSortableTable(table, tableId, sortableCols) {
+    var tbody = table && table.querySelector('tbody');
+    if (!tbody) return;
+    var headerRow = tbody.querySelector('tr:first-child');
+    var ths = headerRow ? headerRow.querySelectorAll('th') : [];
+    ths.forEach(function(th, i) {
+      if (sortableCols.indexOf(i) < 0) return;
+      th.classList.add('sortable');
+      var ind = document.createElement('span');
+      ind.className = 'sort-indicator';
+      ind.setAttribute('aria-hidden', 'true');
+      th.appendChild(ind);
+    });
+    table.addEventListener('click', function(e) {
+      var th = e.target.closest('th.sortable');
+      if (!th) return;
+      var headerRow = table.querySelector('tbody tr:first-child');
+      var ths = headerRow ? headerRow.querySelectorAll('th') : [];
+      var colIndex = [].indexOf.call(ths, th);
+      if (colIndex < 0) return;
+      var currentCol = table.dataset.sortCol !== undefined ? parseInt(table.dataset.sortCol, 10) : -1;
+      var currentDir = table.dataset.sortDir || 'asc';
+      var dir = (currentCol === colIndex && currentDir === 'asc') ? 'desc' : 'asc';
+      table.dataset.sortCol = colIndex;
+      table.dataset.sortDir = dir;
+      headerRow.querySelectorAll('th.sortable').forEach(function(t) {
+        t.classList.remove('sorted-asc', 'sorted-desc');
+        if ([].indexOf.call(ths, t) === colIndex) t.classList.add(dir === 'asc' ? 'sorted-asc' : 'sorted-desc');
+      });
+      sortTable(table, tableId, sortableCols, colIndex, dir);
+    });
+  }
+  var unitTable = document.querySelector('.unit-table');
+  if (unitTable) setupSortableTable(unitTable, 'unit', [0, 1, 2, 3, 4, 5, 6]);
+  var rangedTable = document.querySelector('.ranged-weapons-table');
+  if (rangedTable) setupSortableTable(rangedTable, 'ranged', [0, 1, 2, 3, 4, 5, 6, 7]);
+  var meleeTable = findTableByFirstHeader('Melee Weapons');
+  if (meleeTable) setupSortableTable(meleeTable, 'melee', [0, 1, 2, 3, 4, 5, 6]);
 })();
 </script>
 </body>
