@@ -3961,6 +3961,7 @@ tr.anchor-highlight.highlight-done {
 .unit-inactive {
   opacity: 0.45;
   color: #666;
+  font-style: italic;
 }
 .unit-inactive td {
   color: inherit;
@@ -3969,7 +3970,7 @@ tr.anchor-highlight.highlight-done {
   cursor: pointer;
 }
 @media print {
-    .unit-inactive { opacity: 0.5; }
+    tr.unit-inactive { display: none !important; }
     .print-display-none, .print-display-none * {
         display: none !important;
     }
