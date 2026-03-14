@@ -3950,7 +3950,7 @@ html {
         page-break-inside: avoid;
     }
 }
-/* Mobile-friendly: horizontal scroll for tables, touch-friendly spacing */
+/* Mobile-friendly: horizontal scroll, auto column widths to prevent overlap */
 @media screen and (max-width: 768px) {
     body {
         margin: 0;
@@ -3968,13 +3968,20 @@ html {
         box-shadow: 0 1px 3px rgba(0,0,0,0.08);
     }
     div[type="card"] table {
-        min-width: min-content;
         margin-bottom: 0;
     }
+    /* Unit table: auto layout + min-widths so columns don't overlap */
     .unit-table {
-        min-width: 520px;
+        table-layout: auto;
+        min-width: 640px;
+        width: max-content;
     }
-    /* Keep numerical columns readable on narrow viewports */
+    .unit-table th:first-child,
+    .unit-table td:first-child {
+        min-width: 100px;
+        width: auto;
+        max-width: none;
+    }
     .unit-table th:nth-child(2),
     .unit-table td:nth-child(2),
     .unit-table th:nth-child(3),
@@ -3985,21 +3992,61 @@ html {
     .unit-table td:nth-child(6),
     .unit-table th:nth-child(7),
     .unit-table td:nth-child(7) {
-        min-width: 3em;
+        min-width: 36px;
+        width: auto;
+        max-width: none;
     }
     .unit-table th.sv,
     .unit-table th:nth-child(4),
     .unit-table td:nth-child(4) {
-        min-width: 4em;
+        min-width: 56px;
+        width: auto;
+        max-width: none;
     }
+    .unit-table th.notes:nth-of-type(1),
+    .unit-table td.notes:nth-child(8) {
+        min-width: 200px;
+        width: auto;
+    }
+    .unit-table th.notes:nth-of-type(2),
+    .unit-table td.notes:nth-child(9) {
+        min-width: 72px;
+        width: auto;
+        max-width: none;
+    }
+    /* Ranged table: auto layout + min-widths */
     .ranged-weapons-table {
-        min-width: 580px;
+        table-layout: auto;
+        min-width: 680px;
+        width: max-content;
+    }
+    .ranged-weapons-table th:first-child,
+    .ranged-weapons-table td:first-child {
+        min-width: 110px;
+        width: auto;
+        max-width: none;
+    }
+    .ranged-weapons-table th.notes,
+    .ranged-weapons-table td.notes {
+        min-width: 140px;
+        width: auto;
     }
     .ranged-weapons-table th:nth-child(3),
-    .ranged-weapons-table td:nth-child(3),
+    .ranged-weapons-table td:nth-child(3) {
+        min-width: 44px;
+        width: auto;
+        max-width: none;
+    }
     .ranged-weapons-table th:nth-child(n+4):nth-child(-n+8),
     .ranged-weapons-table td:nth-child(n+4):nth-child(-n+8) {
-        min-width: 3em;
+        min-width: 36px;
+        width: auto;
+        max-width: none;
+    }
+    .ranged-weapons-table th:nth-child(9),
+    .ranged-weapons-table td:nth-child(9) {
+        min-width: 100px;
+        width: auto;
     }
     div[type="card"] table:not(.unit-table):not(.ranged-weapons-table) {
         min-width: 320px;
@@ -4007,10 +4054,15 @@ html {
     th, td {
         padding: 6px 8px;
         font-size: 12px;
+        white-space: nowrap;
     }
     .unit-table th,
     .unit-table td {
-        padding: 6px 6px;
+        padding: 6px 8px;
+    }
+    .unit-table td.notes:nth-child(8),
+    .ranged-weapons-table td.notes {
+        white-space: normal;
     }
     .profile-name {
         font-size: 12px;
