@@ -658,7 +658,7 @@
          
           <td class="notes data" type="markdown">Winged Strike</td> 
         
-      
+        
     </tr>
   
     
@@ -836,7 +836,7 @@
          
           <td class="data" type="markdown">3</td> 
          
-          <td class="data" type="markdown">6+, 6(4)++</td> 
+          <td class="data" type="markdown">6+, 6++*</td> 
          
           <td class="data" type="markdown">1</td> 
          
@@ -844,7 +844,7 @@
          
           <td class="data" type="markdown">2</td> 
          
-          <td class="notes data" type="markdown">No Escape</td>
+          <td class="notes data" type="markdown">No Escape, 4++ versus Melee</td>
          
           <td class="notes data" type="markdown">Acrobatic Gladiators</td> 
         
@@ -4408,6 +4408,7 @@ window.cycleUnitState = function(el) {
         var parts = text.split(',').map(function(p) { return p.trim(); }).filter(Boolean);
         cells[abilitiesCol].innerHTML = parts.map(function(p) {
           if (/^Deadly Demise\b/i.test(p)) return '<a href="#keyword-deadly-demise" class="ability-link">' + escapeHtml(p) + '</a>';
+          if (/\d\+\+.*versus/i.test(p)) return escapeHtml(p);
           var href = abilityHrefMap[p] ? '#' + abilityHrefMap[p] : '#ability-' + slug(p);
           return '<a href="' + href + '" class="ability-link">' + escapeHtml(p) + '</a>';
         }).join(', ');
