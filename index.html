@@ -3537,14 +3537,6 @@ this.ownerDocument.lastHoveredElement?.classList.toggle('print-display-none', th
         
   <table>
   
-    </tbody></table>
-  </div>
-
-  
-<div type="card">
-        
-  <table>
-  
     <tbody><tr>
       <th>Pain</th>
        
@@ -3898,25 +3890,26 @@ html {
     page-break-inside: avoid;
     -moz-column-break-inside: avoid;
     break-inside: avoid;
+    margin-top: 12px;
 }
-/* Collapse: hide data rows, keep header row; button top-right */
+*[type="card"]:first-of-type {
+    margin-top: 0;
+}
+/* Collapse: hide data rows, keep header row; button above table */
 .card-collapse-btn {
-  position: absolute;
-  top: 4px;
-  right: 4px;
+  display: block;
   width: 22px;
   height: 22px;
+  margin-left: auto;
+  margin-bottom: 6px;
   padding: 0;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 3px;
   background: rgba(255,255,255,0.9);
   cursor: pointer;
   font-size: 14px;
-  line-height: 1;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  z-index: 2;
+  line-height: 20px;
+  text-align: center;
   color: #333;
 }
 .card-collapse-btn:hover {
@@ -3993,9 +3986,13 @@ html {
     div[type="card"] {
         overflow-x: auto;
         -webkit-overflow-scrolling: touch;
+        margin-top: 20px;
         margin-bottom: 1rem;
         border-radius: 6px;
         box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+    }
+    div[type="card"]:first-of-type {
+        margin-top: 0;
     }
     div[type="card"] table {
         margin-bottom: 0;
