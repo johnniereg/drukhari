@@ -4409,6 +4409,8 @@ window.cycleUnitState = function(el) {
         cells[abilitiesCol].innerHTML = parts.map(function(p) {
           if (/^Deadly Demise\b/i.test(p)) return '<a href="#keyword-deadly-demise" class="ability-link">' + escapeHtml(p) + '</a>';
           if (/\d\+\+.*versus/i.test(p)) return escapeHtml(p);
+          if (p === 'Infiltrators') return '<a href="#keyword-infiltrators" class="ability-link">' + escapeHtml(p) + '</a>';
+          if (p === 'Stealth') return '<a href="#keyword-stealth" class="ability-link">' + escapeHtml(p) + '</a>';
           var href = abilityHrefMap[p] ? '#' + abilityHrefMap[p] : '#ability-' + slug(p);
           return '<a href="' + href + '" class="ability-link">' + escapeHtml(p) + '</a>';
         }).join(', ');
@@ -4423,7 +4425,7 @@ window.cycleUnitState = function(el) {
       }
     });
   }
-  var idAliases = { 'ability-damaged': 'ability-damaged-1-4-wounds-remaining' };
+  var idAliases = { 'ability-damaged': 'ability-damaged-1-4-wounds-remaining', 'ability-mind-like-a-steel-trap': 'ability-mind-like-a-steel-trap-aura' };
   var currentHighlight = { el: null, timeout: null };
   function clearCurrentHighlight() {
     if (currentHighlight.el) {
