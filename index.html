@@ -3986,14 +3986,27 @@ tr.anchor-highlight.highlight-done {
   display: none;
   align-items: center;
   justify-content: center;
-  z-index: 1000;
+  z-index: 9999;
   color: #333;
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 .back-to-top-btn.visible {
   display: flex;
 }
 .back-to-top-btn:hover {
   background: rgba(0,0,0,0.06);
+}
+@media screen and (max-width: 768px) {
+  .back-to-top-btn {
+    bottom: max(16px, env(safe-area-inset-bottom));
+    right: max(16px, env(safe-area-inset-right));
+    width: 48px;
+    height: 48px;
+    font-size: 22px;
+  }
 }
 th.sortable {
   cursor: pointer;
@@ -4580,13 +4593,20 @@ window.cycleUnitState = function(el) {
   backToTopBtn.className = 'back-to-top-btn';
   backToTopBtn.setAttribute('aria-label', 'Scroll back to top');
   backToTopBtn.innerHTML = '\u2191';
+  var scrollShowThreshold = 400;
+  var scrollHideThreshold = 80;
+  function updateBackToTopVisible() {
+    var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
+    if (y > scrollShowThreshold) backToTopBtn.classList.add('visible');
+    else if (y < scrollHideThreshold) backToTopBtn.classList.remove('visible');
+  }
   backToTopBtn.addEventListener('click', function() {
     window.scrollTo({ top: 0, behavior: 'smooth' });
     backToTopBtn.classList.remove('visible');
   });
-  window.addEventListener('scroll', function() {
-    if (window.scrollY < 80) backToTopBtn.classList.remove('visible');
-  });
+  window.addEventListener('scroll', updateBackToTopVisible, { passive: true });
+  window.addEventListener('resize', updateBackToTopVisible);
+  updateBackToTopVisible();
   document.body.appendChild(backToTopBtn);
   document.addEventListener('click', function(e) {
     var a = e.target.closest('a[href^="#ability-"], a[href^="#pain-"], a[href^="#keyword-"]');
@@ -4606,7 +4626,6 @@ window.cycleUnitState = function(el) {
         currentHighlight.el = null;
         currentHighlight.timeout = null;
       }, 10000);
-      backToTopBtn.classList.add('visible');
     }
   });
 })();
