@@ -4697,6 +4697,18 @@ window.cycleUnitState = function(el) {
       var bKey = getSortKey(tableId, colIndex, bText);
       var aNum = typeof aKey === 'number', bNum = typeof bKey === 'number';
       var cmp = 0;
+
+      // For unit table name column, always group destroyed/disabled together.
+      if (tableId === 'unit' && colIndex === 0) {
+        var aState = (a.classList.contains('crossed') || a.classList.contains('unit-inactive')) ? 1 : 0;
+        var bState = (b.classList.contains('crossed') || b.classList.contains('unit-inactive')) ? 1 : 0;
+        if (aState !== bState) {
+          // Active units (state 0) always come before destroyed/disabled (state 1),
+          // regardless of ascending or descending sort direction.
+          return aState - bState;
+        }
+      }
+
       if (aNum && bNum) cmp = aKey < bKey ? -1 : aKey > bKey ? 1 : 0;
       else cmp = String(aKey).localeCompare(String(bKey), undefined, { numeric: true });
       return dir === 'asc' ? cmp : -cmp;
