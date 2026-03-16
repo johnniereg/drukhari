@@ -3983,6 +3983,16 @@ html {
   margin-bottom: 12px;
   padding: 6px 0;
   border-bottom: 1px solid rgba(0,0,0,0.1);
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: #fff;
+  transition: opacity 0.2s ease, transform 0.2s ease;
+}
+.table-nav.table-nav--hidden {
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(-8px);
 }
 .table-nav a {
   color: #1a5fb4;
@@ -4541,6 +4551,34 @@ window.cycleUnitState = function(el) {
   saveUnitStates();
 };
 restoreUnitStates();
+(function() {
+  var nav = document.querySelector('.table-nav');
+  if (nav) {
+    var lastScrollY = window.scrollY || 0;
+    var scrollThreshold = 80;
+    var ticking = false;
+    function updateNavVisibility() {
+      var y = window.scrollY || 0;
+      if (y > scrollThreshold) {
+        if (y > lastScrollY) {
+          nav.classList.add('table-nav--hidden');
+        } else {
+          nav.classList.remove('table-nav--hidden');
+        }
+      } else {
+        nav.classList.remove('table-nav--hidden');
+      }
+      lastScrollY = y;
+      ticking = false;
+    }
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(updateNavVisibility);
+      }
+    }, { passive: true });
+  }
+})();
 (function() {
   document.querySelectorAll('div[type="card"]').forEach(function(card) {
     var tbl = card.querySelector('table');
