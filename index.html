@@ -4460,6 +4460,56 @@ body {
 } 
 </style>
 <script>
+var UNIT_STATES_KEY = 'drukhari-unit-states';
+function getUnitName(row) {
+  var nameEl = row && row.querySelector('.profile-name');
+  return nameEl ? (nameEl.textContent || '').trim() : '';
+}
+function getRowState(row) {
+  if (row.classList.contains('crossed')) return 'crossed';
+  if (row.classList.contains('unit-inactive')) return 'unit-inactive';
+  return 'active';
+}
+function saveUnitStates() {
+  var unitTable = document.querySelector('.unit-table');
+  if (!unitTable) return;
+  var states = {};
+  try {
+    var stored = localStorage.getItem(UNIT_STATES_KEY);
+    if (stored) states = JSON.parse(stored);
+  } catch (e) {}
+  unitTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+    var name = getUnitName(tr);
+    if (name) states[name] = getRowState(tr);
+  });
+  try {
+    localStorage.setItem(UNIT_STATES_KEY, JSON.stringify(states));
+  } catch (e) {}
+}
+function restoreUnitStates() {
+  var unitTable = document.querySelector('.unit-table');
+  if (!unitTable) return;
+  var states = {};
+  try {
+    var stored = localStorage.getItem(UNIT_STATES_KEY);
+    if (stored) states = JSON.parse(stored);
+  } catch (e) { return; }
+  unitTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+    var name = getUnitName(tr);
+    var state = states[name];
+    if (!state || state === 'active') {
+      tr.classList.remove('crossed', 'print-display-none', 'unit-inactive');
+      return;
+    }
+    if (state === 'crossed') {
+      tr.classList.remove('unit-inactive');
+      tr.classList.add('crossed', 'print-display-none');
+    } else {
+      tr.classList.remove('crossed', 'print-display-none');
+      tr.classList.add('unit-inactive');
+    }
+  });
+}
 window.cycleUnitState = function(el) {
   if (!el || !el.classList) return;
   if (el.classList.contains('crossed')) {
@@ -4470,7 +4520,9 @@ window.cycleUnitState = function(el) {
   } else {
     el.classList.add('crossed', 'print-display-none');
   }
+  saveUnitStates();
 };
+restoreUnitStates();
 (function() {
   document.querySelectorAll('div[type="card"]').forEach(function(card) {
     var tbl = card.querySelector('table');
@@ -4824,13 +4876,11 @@ window.cycleUnitState = function(el) {
       var aNum = typeof aKey === 'number', bNum = typeof bKey === 'number';
       var cmp = 0;
 
-      // For unit table name column, always group destroyed/disabled together.
+      // For unit table name column: active first, then strikethrough (group 1), then disabled (group 2); each group alpha-sorted.
       if (tableId === 'unit' && colIndex === 0) {
-        var aState = (a.classList.contains('crossed') || a.classList.contains('unit-inactive')) ? 1 : 0;
-        var bState = (b.classList.contains('crossed') || b.classList.contains('unit-inactive')) ? 1 : 0;
+        var aState = a.classList.contains('crossed') ? 1 : a.classList.contains('unit-inactive') ? 2 : 0;
+        var bState = b.classList.contains('crossed') ? 1 : b.classList.contains('unit-inactive') ? 2 : 0;
         if (aState !== bState) {
-          // Active units (state 0) always come before destroyed/disabled (state 1),
-          // regardless of ascending or descending sort direction.
           return aState - bState;
         }
       }
