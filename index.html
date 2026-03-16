@@ -7,14 +7,21 @@
 </head>
 <body onmouseover="this.ownerDocument.lastHoveredElement = event.target.closest('.unit-table td.name') ? event.target.closest('tr.removable') : undefined;" onmouseleave="this.ownerDocument.lastHoveredElement = undefined;" onclick="if (typeof window.cycleUnitState === 'function' && this.ownerDocument.lastHoveredElement) window.cycleUnitState(this.ownerDocument.lastHoveredElement);">      
 
-
+<nav class="table-nav">
+  <a href="#unit-table">Units</a>
+  <a href="#ranged-weapons">Ranged</a>
+  <a href="#melee-weapons">Melee</a>
+  <a href="#abilities">Abilities</a>
+  <a href="#pain">Pain</a>
+  <a href="#keywords">Keywords</a>
+</nav>
 
 <!-- Rules -->
 
 
 
   
-<div type="card">
+<div type="card" id="unit-table">
         
   <table class="unit-table">
   
@@ -857,7 +864,7 @@
 
 
   
-<div type="card">
+<div type="card" id="ranged-weapons">
         
   <table class="ranged-weapons-table">
   
@@ -1837,7 +1844,7 @@
 
 
 
-  <div type="card">
+  <div type="card" id="melee-weapons">
         
   <table>
   
@@ -3043,7 +3050,7 @@
 
 
   
-<div type="card">
+<div type="card" id="abilities">
         
   <table>
   
@@ -3554,7 +3561,7 @@
   </div>
 
   
-<div type="card">
+<div type="card" id="pain">
         
   <table>
   
@@ -3825,50 +3832,6 @@ Melee weapons equipped by non-<span style="font-variant: small-caps;"><strong>Ch
 
 
 
-  
-<div type="card">
-        
-  <table>
-  
-    <tbody><tr>
-      <th>Transport</th>
-       
-        
-      
-    </tr>
-  
-  
-    <tr class="removable">
-      
-        
-          <td class="name">
-            <span class="profile-name">Raider</span>
-            <span class="data" type="markdown">This model has a transport capacity of 11 <span style="font-variant: small-caps;">**Drukhari Infantry **</span> models (excluding <span style="font-variant: small-caps;"><strong>Jump Pack</strong></span> models).</span>
-          </td>
-        
-      
-      
-    </tr>
-  
-    <tr class="removable">
-      
-        
-          <td class="name">
-            <span class="profile-name">Venom</span>
-            <span class="data" type="markdown">This model has a transport capacity of 6 <span style="font-variant: small-caps;">**Drukhari Infantry **</span> models (excluding <span style="font-variant: small-caps;"><strong>Jump Pack</strong></span> models).&nbsp;
-Before the battle, at the start of the Declare Battle Formations&nbsp;step, you can select one <span style="font-variant: small-caps;"><strong>Kabalite Warriors</strong></span>, <span style="font-variant: small-caps;"><strong>Hand of the Archon</strong></span> or <span style="font-variant: small-caps;"><strong>Wyches</strong></span> unit&nbsp;from your army that has not already been split. If you do, that unit is split into two units, each&nbsp;containing as equal a number of models as possible (when&nbsp;splitting a unit in this way, make a note of which models form&nbsp;each of the two new units). One of these units must start the&nbsp;battle embarked within this model; the other can start&nbsp;the battle embarked within another <span style="font-variant: small-caps;"><strong>Transport</strong></span>, or it can be&nbsp;deployed as a separate unit.</span>
-          </td>
-        
-      
-      
-    </tr>
-  
-  </tbody></table>
-  </div>
-
-
-
-
 <style>
 html {
   text-rendering: optimizeLegibility;
@@ -3880,6 +3843,23 @@ html {
   box-sizing: border-box;
   print-color-adjust: exact;
   -webkit-print-color-adjust: exact
+}
+.table-nav {
+  font-size: 12px;
+  margin-bottom: 12px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(0,0,0,0.1);
+}
+.table-nav a {
+  color: #1a5fb4;
+  text-decoration: none;
+  margin-right: 1em;
+}
+.table-nav a:hover {
+  text-decoration: underline;
+}
+@media print {
+  .table-nav { display: none !important; }
 }
 *[type="card"] {
     position: relative;
@@ -4519,6 +4499,7 @@ window.cycleUnitState = function(el) {
   if (keywordsList.length) {
     var card = document.createElement('div');
     card.setAttribute('type', 'card');
+    card.id = 'keywords';
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'card-collapse-btn';
