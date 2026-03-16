@@ -4025,6 +4025,24 @@ html {
 .card-collapse-btn:hover {
   background: rgba(0,0,0,0.06);
 }
+.unit-reset-wrap {
+  margin-top: 8px;
+}
+.unit-reset-btn {
+  font-size: 12px;
+  padding: 4px 10px;
+  border: 1px solid rgba(0,0,0,0.2);
+  border-radius: 4px;
+  background: rgba(238, 238, 240, 0.95);
+  cursor: pointer;
+  color: #333;
+}
+.unit-reset-btn:hover {
+  background: rgba(0,0,0,0.06);
+}
+@media print {
+  .unit-reset-wrap { display: none !important; }
+}
 *[type="card"].collapsed tbody tr:not(:first-child) {
   display: none;
 }
@@ -4542,6 +4560,23 @@ restoreUnitStates();
     wrap.className = 'card-table-wrap';
     tbl.parentNode.insertBefore(wrap, tbl);
     wrap.appendChild(tbl);
+    if (tbl.classList.contains('unit-table')) {
+      var resetWrap = document.createElement('div');
+      resetWrap.className = 'unit-reset-wrap';
+      var resetBtn = document.createElement('button');
+      resetBtn.type = 'button';
+      resetBtn.className = 'button unit-reset-btn';
+      resetBtn.textContent = 'Show all units';
+      resetBtn.setAttribute('aria-label', 'Reset all units to visible');
+      resetBtn.addEventListener('click', function() {
+        tbl.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+          tr.classList.remove('crossed', 'print-display-none', 'unit-inactive');
+        });
+        saveUnitStates();
+      });
+      resetWrap.appendChild(resetBtn);
+      card.appendChild(resetWrap);
+    }
   });
 })();
 
