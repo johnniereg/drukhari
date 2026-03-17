@@ -14,6 +14,7 @@
   <a href="#pain">Pain</a>
   <a href="#strategems">Strategems</a>
   <a href="#keywords">Keywords</a>
+  <a href="#battle-phase-guide">Tactics</a>
 </nav>
 <!-- Rules -->
 <div type="card" id="unit-table">
@@ -1697,6 +1698,37 @@ html {
 .table-nav a:hover {
   text-decoration: underline;
 }
+.guide-section {
+  margin-top: 24px;
+  margin-bottom: 2rem;
+  padding: 0 0 1rem;
+}
+.guide-heading {
+  font-size: 1.25rem;
+  font-weight: 700;
+  margin: 0 0 12px;
+  color: #1a1a1a;
+  border-bottom: 2px solid #324355;
+  padding-bottom: 6px;
+}
+.guide-content {
+  max-width: 72em;
+  line-height: 1.6;
+}
+.guide-content ul, .guide-content ol {
+  margin: 0.5em 0 1em;
+  padding-left: 1.5em;
+}
+.guide-content li {
+  margin: 0.25em 0;
+}
+.guide-content p {
+  margin: 0.5em 0 1em;
+}
+.guide-placeholder {
+  color: #666;
+  font-style: italic;
+}
 @media print {
   .table-nav { display: none !important; }
 }
@@ -2762,5 +2794,211 @@ restoreUnitStates();
   if (meleeTable) setupSortableTable(meleeTable, 'melee', [0, 1, 2, 3, 4, 5, 6]);
 })();
 </script>
+<section id="battle-phase-guide" class="guide-section">
+  <h2 class="guide-heading">Battle Phase &amp; Tactics Guide</h2>
+  <div class="guide-content">
+    <!-- Nested content extracted from your exported Google Doc HTML -->
+    <h1>Setup</h1>
+    <ol>
+      <li>Muster Armies
+        <ol>
+          <li>Determine Embarked Transports, Unit leaders</li>
+        </ol>
+      </li>
+      <li>Mission Objectives</li>
+      <li>Create the battlefield</li>
+      <li>Determine Attacker Defender: Roll off</li>
+      <li>Select Secondaries: Fixed vs. Tactical</li>
+      <li>Declare Battle Formations</li>
+      <li>Deploy Armies</li>
+      <li>2025 Mission deck states “Defender Deploys first as well”</li>
+      <li>Redeploy Units</li>
+      <li>Lady Malys ability if not embarked in transport</li>
+      <li>Determine First Turn</li>
+      <li>Resolve Pre Battle Rules</li>
+      <li>Special unit abilities or strategems</li>
+      <li>Begin Battle</li>
+    </ol>
+    <h1>Battle</h1>
+    <ul>
+      <li>Challenger Cards (optional come back mechanic)</li>
+      <li>Battle 5 rounds</li>
+      <li>Scoring &amp; Battleline
+        <ul>
+          <li>In an Incursion mission:
+            <ul>
+              <li>Advancing does not make a BATTLELINE unit ineligible to start an Action.</li>
+              <li>Starting an Action does not make a BATTLELINE unit ineligible to shoot.</li>
+            </ul>
+          </li>
+          <li>3rd Round any reserves from beginning in battle not deployed are destroyed.</li>
+          <li>Uppy Downies are still allowed</li>
+        </ul>
+      </li>
+      <li>Stratagem-Unit Limit
+        <ul>
+          <li>Stratagems limited to one strategy once per phase</li>
+          <li>Units limited to one stratagem per phase</li>
+          <li>I.e. Cannot reuse strategems, or combo strategems on units in one phase.</li>
+        </ul>
+      </li>
+      <li>Target declaration</li>
+      <li>Shooting &amp; Fight phase declare targets for all weapons in a unit.
+        <ul>
+          <li>Includes characters &amp; extra attacks</li>
+        </ul>
+      </li>
+    </ul>
+    <h2>Start of First Battle Round</h2>
+    <p>Special Unit Rules</p>
+    <ul><li>Scout Moves</li></ul>
+    <h2>Any Phase</h2>
+    <ul><li>Command Dice Re-Roll</li></ul>
+    <h2>My Phase</h2>
+    <ul>
+      <li>Command phase
+        <ul>
+          <li>Draw secondaries up to 2</li>
+          <li>New Orders Stratagem (once per battle, spend 1 cp redraw card)</li>
+          <li>Gain 1 CP</li>
+          <li>Gain 1 PAIN TOKEN</li>
+          <li>Insane Bravery: Auto pass BS test</li>
+          <li>Battle shock tests (2d6 over Leadership)</li>
+          <li>Objectives Scoring</li>
+        </ul>
+      </li>
+      <li>Movement phase
+        <ul>
+          <li>PAIN Reavers: 8&rdquo; advance</li>
+          <li>PAIN Venom: Advance, units embarked can disembark</li>
+          <li>Scintillating Tempo: Cannot overwatch</li>
+          <li>Shorten the Odds (2): Can advance, then shoot and charge</li>
+          <li>~Unit Reactive moves</li>
+          <li>~Overwatch: Shoot eligible target, hit on 6s</li>
+          <li>~Rapid Ingress: Set-up unit from reserves</li>
+        </ul>
+      </li>
+      <li>Shooting phase
+        <ul>
+          <li>Re-roll Hits of 1</li>
+          <li>Malicious Frenzy: Lethal Hits or Sustained Hits 1</li>
+          <li>Grenade: 6D6, 4+ deals 1 mortal wound</li>
+          <li>PAIN Archon: Reroll Hits</li>
+          <li>PAIN Malys: Lethal Hits or Sustained 1</li>
+          <li>PAIN Kabalites: Re-roll Wound 1 or Re-roll Wounds if target on obj</li>
+          <li>PAIN Scourges: Re-roll Hits</li>
+          <li>PAIN Cronos: Regain 3 wounds if destroys enemy model</li>
+          <li>PAIN Ravager: Hit causes suppression (-1 to Hit)</li>
+          <li>PAIN Raider: Re-roll Hits of ANTI- weapons</li>
+        </ul>
+      </li>
+      <li>Charge phase
+        <ul>
+          <li>Scintillating Tempo: Cannot overwatch</li>
+          <li>Tank Shock: Toughness x D6, 5+ deals 1 Mortal Wound (6 max)</li>
+          <li>~Overwatch: Shoot eligible target, hit on 6s, torrent autos</li>
+        </ul>
+      </li>
+      <li>Fight phase
+        <ul>
+          <li>Re-roll Hits of 1</li>
+          <li>Murderer&rsquo;s Circle: -1 to HIT</li>
+          <li>Fateful Role: Fight on death on 4+</li>
+          <li>Malicious Frenzy: Lethal Hits or Sustained Hits 1</li>
+          <li>PAIN: Archon, Reroll Hits</li>
+          <li>PAIN: Drazhar, +1 to Wound Roll</li>
+          <li>PAIN: Malys, Lethal Hits or Sustained 1</li>
+          <li>PAIN: Lelith, +1 STR and +1 AP</li>
+          <li>PAIN Kabalites: Re-roll Wound 1 or Re-roll Wounds if target on obj</li>
+          <li>PAIN Incubi: Dev Wounds against Infantry</li>
+          <li>PAIN Hellions: +1 Attacks and +1 Strength</li>
+          <li>PAIN Cronos: Regain 3 wounds if destroys enemy model</li>
+          <li>PAIN Talos: Roll D6, 2+ gives fight on death</li>
+          <li>~Epic challenge: Character gets Precision</li>
+          <li>~Counter Offensive: Unit fights next</li>
+        </ul>
+      </li>
+      <li>End of Turn
+        <ul>
+          <li>Scoring Secondaries</li>
+          <li>Optional discard Secondaries &amp; Gain CP</li>
+        </ul>
+      </li>
+    </ul><h2>Opponents</h2>
+    <ul>
+      <li>Command</li>
+      <li>Move
+        <ul>
+          <li>Unit Reactive movements</li>
+          <li>Dance Macabre: D6&rdquo; Reactive Move if Enemy Ends w/in 9&rdquo;</li>
+          <li>Overwatch: Shoot eligible target, hit on 6s, torrent autos</li>
+          <li>Rapid Ingress: Set-up unit from reserves</li>
+        </ul>
+      </li>
+      <li>Shooting
+        <ul>
+          <li>Go to Ground: 6+ Invulnerable Save and Cover</li>
+          <li>Smoke: Cover (+1 Save) and Stealth (-1 Hit)</li>
+        </ul>
+      </li>
+      <li>Charge
+        <ul>
+          <li>PAIN Wyches: Declare charge if advanced or fell back</li>
+          <li>Heroic Intervention: Charge enemy who ends charge w/in 6&rdquo;</li>
+        </ul>
+      </li>
+      <li>Fight
+        <ul>
+          <li>Re-roll Hits of 1</li>
+          <li>Murderer&rsquo;s Circle: -1 Hit</li>
+          <li>Fateful Role: Fight on death on 4+</li>
+          <li>Malicious Frenzy: Lethal Hits or Sustained Hits 1</li>
+          <li>Epic Challenge: Character gets Precision</li>
+          <li>Counter Offensive: Unit fights next</li>
+          <li>PAIN Archon: Reroll Hits</li>
+          <li>PAIN Drazhar: +1 to Wound Roll</li>
+          <li>PAIN Malys: Lethal Hits or Sustained 1</li>
+          <li>PAIN Lelith: +1 STR and +1 AP</li>
+          <li>PAIN Kabalites: Re-roll Wound 1 or Re-roll Wounds if target on obj</li>
+          <li>PAIN Incubi: Dev Wounds against Infantry</li>
+          <li>PAIN Mandrakes: Move to strategic reserves</li>
+          <li>PAIN Cronos: Regain 3 wounds if destroys enemy model</li>
+          <li>PAIN Talos: Roll D6, 2+ gives fight on death</li>
+        </ul>
+      </li>
+      <li>End of Turn
+        <ul>
+          <li>Discard Secondaries &amp; Gain CP</li>
+          <li>Scoring Secondaries</li>
+          <li>Pictures</li>
+        </ul>
+      </li>
+    </ul>
+    <h2>End of Battle Round</h2>
+    <ul>
+      <li>Special EoT unit abilities</li>
+      <li>Special Scoring Rules on Objectives</li>
+    </ul>
+    <h1>Pain Token &amp; Ability Combos</h1>
+    <ul>
+      <li>Archon + Kabalites
+        <ul>
+          <li>SHOOT: Re-roll Hits, Re-roll Wound 1s / All if Target on Objective</li>
+          <li>FIGHT: Re-roll Hits, Re-roll Wound 1s / All if Target on Objective</li>
+        </ul>
+      </li>
+      <li>Archon + Incubi<ul><li>FIGHT: Re-roll Hits &amp; Dev Wounds to Infantry</li></ul></li>
+      <li>Drazhar + Incubi<ul><li>FIGHT: +1 to Wounds &amp; Dev Wounds to Infantry (5+ due to combo)</li></ul></li>
+      <li>Lelith + Wyches<ul><li>No Same Phase Combo</li></ul></li>
+      <li>Lady Malys + Kabalites
+        <ul>
+          <li>SHOOT: Sustained 1 or Lethal Hits, Re-roll Wound 1s / All if Target on Objective</li>
+          <li>FIGHT: Sustained 1 or Lethal Hits, Re-roll Wound 1s / All if Target on Objective</li>
+        </ul>
+      </li>
+      <li>Lady Malys + Incubi<ul><li>FIGHT: Sustained 1 or Lethal Hits, Dev Wounds to Infantry</li></ul></li>
+    </ul>
+  </div>
+</section>
 </body>
 </html>
