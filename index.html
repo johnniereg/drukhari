@@ -1397,9 +1397,11 @@
   </tbody></table>
   </div>
 <div type="card" id="pain">
-  <table>
+  <table class="pain-table">
     <tbody><tr>
       <th>Pain</th>
+      <th>Phase</th>
+      <th class="notes">Description</th>
     </tr>
     <tr class="removable">
           <td class="name">
@@ -2064,6 +2066,12 @@ th.notes, td.notes {
 .strategems-table td:nth-child(4) { min-width: 72px; }
 .strategems-table th:nth-child(5),
 .strategems-table td:nth-child(5) { min-width: 320px; }
+.pain-table th:nth-child(1),
+.pain-table td:nth-child(1) { min-width: 72px; }
+.pain-table th:nth-child(2),
+.pain-table td:nth-child(2) { min-width: 64px; white-space: nowrap; }
+.pain-table th:nth-child(3),
+.pain-table td:nth-child(3) { min-width: 360px; }
 /* Units table: narrow Unit, stats and Pain so Abilities has more room */
 .unit-table {
   table-layout: fixed;
@@ -2331,7 +2339,7 @@ restoreUnitStates();
     if (!t) return;
     var h = getFirstHeaderText(t);
     if (h === 'Abilities') abilitiesTable = t;
-    else if (h === 'Pain') painTable = t;
+    else if (card.id === 'pain' || h === 'Pain') painTable = t;
   });
   if (abilitiesTable) {
     abilitiesTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
@@ -2339,10 +2347,45 @@ restoreUnitStates();
       if (nameEl) { tr.id = 'ability-' + slug(nameEl.textContent); }
     });
   }
+  function parsePainPhase(text) {
+    var t = (text || '').replace(/\s+/g, ' ');
+    if (/At the start of your Charge phase/i.test(t)) return 'Charge';
+    if (/At the end of your opponent'?s? Fight phase/i.test(t)) return "Opponent's Fight";
+    if (/In your Command phase/i.test(t)) return 'Command';
+    if (/In your Shooting phase or the Fight phase|In your Shooting or the Fight phase/i.test(t)) return 'Shooting or Fight';
+    if (/In your Shooting phase[, ]/i.test(t) && !/or the Fight/i.test(t)) return 'Shooting';
+    if (/In the Fight phase|At the start of the Fight phase/i.test(t)) return 'Fight';
+    if (/In your Movement phase when.*Advance.*or in your Charge phase|in your Charge phase before you make a Charge roll/i.test(t)) return 'Movement or Charge';
+    if (/In your Movement phase[, ].*Advance/i.test(t)) return 'Movement';
+    return '—';
+  }
   if (painTable) {
     painTable.querySelectorAll('tbody tr.removable').forEach(function(tr) {
       var nameEl = tr.querySelector('.profile-name');
-      if (nameEl) { tr.id = 'pain-' + slug(nameEl.textContent); }
+      var dataEl = tr.querySelector('.name .data');
+      var rawName = nameEl ? (nameEl.textContent || '').trim() : '';
+      var nameOnly = rawName.replace(/\s*\(Pain\)\s*$/i, '').trim();
+      var descText = dataEl ? (dataEl.textContent || '').trim() : '';
+      var descHtml = dataEl ? dataEl.innerHTML : '';
+      tr.id = nameOnly ? 'pain-' + slug(nameOnly) : '';
+      tr.innerHTML = '';
+      var nameTd = document.createElement('td');
+      nameTd.className = 'name';
+      var nameSpan = document.createElement('span');
+      nameSpan.className = 'profile-name';
+      nameSpan.textContent = nameOnly || rawName;
+      nameTd.appendChild(nameSpan);
+      tr.appendChild(nameTd);
+      var phaseTd = document.createElement('td');
+      phaseTd.className = 'data';
+      phaseTd.setAttribute('type', 'markdown');
+      phaseTd.textContent = parsePainPhase(descText);
+      tr.appendChild(phaseTd);
+      var descTd = document.createElement('td');
+      descTd.className = 'notes data';
+      descTd.setAttribute('type', 'markdown');
+      descTd.innerHTML = descHtml;
+      tr.appendChild(descTd);
     });
   }
   var unitTable = document.querySelector('.unit-table');
