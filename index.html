@@ -2480,6 +2480,7 @@ restoreUnitStates();
   collectKeywords(rangedTable);
   collectKeywords(meleeTable);
   keywordSet['Deadly Demise'] = true;
+  keywordSet['Lethal Hits'] = true;
   var keywordsList = Object.keys(keywordSet).sort();
   var keywordDescriptions = {
     'Anti-': 'Weapons with [ANTI-KEYWORD X+] in their profile are known as Anti weapons. Each time an attack is made with such a weapon against a target with the keyword after the word \'Anti-\', an unmodified Wound roll of \'x+\' scores a Critical Wound.',
@@ -2492,6 +2493,7 @@ restoreUnitStates();
     'Heavy': 'Weapons with [HEAVY] in their profile are known as Heavy weapons. Each time an attack is made with such a weapon, if the attacking model\'s unit Remained Stationary this turn, add 1 to that attack\'s Hit roll.',
     'Ignores Cover': 'Weapons with [IGNORES COVER] in their profile are known as Ignores Cover weapons. Each time an attack is made with such a weapon, the target cannot have the Benefit of Cover against that attack.',
     'Infiltrators': 'During deployment, if every model in a unit has this ability, then when you set it up, it can be set up anywhere on the battlefield that is more than 9" horizontally away from the enemy deployment zone and all enemy models.',
+    'Lethal Hits': 'Weapons with [LETHAL HITS] in their profile are known as Lethal Hits weapons. Each time an attack is made with such a weapon, if that attack scores a Critical Wound, the target cannot make a saving throw against that attack.',
     'Lance': 'Weapons with [LANCE] in their profile are known as Lance weapons. Each time an attack is made with such a weapon, if the bearer made a Charge move this turn, add 1 to that attack\'s Wound roll.',
     'Melta': 'Weapons with [MELTA X] in their profile are known as Melta weapons. Each time an attack made with such a weapon targets a unit within half that weapon\'s range, that attack\'s Damage characteristic is increased by the amount denoted by \'x\'.',
     'Pistol': 'Weapons with [PISTOL] in their profile are known as Pistols. If a unit contains any models equipped with Pistols, that unit is eligible to shoot in its controlling player\'s Shooting phase even while it is within Engagement Range of one or more enemy units. When such a unit is selected to shoot, it can only resolve attacks using its Pistols and can only target one of the enemy units it is within Engagement Range of. In such circumstances, a Pistol can target an enemy unit even if other friendly units are within Engagement Range of the same enemy unit.  If a model is equipped with one or more Pistols, unless it is a Monster or Vehicle model, it can either shoot with its Pistols or with all of its other ranged weapons. Declare whether such a model will shoot with its Pistols or its other ranged weapons before selecting targets.',
@@ -2574,6 +2576,26 @@ restoreUnitStates();
     }
     linkifyKeywordsColumn(rangedTable);
     linkifyKeywordsColumn(meleeTable);
+    function linkifyPainDescriptions() {
+      var painTbl = document.querySelector('#pain table');
+      if (!painTbl || !keywordsList.length) return;
+      var escapeRegex = function(s) { return s.replace(/[.*+?^${}()|[\]\\]/g, '\\$&'); };
+      var keywordsByLength = keywordsList.slice().sort(function(a, b) { return b.length - a.length; });
+      painTbl.querySelectorAll('tbody tr.removable').forEach(function(tr) {
+        var cells = tr.querySelectorAll('td');
+        var descCell = cells[2];
+        if (!descCell) return;
+        var html = descCell.innerHTML;
+        keywordsByLength.forEach(function(kw) {
+          var pat = new RegExp('\\[' + escapeRegex(kw) + '(\\s+\\d+)?\\]', 'gi');
+          html = html.replace(pat, function(match) {
+            return '<a href="#keyword-' + slug(kw) + '" class="keyword-link">' + match + '</a>';
+          });
+        });
+        descCell.innerHTML = html;
+      });
+    }
+    linkifyPainDescriptions();
   }
   var backToTopBtn = document.createElement('button');
   backToTopBtn.type = 'button';
