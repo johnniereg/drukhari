@@ -25,6 +25,7 @@
   <a href="#battle-phase-guide">Tactics</a>
 </nav>
 
+
 <div type="card" id="units-card">
         
   <table class="unit-table">
@@ -1779,50 +1780,28 @@ Melee weapons equipped by non-<span style="font-variant: small-caps;"><strong>Ch
         <td class="notes data">Just after an enemy unit ends a Charge: one unit within 6&rdquo; that could declare a charge against it does so, resolved as your Charge phase. <span style="font-variant:small-caps"><strong>Vehicles</strong></span> only if <span style="font-variant:small-caps"><strong>Walker</strong></span>. No Charge bonus this turn.</td>
       </tr>
 
-      <tr><th colspan="4">Skysplinter Assault</th></tr>
+      <tr id="det-strats-marker"></tr>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Vicious Blades</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Fight phase</td>
-        <td class="notes data">Just after a <span style="font-variant:small-caps"><strong>Drukhari Transport</strong></span> selects its targets: after it fights, select one targeted enemy unit. Roll D6 for each embarked model (+1 if <span style="font-variant:small-caps"><strong>Wracks</strong></span>): each 5+ = 1 mortal wound (max 6).</td>
+    </tbody>
+  </table>
+</div>
+
+<div type="card" id="detachment-rule-card">
+  <table>
+    <tbody>
+      <tr>
+        <th id="det-card-header">Detachment Rule</th>
+        <td style="text-align:right;padding:4px 8px;vertical-align:middle;">
+          <button class="det-btn" data-det="skysplinter">Skysplinter Assault</button>
+          <button class="det-btn" data-det="reapers">Reaper&rsquo;s Wager</button>
+        </td>
       </tr>
-
       <tr class="removable">
-        <td class="name"><span class="profile-name">Wraithlike Retreat</span></td>
-        <td class="data">1CP</td>
-        <td class="data">End of Fight phase</td>
-        <td class="notes data">One <span style="font-variant:small-caps"><strong>Drukhari Infantry</strong></span> unit that fought makes a Normal or Fall Back move. Unless <span style="font-variant:small-caps"><strong>Wyches</strong></span>, must end within 3&rdquo; horizontal / 5&rdquo; vertical of a friendly <span style="font-variant:small-caps"><strong>Drukhari Transport</strong></span> and embark within it.</td>
+        <td class="name" colspan="2">
+          <span class="profile-name" id="det-rule-title"></span>
+          <span class="data" id="det-rule-body"></span>
+        </td>
       </tr>
-
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Pounce on the Prey</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Movement phase</td>
-        <td class="notes data">Just after a <span style="font-variant:small-caps"><strong>Drukhari Infantry</strong></span> unit disembarks from a <span style="font-variant:small-caps"><strong>Transport</strong></span> that made a Normal move: until end of turn, that unit is eligible to declare a charge.</td>
-      </tr>
-
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Skyborne Annihilation</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Shooting phase</td>
-        <td class="notes data">One <span style="font-variant:small-caps"><strong>Drukhari</strong></span> unit that hasn&rsquo;t shot this phase and disembarked from a <span style="font-variant:small-caps"><strong>Transport</strong></span> this turn gains <strong>[Sustained Hits 1]</strong> on ranged weapons (or <strong>[Sustained Hits 2]</strong> if <span style="font-variant:small-caps"><strong>Kabalite Warriors</strong></span> or <span style="font-variant:small-caps"><strong>Hand of the Archon</strong></span>).</td>
-      </tr>
-
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Swooping Mockery</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Movement phase</td>
-        <td class="notes data">Just after an enemy unit ends a Normal, Advance or Fall Back move: one <span style="font-variant:small-caps"><strong>Drukhari Transport</strong></span> within 9&rdquo; of that unit makes a Normal move of up to 6&rdquo;.</td>
-      </tr>
-
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Night Shield</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Shooting phase</td>
-        <td class="notes data">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Drukhari Vehicle</strong></span> unit targeted gains a 4+ invulnerable save until end of phase.</td>
-      </tr>
-
     </tbody>
   </table>
 </div>
@@ -2031,6 +2010,28 @@ tr.anchor-highlight.highlight-done {
   white-space: nowrap;
 }
 .top-nav a:hover {
+  background: rgba(255,255,255,0.08);
+}
+/* Detachment selector buttons */
+.det-btn {
+  padding: 3px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background: transparent;
+  color: #bbb;
+  font-size: 12px;
+  cursor: pointer;
+  white-space: nowrap;
+  -webkit-tap-highlight-color: transparent;
+  font-family: inherit;
+}
+.det-btn.active {
+  background: #6b1a2a;
+  border-color: #a0293f;
+  color: #fff;
+  font-weight: 600;
+}
+.det-btn:hover:not(.active) {
   background: rgba(255,255,255,0.08);
 }
 .back-to-top-btn {
@@ -3211,5 +3212,117 @@ restoreUnitStates();
     </ul>
   </div>
 </section>
+
+<script>
+(function () {
+  function kw(t) { return '<span style="font-variant:small-caps"><strong>' + t + '</strong></span>'; }
+
+  var DETACHMENTS = {
+    skysplinter: {
+      name: 'Skysplinter Assault',
+      ruleName: 'Rain of Cruelty',
+      ruleText:
+        'Each time a ' + kw('Drukhari') + ' unit from your army disembarks from a ' + kw('Transport') +
+        ', until the end of the turn:<br>' +
+        '&bull;&nbsp;Ranged weapons equipped by models in that unit have the <strong>[Ignores Cover]</strong> ability.<br>' +
+        '&bull;&nbsp;Melee weapons equipped by models in that unit have the <strong>[Lance]</strong> ability.',
+      stratagems: [
+        { name: 'Vicious Blades',       cp: '1CP', when: 'Fight phase',
+          effect: 'Just after a ' + kw('Drukhari Transport') + ' selects its targets: after it fights, select one targeted enemy unit. Roll D6 for each embarked model (+1 if ' + kw('Wracks') + '): each 5+ = 1 mortal wound (max 6).' },
+        { name: 'Wraithlike Retreat',   cp: '1CP', when: 'End of Fight phase',
+          effect: 'One ' + kw('Drukhari Infantry') + ' unit that fought makes a Normal or Fall Back move. Unless ' + kw('Wyches') + ', must end within 3&rdquo; horizontal / 5&rdquo; vertical of a friendly ' + kw('Drukhari Transport') + ' and embark within it.' },
+        { name: 'Pounce on the Prey',   cp: '1CP', when: 'Movement phase',
+          effect: 'Just after a ' + kw('Drukhari Infantry') + ' unit disembarks from a ' + kw('Transport') + ' that made a Normal move: until end of turn, that unit is eligible to declare a charge.' },
+        { name: 'Skyborne Annihilation', cp: '1CP', when: 'Shooting phase',
+          effect: 'One ' + kw('Drukhari') + ' unit that hasn&rsquo;t shot this phase and disembarked from a ' + kw('Transport') + ' this turn gains <strong>[Sustained Hits 1]</strong> on ranged weapons (or <strong>[Sustained Hits 2]</strong> if ' + kw('Kabalite Warriors') + ' or ' + kw('Hand of the Archon') + ').' },
+        { name: 'Swooping Mockery',     cp: '1CP', when: 'Opp. Movement phase',
+          effect: 'Just after an enemy unit ends a Normal, Advance or Fall Back move: one ' + kw('Drukhari Transport') + ' within 9&rdquo; of that unit makes a Normal move of up to 6&rdquo;.' },
+        { name: 'Night Shield',         cp: '1CP', when: 'Opp. Shooting phase',
+          effect: 'Just after an enemy selects targets: one ' + kw('Drukhari Vehicle') + ' unit targeted gains a 4+ invulnerable save until end of phase.' }
+      ]
+    },
+    reapers: {
+      name: 'Reaper\u2019s Wager',
+      ruleName: 'Callous Competition',
+      ruleText:
+        'At the start of the battle, ' + kw('Drukhari') + ' units are winning the wager. Each time a ' +
+        kw('Drukhari') + ' unit destroys an enemy unit, ' + kw('Drukhari') + ' units are winning. Each time a ' +
+        kw('Harlequins') + ' unit destroys an enemy unit, ' + kw('Harlequins') + ' units are winning (the other faction is losing).<br><br>' +
+        'Each time a ' + kw('Drukhari') + ' or ' + kw('Harlequins') + ' model makes an attack: if <em>winning</em> the wager, re-roll a Hit roll of 1. ' +
+        'If <em>losing</em> the wager, re-roll a Hit roll of 1 <strong>and</strong> re-roll a Wound roll of 1 instead.',
+      stratagems: [
+        { name: 'Malicious Frenzy',    cp: '1CP', when: 'Shooting or Fight phase',
+          effect: 'One ' + kw('Drukhari') + ' or ' + kw('Harlequins') + ' unit that hasn&rsquo;t shot or fought this phase: select <strong>[Lethal Hits]</strong> or <strong>[Sustained Hits 1]</strong>. Until end of phase, weapons have the selected ability.' },
+        { name: 'Fateful Role',         cp: '1CP', when: 'Fight phase (opp.)',
+          effect: 'Just after an enemy selects targets: one ' + kw('Drukhari') + ' or ' + kw('Harlequins') + ' unit targeted &mdash; each time a model is destroyed without having fought, roll D6 (+1 if losing the wager): on 4+, that model fights before removal.' },
+        { name: 'Murderer\u2019s Circus', cp: '1CP', when: 'Fight phase (opp.)',
+          effect: 'Just after an enemy selects targets: one ' + kw('Drukhari') + ' or ' + kw('Harlequins') + ' unit targeted &mdash; until end of phase, each time an attack targets your unit, subtract 1 from the Hit roll.' },
+        { name: 'Shorten the Odds',    cp: '1CP', when: 'Movement phase',
+          effect: 'Just after a ' + kw('Drukhari') + ' or ' + kw('Harlequins') + ' unit Advances: until end of turn, that unit is eligible to shoot and declare a charge in a turn it Advanced.' },
+        { name: 'Scintillating Tempo', cp: '1CP', when: 'Movement or Charge phase',
+          effect: 'Just after a ' + kw('Drukhari') + ' or ' + kw('Harlequins') + ' unit moves, is set up, or declares a charge: until end of turn, enemies cannot use the Fire Overwatch Stratagem to shoot at your unit.' },
+        { name: 'Dance Macabre',       cp: '2CP', when: 'Opp. Movement phase',
+          effect: 'Just after an enemy unit ends a Normal, Advance or Fall Back move: one ' + kw('Drukhari Infantry') + ' or ' + kw('Harlequins Infantry') + ' unit within 9&rdquo; makes a Normal move of up to D6&rdquo; (or 6&rdquo; if losing the wager).' }
+      ]
+    }
+  };
+
+  function renderDetachment(id) {
+    var det = DETACHMENTS[id];
+    if (!det) return;
+
+    // Update rule card
+    document.getElementById('det-card-header').textContent = 'Detachment Rule \u2013 ' + det.name;
+    document.getElementById('det-rule-title').textContent = det.ruleName;
+    document.getElementById('det-rule-body').innerHTML = det.ruleText;
+
+    // Remove previously injected stratagem rows
+    document.querySelectorAll('.det-strat-row').forEach(function (r) { r.remove(); });
+
+    // Inject new rows after the marker
+    var marker = document.getElementById('det-strats-marker');
+    var insertAfter = marker;
+
+    function insertRow(el) {
+      insertAfter.parentNode.insertBefore(el, insertAfter.nextSibling);
+      insertAfter = el;
+    }
+
+    // Section header row
+    var hdr = document.createElement('tr');
+    hdr.className = 'det-strat-row';
+    hdr.innerHTML = '<th colspan="4">' + det.name + '</th>';
+    insertRow(hdr);
+
+    det.stratagems.forEach(function (s) {
+      var tr = document.createElement('tr');
+      tr.className = 'removable det-strat-row';
+      tr.innerHTML =
+        '<td class="name"><span class="profile-name">' + s.name + '</span></td>' +
+        '<td class="data">' + s.cp + '</td>' +
+        '<td class="data">' + s.when + '</td>' +
+        '<td class="notes data">' + s.effect + '</td>';
+      insertRow(tr);
+    });
+
+    // Update button states
+    document.querySelectorAll('.det-btn').forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.det === id);
+    });
+
+    try { localStorage.setItem('drukhari-detachment', id); } catch (e) {}
+  }
+
+  // Wire buttons
+  document.querySelectorAll('.det-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () { renderDetachment(btn.dataset.det); });
+  });
+
+  // Initial render — restore saved preference or default to Skysplinter
+  var saved = 'skysplinter';
+  try { saved = localStorage.getItem('drukhari-detachment') || 'skysplinter'; } catch (e) {}
+  renderDetachment(saved);
+}());
+</script>
 </body>
 </html>
