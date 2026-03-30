@@ -6,18 +6,26 @@
   <title>Drukhari Reference</title>
 </head>
 <body onmouseover="this.ownerDocument.lastHoveredElement = event.target.closest('.unit-table td.name') ? event.target.closest('tr.removable') : undefined;" onmouseleave="this.ownerDocument.lastHoveredElement = undefined;" onclick="if (typeof window.cycleUnitState === 'function' && this.ownerDocument.lastHoveredElement) window.cycleUnitState(this.ownerDocument.lastHoveredElement);">
-<nav class="table-nav">
-  <a href="#unit-table">Units</a>
-  <a href="#ranged-weapons">Ranged</a>
-  <a href="#melee-weapons">Melee</a>
-  <a href="#abilities">Abilities</a>
-  <a href="#pain">Pain</a>
-  <a href="#strategems">Strategems</a>
-  <a href="#keywords">Keywords</a>
-  <a href="#battle-phase-guide">Tactics</a>
-</nav>
+
+
 <!-- Rules -->
-<div type="card" id="unit-table">
+
+
+
+  
+<nav class="top-nav">
+  <a href="#" class="top-nav-top">Top</a>
+  <a href="#units-card">Units</a>
+  <a href="#ranged-card">Ranged</a>
+  <a href="#melee-card">Melee</a>
+  <a href="#abilities-card">Abilities</a>
+  <a href="#pain-card">Pain</a>
+  <a href="#stratagems-card">Stratagems</a>
+  <a href="#keywords-card">Keywords</a>
+</nav>
+
+<div type="card" id="units-card">
+        
   <table class="unit-table">
     <tbody><tr>
       <th>Unit</th>
@@ -305,7 +313,12 @@
     </tr>
   </tbody></table>
   </div>
-<div type="card" id="ranged-weapons">
+
+
+
+  
+<div type="card" id="ranged-card">
+        
   <table class="ranged-weapons-table">
     <tbody><tr>
       <th>Ranged Weapons</th>
@@ -697,7 +710,11 @@
     </tr>
   </tbody></table>
   </div>
-  <div type="card" id="melee-weapons">
+
+
+
+  <div type="card" id="melee-card">
+        
   <table>
     <tbody><tr>
       <th>Melee Weapons</th>
@@ -1143,7 +1160,13 @@
     </tr>
   </tbody></table>
   </div>
-<div type="card" id="abilities">
+
+
+
+
+  
+<div type="card" id="abilities-card">
+        
   <table>
     <tbody><tr>
       <th>Abilities</th>
@@ -1397,8 +1420,12 @@
     </tr>
   </tbody></table>
   </div>
-<div type="card" id="pain">
-  <table class="pain-table">
+
+  
+<div type="card" id="pain-card">
+        
+  <table>
+  
     <tbody><tr>
       <th>Pain</th>
       <th>Phase</th>
@@ -1658,6 +1685,148 @@ Melee weapons equipped by non-<span style="font-variant: small-caps;"><strong>Ch
     </tr>
       </tbody></table>
   </div>
+
+
+
+
+<div type="card" id="stratagems-card">
+  <table class="stratagems-table">
+    <tbody>
+      <tr>
+        <th>Stratagem</th>
+        <th>CP</th>
+        <th>When</th>
+        <th class="notes">Effect</th>
+      </tr>
+
+      <tr><th colspan="4">Core</th></tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Command Re-roll</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Any phase</td>
+        <td class="notes data">Re-roll one Advance, Charge, Desperate Escape, Hazardous, Hit, Wound, Damage, saving throw, or attacks roll for a unit from your army.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Counter-Offensive</span></td>
+        <td class="data">2CP</td>
+        <td class="data">Fight phase</td>
+        <td class="notes data">Just after an enemy unit fights: one unit from your army within Engagement Range of enemies that hasn&rsquo;t fought yet fights next.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Epic Challenge</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Fight phase</td>
+        <td class="notes data">When a <span style="font-variant:small-caps"><strong>Character</strong></span> unit within Engagement Range of Attached units is selected to fight: one <span style="font-variant:small-caps"><strong>Character</strong></span> model gains <strong>[Precision]</strong> on all its melee attacks until end of phase.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Insane Bravery</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Command phase</td>
+        <td class="notes data">Just before a Battle-shock test: that unit automatically passes. Once per battle.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Grenade</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Shooting phase</td>
+        <td class="notes data">One <span style="font-variant:small-caps"><strong>Grenades</strong></span> unit that hasn&rsquo;t Advanced, Fell Back or shot: select a <span style="font-variant:small-caps"><strong>Grenades</strong></span> model and one enemy unit within 8&rdquo; not in Engagement Range. Roll 6D6: each 4+ = 1 mortal wound.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Tank Shock</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Charge phase</td>
+        <td class="notes data">Just after a <span style="font-variant:small-caps"><strong>Vehicle</strong></span> ends a Charge: select one enemy unit and one <span style="font-variant:small-caps"><strong>Vehicle</strong></span> model in Engagement Range of it. Roll D6 equal to that model&rsquo;s Toughness: each 5+ = 1 mortal wound (max 6).</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Rapid Ingress</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Movement phase</td>
+        <td class="notes data">End of opponent&rsquo;s Movement phase: one unit in Reserves arrives as if it were the Reinforcements step. Units with <span style="font-variant:small-caps"><strong>Deep Strike</strong></span> may use that ability. Can&rsquo;t arrive in a round it normally couldn&rsquo;t.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Fire Overwatch</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Movement or Charge phase</td>
+        <td class="notes data">Just after an enemy unit is set up, moves, or declares a charge: one eligible unit within 24&rdquo; shoots that enemy (hits only on unmodified 6). Cannot target <span style="font-variant:small-caps"><strong>Titanic</strong></span>. Once per turn.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Go to Ground</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Shooting phase</td>
+        <td class="notes data">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Infantry</strong></span> unit targeted gets a 6+ invulnerable save and Benefit of Cover until end of phase.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Smokescreen</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Shooting phase</td>
+        <td class="notes data">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Smoke</strong></span> unit targeted gets Benefit of Cover and <strong>Stealth</strong> until end of phase.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Heroic Intervention</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Charge phase</td>
+        <td class="notes data">Just after an enemy unit ends a Charge: one unit within 6&rdquo; that could declare a charge against it does so, resolved as your Charge phase. <span style="font-variant:small-caps"><strong>Vehicles</strong></span> only if <span style="font-variant:small-caps"><strong>Walker</strong></span>. No Charge bonus this turn.</td>
+      </tr>
+
+      <tr><th colspan="4">Skysplinter Assault</th></tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Vicious Blades</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Fight phase</td>
+        <td class="notes data">Just after a <span style="font-variant:small-caps"><strong>Drukhari Transport</strong></span> selects its targets: after it fights, select one targeted enemy unit. Roll D6 for each embarked model (+1 if <span style="font-variant:small-caps"><strong>Wracks</strong></span>): each 5+ = 1 mortal wound (max 6).</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Wraithlike Retreat</span></td>
+        <td class="data">1CP</td>
+        <td class="data">End of Fight phase</td>
+        <td class="notes data">One <span style="font-variant:small-caps"><strong>Drukhari Infantry</strong></span> unit that fought makes a Normal or Fall Back move. Unless <span style="font-variant:small-caps"><strong>Wyches</strong></span>, must end within 3&rdquo; horizontal / 5&rdquo; vertical of a friendly <span style="font-variant:small-caps"><strong>Drukhari Transport</strong></span> and embark within it.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Pounce on the Prey</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Movement phase</td>
+        <td class="notes data">Just after a <span style="font-variant:small-caps"><strong>Drukhari Infantry</strong></span> unit disembarks from a <span style="font-variant:small-caps"><strong>Transport</strong></span> that made a Normal move: until end of turn, that unit is eligible to declare a charge.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Skyborne Annihilation</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Shooting phase</td>
+        <td class="notes data">One <span style="font-variant:small-caps"><strong>Drukhari</strong></span> unit that hasn&rsquo;t shot this phase and disembarked from a <span style="font-variant:small-caps"><strong>Transport</strong></span> this turn gains <strong>[Sustained Hits 1]</strong> on ranged weapons (or <strong>[Sustained Hits 2]</strong> if <span style="font-variant:small-caps"><strong>Kabalite Warriors</strong></span> or <span style="font-variant:small-caps"><strong>Hand of the Archon</strong></span>).</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Swooping Mockery</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Movement phase</td>
+        <td class="notes data">Just after an enemy unit ends a Normal, Advance or Fall Back move: one <span style="font-variant:small-caps"><strong>Drukhari Transport</strong></span> within 9&rdquo; of that unit makes a Normal move of up to 6&rdquo;.</td>
+      </tr>
+
+      <tr class="removable">
+        <td class="name"><span class="profile-name">Night Shield</span></td>
+        <td class="data">1CP</td>
+        <td class="data">Opp. Shooting phase</td>
+        <td class="notes data">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Drukhari Vehicle</strong></span> unit targeted gains a 4+ invulnerable save until end of phase.</td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+
 <style>
 html {
   text-rendering: optimizeLegibility;
@@ -1838,13 +2007,38 @@ tr.anchor-highlight.highlight-done {
 .removable {
   cursor: pointer;
 }
+.top-nav {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 10px;
+  padding: 4px 0;
+  margin: -10px -10px 10px -10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  background: #111113;
+  font-size: 12px;
+}
+.top-nav a {
+  padding: 2px 6px;
+  border-radius: 999px;
+  border: 1px solid rgba(255,255,255,0.12);
+  color: #ddd;
+  text-decoration: none;
+  white-space: nowrap;
+}
+.top-nav a:hover {
+  background: rgba(255,255,255,0.08);
+}
 .back-to-top-btn {
-  position: fixed;
-  bottom: 16px;
-  right: 16px;
-  width: 40px;
-  height: 40px;
-  padding: 0;
+  position: fixed !important;
+  bottom: 16px !important;
+  right: 16px !important;
+  width: 40px !important;
+  height: 40px !important;
+  padding: 0 !important;
   border: 1px solid rgba(0,0,0,0.15);
   border-radius: 50%;
   background: rgba(255,255,255,0.95);
@@ -1852,18 +2046,24 @@ tr.anchor-highlight.highlight-done {
   cursor: pointer;
   font-size: 18px;
   line-height: 1;
-  display: none;
+  display: -webkit-flex !important;
+  display: flex !important;
+  -webkit-box-align: center;
+  -webkit-box-pack: center;
   align-items: center;
   justify-content: center;
-  z-index: 9999;
+  z-index: 2147483647;
   color: #333;
   -webkit-transform: translateZ(0);
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
-}
-.back-to-top-btn.visible {
-  display: flex;
+  -webkit-tap-highlight-color: transparent;
+  -webkit-appearance: none;
+  appearance: none;
+  visibility: visible !important;
+  opacity: 1 !important;
+  pointer-events: auto !important;
 }
 .back-to-top-btn:hover {
   background: rgba(0,0,0,0.06);
@@ -2034,8 +2234,32 @@ th.sorted-desc .sort-indicator::after { content: '▼'; }
         min-width: 100px;
         width: auto;
     }
-    div[type="card"] table:not(.unit-table):not(.ranged-weapons-table) {
+    div[type="card"] table:not(.unit-table):not(.ranged-weapons-table):not(.stratagems-table) {
         min-width: 320px;
+    }
+    .stratagems-table {
+        table-layout: auto;
+        min-width: 560px;
+        width: max-content;
+    }
+    .stratagems-table th:first-child,
+    .stratagems-table td:first-child {
+        min-width: 130px;
+    }
+    .stratagems-table th:nth-child(2),
+    .stratagems-table td:nth-child(2) {
+        min-width: 36px;
+        white-space: nowrap;
+        text-align: center;
+    }
+    .stratagems-table th:nth-child(3),
+    .stratagems-table td:nth-child(3) {
+        min-width: 90px;
+        white-space: nowrap;
+    }
+    .stratagems-table th:nth-child(4),
+    .stratagems-table td:nth-child(4) {
+        min-width: 240px;
     }
     th, td {
         padding: 6px 8px;
@@ -2539,7 +2763,7 @@ restoreUnitStates();
   if (keywordsList.length) {
     var card = document.createElement('div');
     card.setAttribute('type', 'card');
-    card.id = 'keywords';
+    card.id = 'keywords-card';
     var btn = document.createElement('button');
     btn.type = 'button';
     btn.className = 'card-collapse-btn';
@@ -2629,27 +2853,13 @@ restoreUnitStates();
     }
     linkifyPainDescriptions();
   }
-  var backToTopBtn = document.createElement('button');
-  backToTopBtn.type = 'button';
-  backToTopBtn.className = 'back-to-top-btn';
-  backToTopBtn.setAttribute('aria-label', 'Scroll back to top');
-  backToTopBtn.innerHTML = '\u2191';
-  var scrollShowThreshold = 400;
-  var scrollHideThreshold = 80;
-  function updateBackToTopVisible() {
-    var y = window.scrollY || window.pageYOffset || document.documentElement.scrollTop;
-    if (y > scrollShowThreshold) backToTopBtn.classList.add('visible');
-    else if (y < scrollHideThreshold) backToTopBtn.classList.remove('visible');
-  }
-  backToTopBtn.addEventListener('click', function() {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-    backToTopBtn.classList.remove('visible');
-  });
-  window.addEventListener('scroll', updateBackToTopVisible, { passive: true });
-  window.addEventListener('resize', updateBackToTopVisible);
-  updateBackToTopVisible();
-  document.body.appendChild(backToTopBtn);
   document.addEventListener('click', function(e) {
+    var topLink = e.target.closest('a.top-nav-top');
+    if (topLink) {
+      e.preventDefault();
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+      return;
+    }
     var a = e.target.closest('a[href^="#ability-"], a[href^="#pain-"], a[href^="#keyword-"]');
     if (!a) return;
     e.preventDefault();
