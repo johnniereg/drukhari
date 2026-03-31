@@ -14,7 +14,6 @@
 
   
 <nav class="top-nav">
-  <a href="#" class="top-nav-top">Top</a>
   <a href="#units-card">Units</a>
   <a href="#ranged-card">Ranged</a>
   <a href="#melee-card">Melee</a>
@@ -25,6 +24,7 @@
   <a href="#battle-phase-guide">Tactics</a>
 </nav>
 
+<button class="back-to-top-btn" id="back-to-top-btn" aria-label="Back to top" style="display:none">↑</button>
 
 <div type="card" id="units-card" data-unit-view="stats">
   <div class="unit-view-toggle">
@@ -2507,6 +2507,21 @@ th.sorted-desc .sort-indicator::after { content: '▼'; }
   font-size: 12px;
   line-height: 1.45;
 }
+/* Weapon jump links in unit full-view cards */
+.unit-weapon-link {
+  color: #1a5fb4;
+  text-decoration: none;
+  font-size: 12px;
+}
+.unit-weapon-link:hover {
+  text-decoration: underline;
+}
+/* Highlight a weapon card when jumped to */
+.weapon-card.jump-highlight {
+  outline: 2px solid #1a5fb4;
+  outline-offset: 1px;
+}
+
 /* Stratagem card collapse button (no table, so manually placed) */
 #stratagems-card .card-collapse-btn {
   display: block;
@@ -2797,6 +2812,9 @@ restoreUnitStates();
   });
 })();
 
+// Shared weapon index: unitName -> [{name, id, type}]
+var weaponIndex = {};
+
 // ---- Stratagems card: add collapse button (no table, so not caught by above) ----
 (function() {
   var card = document.getElementById('stratagems-card');
@@ -2847,6 +2865,21 @@ restoreUnitStates();
       var painEl = cells[8];
       var abilities = abilitiesEl ? abilitiesEl.innerHTML.trim() : '';
       var pain = painEl ? painEl.innerHTML.trim() : '';
+      // Weapon links from weaponIndex
+      var unitWeapons = weaponIndex[name] || [];
+      var rangedW = unitWeapons.filter(function(x) { return x.type === 'ranged'; });
+      var meleeW  = unitWeapons.filter(function(x) { return x.type === 'melee'; });
+      var weaponHtml = '';
+      if (rangedW.length) {
+        weaponHtml += '<div class="unit-ability-row"><span class="unit-ability-label">Ranged</span> ' +
+          rangedW.map(function(x) { return '<a class="unit-weapon-link" href="#' + x.id + '">' + x.name + '</a>'; }).join(', ') +
+        '</div>';
+      }
+      if (meleeW.length) {
+        weaponHtml += '<div class="unit-ability-row"><span class="unit-ability-label">Melee</span> ' +
+          meleeW.map(function(x) { return '<a class="unit-weapon-link" href="#' + x.id + '">' + x.name + '</a>'; }).join(', ') +
+        '</div>';
+      }
       html += '<div class="unit-card">' +
         '<div class="unit-card-header">' + name + '</div>' +
         '<div class="unit-card-stats">' +
@@ -2855,6 +2888,7 @@ restoreUnitStates();
         '<div class="unit-card-abilities">' +
           (abilities ? '<div class="unit-ability-row"><span class="unit-ability-label">Abilities</span> ' + abilities + '</div>' : '') +
           (pain ? '<div class="unit-ability-row"><span class="unit-ability-label">Pain</span> ' + pain + '</div>' : '') +
+          weaponHtml +
         '</div>' +
       '</div>';
     });
@@ -2881,11 +2915,14 @@ restoreUnitStates();
 
 // ---- Weapon card builders ----
 (function() {
+  function slugW(name) {
+    return 'wcard-' + name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+  }
   function wstat(label, val) {
     return '<div class="weapon-stat"><div class="weapon-stat-label">' + label + '</div><div class="weapon-stat-value">' + val + '</div></div>';
   }
 
-  function buildWeaponCards(cardId, containerId, statHeaders) {
+  function buildWeaponCards(cardId, containerId, statHeaders, type) {
     var card = document.getElementById(cardId);
     var container = document.getElementById(containerId);
     if (!card || !container) return;
@@ -2897,6 +2934,7 @@ restoreUnitStates();
       var cells = tr.querySelectorAll('td');
       var name = cells[0] ? (cells[0].querySelector('.profile-name') || cells[0]).textContent.trim() : '';
       var unitsText = cells[1] ? cells[1].textContent.trim() : '';
+      var wid = slugW(name);
       var statsHtml = '';
       // stat columns start at index 2 (skip Name=0, Units=1)
       for (var i = 0; i < statHeaders.length; i++) {
@@ -2905,7 +2943,14 @@ restoreUnitStates();
       }
       var kwIdx = statHeaders.length + 2;
       var keywords = cells[kwIdx] ? cells[kwIdx].textContent.trim() : '';
-      html += '<div class="weapon-card">' +
+      // Populate shared weapon index
+      unitsText.split(/,\s*/).forEach(function(unitName) {
+        unitName = unitName.trim();
+        if (!unitName) return;
+        if (!weaponIndex[unitName]) weaponIndex[unitName] = [];
+        weaponIndex[unitName].push({ name: name, id: wid, type: type });
+      });
+      html += '<div class="weapon-card" id="' + wid + '">' +
         '<div class="weapon-card-name">' + name +
           (unitsText ? '<span class="weapon-card-units">(' + unitsText + ')</span>' : '') +
         '</div>' +
@@ -2920,10 +2965,32 @@ restoreUnitStates();
   }
 
   // Ranged: cols after Name+Units are Range, A, BS, S, AP, D then Keywords
-  buildWeaponCards('ranged-card', 'ranged-cards', ['Range', 'A', 'BS', 'S', 'AP', 'D']);
+  buildWeaponCards('ranged-card', 'ranged-cards', ['Range', 'A', 'BS', 'S', 'AP', 'D'], 'ranged');
   // Melee: cols after Name+Units are A, WS, S, AP, D then Keywords
-  buildWeaponCards('melee-card', 'melee-cards', ['A', 'WS', 'S', 'AP', 'D']);
+  buildWeaponCards('melee-card', 'melee-cards', ['A', 'WS', 'S', 'AP', 'D'], 'melee');
 })();
+
+// ---- Weapon jump link handler: expand card if collapsed, then scroll ----
+document.addEventListener('click', function(e) {
+  var link = e.target.closest('.unit-weapon-link');
+  if (!link) return;
+  var href = link.getAttribute('href');
+  if (!href || href[0] !== '#') return;
+  var target = document.getElementById(href.slice(1));
+  if (!target) return;
+  e.preventDefault();
+  // Expand parent card if it's collapsed
+  var parentCard = target.closest('div[type="card"]');
+  if (parentCard && parentCard.classList.contains('collapsed')) {
+    parentCard.classList.remove('collapsed');
+    var colBtn = parentCard.querySelector('.card-collapse-btn');
+    if (colBtn) { colBtn.textContent = '\u2212'; colBtn.setAttribute('aria-label', 'Collapse'); }
+  }
+  target.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  // Brief highlight flash
+  target.classList.add('jump-highlight');
+  setTimeout(function() { target.classList.remove('jump-highlight'); }, 1200);
+});
 
 (function() {
   function slug(s) {
@@ -3203,13 +3270,26 @@ restoreUnitStates();
     }
     linkifyPainDescriptions();
   }
-  document.addEventListener('click', function(e) {
-    var topLink = e.target.closest('a.top-nav-top');
-    if (topLink) {
-      e.preventDefault();
+  // Back-to-top button: show after scrolling down, hide at top
+  (function() {
+    var btn = document.getElementById('back-to-top-btn');
+    if (!btn) return;
+    btn.addEventListener('click', function() {
       window.scrollTo({ top: 0, behavior: 'smooth' });
-      return;
-    }
+    });
+    var ticking = false;
+    window.addEventListener('scroll', function() {
+      if (!ticking) {
+        ticking = true;
+        requestAnimationFrame(function() {
+          btn.style.display = window.scrollY > 120 ? '' : 'none';
+          ticking = false;
+        });
+      }
+    }, { passive: true });
+  })();
+
+  document.addEventListener('click', function(e) {
     var a = e.target.closest('a[href^="#ability-"], a[href^="#pain-"], a[href^="#keyword-"]');
     if (!a) return;
     e.preventDefault();
