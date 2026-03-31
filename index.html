@@ -26,8 +26,12 @@
 </nav>
 
 
-<div type="card" id="units-card">
-        
+<div type="card" id="units-card" data-unit-view="stats">
+  <div class="unit-view-toggle">
+    <span class="view-label">View:</span>
+    <button class="view-btn active" data-view="stats">Stats</button>
+    <button class="view-btn" data-view="full">Full</button>
+  </div>
   <table class="unit-table">
     <tbody><tr>
       <th>Unit</th>
@@ -314,11 +318,12 @@
           <td class="notes data" type="markdown">Acrobatic Gladiators</td>
     </tr>
   </tbody></table>
+  <div id="units-full-view" class="unit-cards-body" style="display:none"></div>
   </div>
 
 
 
-  
+
 <div type="card" id="ranged-card">
         
   <table class="ranged-weapons-table">
@@ -711,6 +716,7 @@
           <td class="data" type="markdown">Anti-Infantry 3+, Assault, Rapid Fire 2, Twin-Linked</td>
     </tr>
   </tbody></table>
+  <div id="ranged-cards" class="weapon-cards-body"></div>
   </div>
 
 
@@ -1161,12 +1167,13 @@
           <td class="data" type="markdown">Anti-Infantry 4+, Twin-Linked</td>
     </tr>
   </tbody></table>
+  <div id="melee-cards" class="weapon-cards-body"></div>
   </div>
 
 
 
 
-  
+
 <div type="card" id="abilities-card">
         
   <table>
@@ -1692,98 +1699,77 @@ Melee weapons equipped by non-<span style="font-variant: small-caps;"><strong>Ch
 
 
 <div type="card" id="stratagems-card">
-  <table class="stratagems-table">
-    <tbody>
-      <tr>
-        <th>Stratagem</th>
-        <th>CP</th>
-        <th>When</th>
-        <th class="notes">Effect</th>
-      </tr>
+  <div class="strat-cards-body">
+    <div class="strat-section-header">Core</div>
 
-      <tr><th colspan="4">Core</th></tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Command Re-roll</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Any phase</div>
+      <div class="strat-effect">Re-roll one Advance, Charge, Desperate Escape, Hazardous, Hit, Wound, Damage, saving throw, or attacks roll for a unit from your army.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Command Re-roll</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Any phase</td>
-        <td class="notes data">Re-roll one Advance, Charge, Desperate Escape, Hazardous, Hit, Wound, Damage, saving throw, or attacks roll for a unit from your army.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Counter-Offensive</span><span class="strat-cp">2CP</span></div>
+      <div class="strat-phase">Fight phase</div>
+      <div class="strat-effect">Just after an enemy unit fights: one unit from your army within Engagement Range of enemies that hasn&rsquo;t fought yet fights next.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Counter-Offensive</span></td>
-        <td class="data">2CP</td>
-        <td class="data">Fight phase</td>
-        <td class="notes data">Just after an enemy unit fights: one unit from your army within Engagement Range of enemies that hasn&rsquo;t fought yet fights next.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Epic Challenge</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Fight phase</div>
+      <div class="strat-effect">When a <span style="font-variant:small-caps"><strong>Character</strong></span> unit within Engagement Range of Attached units is selected to fight: one <span style="font-variant:small-caps"><strong>Character</strong></span> model gains <strong>[Precision]</strong> on all its melee attacks until end of phase.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Epic Challenge</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Fight phase</td>
-        <td class="notes data">When a <span style="font-variant:small-caps"><strong>Character</strong></span> unit within Engagement Range of Attached units is selected to fight: one <span style="font-variant:small-caps"><strong>Character</strong></span> model gains <strong>[Precision]</strong> on all its melee attacks until end of phase.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Insane Bravery</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Command phase</div>
+      <div class="strat-effect">Just before a Battle-shock test: that unit automatically passes. Once per battle.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Insane Bravery</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Command phase</td>
-        <td class="notes data">Just before a Battle-shock test: that unit automatically passes. Once per battle.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Grenade</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Shooting phase</div>
+      <div class="strat-effect">One <span style="font-variant:small-caps"><strong>Grenades</strong></span> unit that hasn&rsquo;t Advanced, Fell Back or shot: select a <span style="font-variant:small-caps"><strong>Grenades</strong></span> model and one enemy unit within 8&rdquo; not in Engagement Range. Roll 6D6: each 4+ = 1 mortal wound.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Grenade</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Shooting phase</td>
-        <td class="notes data">One <span style="font-variant:small-caps"><strong>Grenades</strong></span> unit that hasn&rsquo;t Advanced, Fell Back or shot: select a <span style="font-variant:small-caps"><strong>Grenades</strong></span> model and one enemy unit within 8&rdquo; not in Engagement Range. Roll 6D6: each 4+ = 1 mortal wound.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Tank Shock</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Charge phase</div>
+      <div class="strat-effect">Just after a <span style="font-variant:small-caps"><strong>Vehicle</strong></span> ends a Charge: select one enemy unit and one <span style="font-variant:small-caps"><strong>Vehicle</strong></span> model in Engagement Range of it. Roll D6 equal to that model&rsquo;s Toughness: each 5+ = 1 mortal wound (max 6).</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Tank Shock</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Charge phase</td>
-        <td class="notes data">Just after a <span style="font-variant:small-caps"><strong>Vehicle</strong></span> ends a Charge: select one enemy unit and one <span style="font-variant:small-caps"><strong>Vehicle</strong></span> model in Engagement Range of it. Roll D6 equal to that model&rsquo;s Toughness: each 5+ = 1 mortal wound (max 6).</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Rapid Ingress</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Opp. Movement phase</div>
+      <div class="strat-effect">End of opponent&rsquo;s Movement phase: one unit in Reserves arrives as if it were the Reinforcements step. Units with <span style="font-variant:small-caps"><strong>Deep Strike</strong></span> may use that ability. Can&rsquo;t arrive in a round it normally couldn&rsquo;t.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Rapid Ingress</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Movement phase</td>
-        <td class="notes data">End of opponent&rsquo;s Movement phase: one unit in Reserves arrives as if it were the Reinforcements step. Units with <span style="font-variant:small-caps"><strong>Deep Strike</strong></span> may use that ability. Can&rsquo;t arrive in a round it normally couldn&rsquo;t.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Fire Overwatch</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Opp. Movement or Charge phase</div>
+      <div class="strat-effect">Just after an enemy unit is set up, moves, or declares a charge: one eligible unit within 24&rdquo; shoots that enemy (hits only on unmodified 6). Cannot target <span style="font-variant:small-caps"><strong>Titanic</strong></span>. Once per turn.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Fire Overwatch</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Movement or Charge phase</td>
-        <td class="notes data">Just after an enemy unit is set up, moves, or declares a charge: one eligible unit within 24&rdquo; shoots that enemy (hits only on unmodified 6). Cannot target <span style="font-variant:small-caps"><strong>Titanic</strong></span>. Once per turn.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Go to Ground</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Opp. Shooting phase</div>
+      <div class="strat-effect">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Infantry</strong></span> unit targeted gets a 6+ invulnerable save and Benefit of Cover until end of phase.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Go to Ground</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Shooting phase</td>
-        <td class="notes data">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Infantry</strong></span> unit targeted gets a 6+ invulnerable save and Benefit of Cover until end of phase.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Smokescreen</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Opp. Shooting phase</div>
+      <div class="strat-effect">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Smoke</strong></span> unit targeted gets Benefit of Cover and <strong>Stealth</strong> until end of phase.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Smokescreen</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Shooting phase</td>
-        <td class="notes data">Just after an enemy selects targets: one <span style="font-variant:small-caps"><strong>Smoke</strong></span> unit targeted gets Benefit of Cover and <strong>Stealth</strong> until end of phase.</td>
-      </tr>
+    <div class="strat-card removable">
+      <div class="strat-card-header"><span class="strat-name">Heroic Intervention</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-phase">Opp. Charge phase</div>
+      <div class="strat-effect">Just after an enemy unit ends a Charge: one unit within 6&rdquo; that could declare a charge against it does so, resolved as your Charge phase. <span style="font-variant:small-caps"><strong>Vehicles</strong></span> only if <span style="font-variant:small-caps"><strong>Walker</strong></span>. No Charge bonus this turn.</div>
+    </div>
 
-      <tr class="removable">
-        <td class="name"><span class="profile-name">Heroic Intervention</span></td>
-        <td class="data">1CP</td>
-        <td class="data">Opp. Charge phase</td>
-        <td class="notes data">Just after an enemy unit ends a Charge: one unit within 6&rdquo; that could declare a charge against it does so, resolved as your Charge phase. <span style="font-variant:small-caps"><strong>Vehicles</strong></span> only if <span style="font-variant:small-caps"><strong>Walker</strong></span>. No Charge bonus this turn.</td>
-      </tr>
-
-      <tr id="det-strats-marker"></tr>
-
-    </tbody>
-  </table>
+    <div id="det-strats-marker"></div>
+  </div>
 </div>
 
 <div type="card" id="detachment-rule-card">
@@ -2296,6 +2282,240 @@ th.sorted-desc .sort-indicator::after { content: '▼'; }
   margin: 10px;
 }
 
+/* ---- Unit view toggle ---- */
+.unit-view-toggle {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 8px 2px;
+  font-size: 12px;
+}
+.view-label {
+  color: #666;
+  font-size: 11px;
+}
+.view-btn {
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0,0,0,0.2);
+  background: transparent;
+  color: #666;
+  font-size: 11px;
+  cursor: pointer;
+  font-family: inherit;
+  -webkit-tap-highlight-color: transparent;
+}
+.view-btn.active {
+  background: #324355;
+  border-color: #324355;
+  color: #fff;
+  font-weight: 600;
+}
+
+/* ---- Stats mode: hide Abilities + Pain columns ---- */
+#units-card[data-unit-view="stats"] .unit-table th:nth-child(8),
+#units-card[data-unit-view="stats"] .unit-table td:nth-child(8),
+#units-card[data-unit-view="stats"] .unit-table th:nth-child(9),
+#units-card[data-unit-view="stats"] .unit-table td:nth-child(9) {
+  display: none;
+}
+#units-card[data-unit-view="stats"] .unit-table {
+  min-width: unset !important;
+  width: 100%;
+  table-layout: auto;
+}
+
+/* ---- Unit full-view cards ---- */
+.unit-cards-body {
+  padding: 6px 8px 8px;
+}
+.unit-card {
+  border: 1px solid #32435580;
+  border-radius: 4px;
+  margin-bottom: 8px;
+  overflow: hidden;
+}
+.unit-card-header {
+  background: #324355;
+  color: #fff;
+  padding: 5px 8px;
+  font-weight: 700;
+  font-size: 13px;
+}
+.unit-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 6px;
+  padding: 5px 8px;
+  background: #eeeef0;
+  border-bottom: 1px solid #32435540;
+}
+.unit-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 30px;
+}
+.unit-stat-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+}
+.unit-stat-value {
+  font-size: 13px;
+  font-weight: 600;
+}
+.unit-card-abilities {
+  padding: 5px 8px;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.unit-ability-row {
+  display: flex;
+  gap: 5px;
+  margin-bottom: 3px;
+}
+.unit-ability-row:last-child {
+  margin-bottom: 0;
+}
+.unit-ability-label {
+  font-weight: 700;
+  color: #324355;
+  font-size: 11px;
+  white-space: nowrap;
+  padding-top: 1px;
+}
+
+/* ---- Collapse compat for card-based layouts ---- */
+#units-card.collapsed .unit-cards-body,
+#ranged-card.collapsed .weapon-cards-body,
+#melee-card.collapsed .weapon-cards-body,
+#stratagems-card.collapsed .strat-cards-body {
+  display: none !important;
+}
+
+/* ---- Weapon cards ---- */
+.weapon-cards-body {
+  padding: 6px 8px 8px;
+}
+.weapon-card {
+  border: 1px solid #32435560;
+  border-radius: 4px;
+  margin-bottom: 6px;
+  overflow: hidden;
+}
+.weapon-card-name {
+  background: #324355;
+  color: #fff;
+  padding: 4px 8px;
+  font-weight: 700;
+  font-size: 12px;
+}
+.weapon-card-units {
+  font-size: 10px;
+  color: #bbb;
+  font-weight: 400;
+  margin-left: 6px;
+}
+.weapon-card-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  padding: 4px 8px;
+  background: #eeeef0;
+  border-bottom: 1px solid #32435540;
+}
+.weapon-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-width: 28px;
+}
+.weapon-stat-label {
+  font-size: 9px;
+  font-weight: 700;
+  color: #555;
+  text-transform: uppercase;
+}
+.weapon-stat-value {
+  font-size: 12px;
+  font-weight: 600;
+}
+.weapon-card-keywords {
+  padding: 4px 8px;
+  font-size: 11px;
+  color: #333;
+  line-height: 1.4;
+}
+
+/* ---- Stratagem cards ---- */
+.strat-cards-body {
+  padding: 6px 8px 8px;
+}
+.strat-section-header {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: #fff;
+  background: #324355;
+  padding: 3px 8px;
+  margin-bottom: 5px;
+  margin-top: 8px;
+  border-radius: 2px;
+}
+.strat-section-header:first-child {
+  margin-top: 0;
+}
+.strat-card {
+  border: 1px solid #32435560;
+  border-radius: 4px;
+  margin-bottom: 5px;
+  overflow: hidden;
+}
+.strat-card-header {
+  background: #eeeef0;
+  border-bottom: 1px solid #32435540;
+  padding: 4px 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.strat-name {
+  font-weight: 700;
+  font-size: 12px;
+}
+.strat-cp {
+  font-size: 12px;
+  font-weight: 700;
+  color: #6b1a2a;
+  white-space: nowrap;
+  margin-left: 8px;
+}
+.strat-phase {
+  font-size: 10px;
+  font-weight: 600;
+  background: #324355;
+  color: #fff;
+  padding: 2px 8px;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+.strat-effect {
+  padding: 5px 8px;
+  font-size: 12px;
+  line-height: 1.45;
+}
+/* Stratagem card collapse button (no table, so manually placed) */
+#stratagems-card .card-collapse-btn {
+  display: block;
+  width: 22px;
+  height: 22px;
+  margin-left: auto;
+  margin-bottom: 2px;
+}
+
 </style>
 <style>
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans:ital,wght@0,100..900;1,100..900&display=swap');
@@ -2575,6 +2795,134 @@ restoreUnitStates();
       card.appendChild(resetWrap);
     }
   });
+})();
+
+// ---- Stratagems card: add collapse button (no table, so not caught by above) ----
+(function() {
+  var card = document.getElementById('stratagems-card');
+  if (!card) return;
+  var btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'card-collapse-btn';
+  btn.setAttribute('aria-label', 'Collapse');
+  btn.textContent = '\u2212';
+  btn.addEventListener('click', function() {
+    card.classList.toggle('collapsed');
+    btn.textContent = card.classList.contains('collapsed') ? '\u002B' : '\u2212';
+    btn.setAttribute('aria-label', card.classList.contains('collapsed') ? 'Expand' : 'Collapse');
+  });
+  card.insertBefore(btn, card.firstChild);
+})();
+
+// ---- Units Stats/Full view toggle ----
+(function() {
+  var card = document.getElementById('units-card');
+  if (!card) return;
+  var tbl = card.querySelector('.unit-table');
+  var fullView = document.getElementById('units-full-view');
+  var btns = card.querySelectorAll('.view-btn');
+  // After collapse button JS ran, the table is wrapped in .card-table-wrap
+  function getTableWrap() { return tbl ? tbl.closest('.card-table-wrap') || tbl.parentElement : null; }
+
+  function stat(label, val) {
+    return '<div class="unit-stat"><div class="unit-stat-label">' + label + '</div><div class="unit-stat-value">' + val + '</div></div>';
+  }
+
+  function buildUnitCards() {
+    if (fullView.dataset.built) return;
+    fullView.dataset.built = '1';
+    if (!tbl) return;
+    var rows = tbl.querySelectorAll('tbody tr.removable');
+    var html = '';
+    rows.forEach(function(tr) {
+      var cells = tr.querySelectorAll('td');
+      var name = cells[0] ? (cells[0].querySelector('.profile-name') || cells[0]).textContent.trim() : '';
+      var m   = cells[1] ? cells[1].textContent.trim() : '';
+      var t   = cells[2] ? cells[2].textContent.trim() : '';
+      var sv  = cells[3] ? cells[3].textContent.trim() : '';
+      var w   = cells[4] ? cells[4].textContent.trim() : '';
+      var ld  = cells[5] ? cells[5].textContent.trim() : '';
+      var oc  = cells[6] ? cells[6].textContent.trim() : '';
+      var abilitiesEl = cells[7];
+      var painEl = cells[8];
+      var abilities = abilitiesEl ? abilitiesEl.innerHTML.trim() : '';
+      var pain = painEl ? painEl.innerHTML.trim() : '';
+      html += '<div class="unit-card">' +
+        '<div class="unit-card-header">' + name + '</div>' +
+        '<div class="unit-card-stats">' +
+          stat('M', m) + stat('T', t) + stat('SV', sv) + stat('W', w) + stat('LD', ld) + stat('OC', oc) +
+        '</div>' +
+        '<div class="unit-card-abilities">' +
+          (abilities ? '<div class="unit-ability-row"><span class="unit-ability-label">Abilities</span> ' + abilities + '</div>' : '') +
+          (pain ? '<div class="unit-ability-row"><span class="unit-ability-label">Pain</span> ' + pain + '</div>' : '') +
+        '</div>' +
+      '</div>';
+    });
+    fullView.innerHTML = html;
+  }
+
+  btns.forEach(function(btn) {
+    btn.addEventListener('click', function() {
+      var view = btn.dataset.view;
+      card.setAttribute('data-unit-view', view);
+      btns.forEach(function(b) { b.classList.toggle('active', b === btn); });
+      var wrap = getTableWrap();
+      if (view === 'full') {
+        buildUnitCards();
+        if (wrap) wrap.style.display = 'none';
+        if (fullView) fullView.style.display = '';
+      } else {
+        if (wrap) wrap.style.display = '';
+        if (fullView) fullView.style.display = 'none';
+      }
+    });
+  });
+})();
+
+// ---- Weapon card builders ----
+(function() {
+  function wstat(label, val) {
+    return '<div class="weapon-stat"><div class="weapon-stat-label">' + label + '</div><div class="weapon-stat-value">' + val + '</div></div>';
+  }
+
+  function buildWeaponCards(cardId, containerId, statHeaders) {
+    var card = document.getElementById(cardId);
+    var container = document.getElementById(containerId);
+    if (!card || !container) return;
+    var tbl = card.querySelector('table');
+    if (!tbl) return;
+    var rows = tbl.querySelectorAll('tbody tr.removable');
+    var html = '';
+    rows.forEach(function(tr) {
+      var cells = tr.querySelectorAll('td');
+      var name = cells[0] ? (cells[0].querySelector('.profile-name') || cells[0]).textContent.trim() : '';
+      var unitsText = cells[1] ? cells[1].textContent.trim() : '';
+      var statsHtml = '';
+      // stat columns start at index 2 (skip Name=0, Units=1)
+      for (var i = 0; i < statHeaders.length; i++) {
+        var val = cells[i + 2] ? cells[i + 2].textContent.trim() : '';
+        statsHtml += wstat(statHeaders[i], val);
+      }
+      var kwIdx = statHeaders.length + 2;
+      var keywords = cells[kwIdx] ? cells[kwIdx].textContent.trim() : '';
+      html += '<div class="weapon-card">' +
+        '<div class="weapon-card-name">' + name +
+          (unitsText ? '<span class="weapon-card-units">(' + unitsText + ')</span>' : '') +
+        '</div>' +
+        '<div class="weapon-card-stats">' + statsHtml + '</div>' +
+        (keywords ? '<div class="weapon-card-keywords">' + keywords + '</div>' : '') +
+      '</div>';
+    });
+    container.innerHTML = html;
+    // Hide the original table wrap
+    var wrap = tbl.closest('.card-table-wrap') || tbl.parentElement;
+    if (wrap && wrap !== card) wrap.style.display = 'none';
+  }
+
+  // Ranged: cols after Name+Units are Range, A, BS, S, AP, D then Keywords
+  buildWeaponCards('ranged-card', 'ranged-cards', ['Range', 'A', 'BS', 'S', 'AP', 'D']);
+  // Melee: cols after Name+Units are A, WS, S, AP, D then Keywords
+  buildWeaponCards('melee-card', 'melee-cards', ['A', 'WS', 'S', 'AP', 'D']);
 })();
 
 (function() {
@@ -3276,33 +3624,32 @@ restoreUnitStates();
     document.getElementById('det-rule-title').textContent = det.ruleName;
     document.getElementById('det-rule-body').innerHTML = det.ruleText;
 
-    // Remove previously injected stratagem rows
+    // Remove previously injected stratagem cards
     document.querySelectorAll('.det-strat-row').forEach(function (r) { r.remove(); });
 
-    // Inject new rows after the marker
+    // Inject card divs after the marker
     var marker = document.getElementById('det-strats-marker');
     var insertAfter = marker;
 
-    function insertRow(el) {
+    function insertAfterEl(el) {
       insertAfter.parentNode.insertBefore(el, insertAfter.nextSibling);
       insertAfter = el;
     }
 
-    // Section header row
-    var hdr = document.createElement('tr');
-    hdr.className = 'det-strat-row';
-    hdr.innerHTML = '<th colspan="4">' + det.name + '</th>';
-    insertRow(hdr);
+    // Section header
+    var hdr = document.createElement('div');
+    hdr.className = 'strat-section-header det-strat-row';
+    hdr.textContent = det.name;
+    insertAfterEl(hdr);
 
     det.stratagems.forEach(function (s) {
-      var tr = document.createElement('tr');
-      tr.className = 'removable det-strat-row';
-      tr.innerHTML =
-        '<td class="name"><span class="profile-name">' + s.name + '</span></td>' +
-        '<td class="data">' + s.cp + '</td>' +
-        '<td class="data">' + s.when + '</td>' +
-        '<td class="notes data">' + s.effect + '</td>';
-      insertRow(tr);
+      var card = document.createElement('div');
+      card.className = 'strat-card removable det-strat-row';
+      card.innerHTML =
+        '<div class="strat-card-header"><span class="strat-name">' + s.name + '</span><span class="strat-cp">' + s.cp + '</span></div>' +
+        '<div class="strat-phase">' + s.when + '</div>' +
+        '<div class="strat-effect">' + s.effect + '</div>';
+      insertAfterEl(card);
     });
 
     // Update button states

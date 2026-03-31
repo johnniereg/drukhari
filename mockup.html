@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Drukhari Mobile UX Mockup</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+      background: #1a1a1e;
+      color: #e0e0e0;
+      padding: 16px;
+      font-size: 14px;
+    }
+
+    /* ── Page header ── */
+    .page-title {
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #666;
+      margin-bottom: 20px;
+    }
+
+    /* ── Section separator ── */
+    .section-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #555;
+      margin: 28px 0 8px;
+    }
+    .section-label span {
+      background: #2a2a30;
+      padding: 2px 8px;
+      border-radius: 4px;
+    }
+
+    /* ══════════════════════════════════
+       APPROACH A – stat chips per unit
+       ══════════════════════════════════ */
+    .unit-card {
+      background: #25252c;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 6px;
+      border-left: 3px solid #7b2d3e;
+    }
+    .unit-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f0e6d0;
+      margin-bottom: 5px;
+    }
+    .stat-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 4px;
+      margin-bottom: 5px;
+    }
+    .stat {
+      background: #1a1a22;
+      border-radius: 4px;
+      padding: 2px 6px;
+      font-size: 11px;
+      color: #b0b8c8;
+      white-space: nowrap;
+    }
+    .stat b {
+      color: #7ca8d0;
+      font-weight: 500;
+      font-size: 10px;
+      margin-right: 2px;
+    }
+    .unit-abilities {
+      font-size: 11px;
+      color: #888;
+      line-height: 1.4;
+    }
+    .unit-abilities .lbl {
+      color: #555;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .05em;
+      margin-right: 3px;
+    }
+
+    /* ══════════════════════════════════
+       APPROACH B – weapon entry rows
+       ══════════════════════════════════ */
+    .weapon-card {
+      background: #25252c;
+      border-radius: 8px;
+      padding: 9px 12px;
+      margin-bottom: 6px;
+    }
+    .weapon-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      margin-bottom: 4px;
+    }
+    .weapon-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f0e6d0;
+    }
+    .weapon-unit {
+      font-size: 11px;
+      color: #666;
+    }
+    .weapon-stats {
+      font-size: 12px;
+      color: #c8c0b0;
+      margin-bottom: 4px;
+      letter-spacing: .01em;
+    }
+    .weapon-stats b {
+      color: #7ca8d0;
+      font-weight: 500;
+      font-size: 10px;
+      margin-right: 1px;
+    }
+    .weapon-stats .sep { color: #444; margin: 0 3px; }
+    .keyword-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 3px;
+    }
+    .chip {
+      background: #1a2830;
+      border: 1px solid #2a4050;
+      border-radius: 4px;
+      padding: 1px 6px;
+      font-size: 10px;
+      color: #7ca8d0;
+    }
+
+    /* ══════════════════════════════════
+       APPROACH C – stratagem cards
+       ══════════════════════════════════ */
+    .strat-card {
+      background: #25252c;
+      border-radius: 8px;
+      margin-bottom: 6px;
+      overflow: hidden;
+    }
+    .strat-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 8px 12px;
+      background: #2e2e38;
+    }
+    .strat-name {
+      font-size: 13px;
+      font-weight: 600;
+      color: #f0e6d0;
+    }
+    .strat-cp {
+      background: #7b2d3e;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 700;
+      padding: 2px 7px;
+      border-radius: 4px;
+      white-space: nowrap;
+    }
+    .strat-when {
+      padding: 4px 12px;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .08em;
+      color: #888;
+      background: #202028;
+    }
+    .strat-effect {
+      padding: 8px 12px;
+      font-size: 12px;
+      color: #c8c0b0;
+      line-height: 1.5;
+    }
+    .strat-effect sc {
+      font-variant: small-caps;
+      font-weight: 600;
+      color: #d0c8e0;
+    }
+
+    /* ══════════════════════════════════
+       COLLAPSIBLE SECTIONS
+       ══════════════════════════════════ */
+    .collapse-section {
+      margin-bottom: 6px;
+    }
+    .collapse-toggle {
+      width: 100%;
+      background: #2e2e38;
+      border: none;
+      border-radius: 8px;
+      color: #c0b8d0;
+      font-size: 13px;
+      font-weight: 600;
+      padding: 10px 14px;
+      text-align: left;
+      cursor: pointer;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-family: inherit;
+    }
+    .collapse-toggle.open {
+      border-radius: 8px 8px 0 0;
+    }
+    .collapse-toggle .arrow {
+      font-size: 11px;
+      color: #666;
+      transition: transform .2s;
+    }
+    .collapse-toggle.open .arrow {
+      transform: rotate(180deg);
+    }
+    .collapse-body {
+      display: none;
+      padding: 6px;
+      background: #1e1e24;
+      border-radius: 0 0 8px 8px;
+    }
+    .collapse-body.open {
+      display: block;
+    }
+
+    /* ── Nav ── */
+    .mock-nav {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      background: #111113;
+      padding: 8px;
+      border-radius: 8px;
+      margin-bottom: 20px;
+    }
+    .mock-nav a {
+      padding: 3px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.12);
+      color: #ddd;
+      font-size: 11px;
+      text-decoration: none;
+    }
+
+    /* ── Comparison label ── */
+    .compare-label {
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: .1em;
+      color: #444;
+      margin: 4px 0 8px;
+    }
+    .compare-label.new { color: #3a6e3a; }
+
+    hr.divider {
+      border: none;
+      border-top: 1px solid #2a2a30;
+      margin: 24px 0;
+    }
+
+    /* ── OLD table (for comparison) ── */
+    .old-wrap {
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      border-radius: 8px;
+    }
+    .old-table {
+      border-collapse: collapse;
+      font-size: 11px;
+      background: #25252c;
+      min-width: 520px;
+      width: max-content;
+    }
+    .old-table th {
+      background: #1e1e24;
+      color: #888;
+      font-weight: 600;
+      padding: 6px 10px;
+      text-align: left;
+      white-space: nowrap;
+    }
+    .old-table td {
+      padding: 6px 10px;
+      border-top: 1px solid #2a2a30;
+      color: #c0b8b0;
+      white-space: nowrap;
+    }
+    .old-table td:first-child { color: #f0e6d0; font-weight: 600; }
+  </style>
+</head>
+<body>
+
+<p class="page-title">Drukhari Reference — Mobile UX Mockup</p>
+
+<!-- NAV -->
+<div class="mock-nav">
+  <a href="#">Top</a>
+  <a href="#">Units</a>
+  <a href="#">Ranged</a>
+  <a href="#">Melee</a>
+  <a href="#">Abilities</a>
+  <a href="#">Pain</a>
+  <a href="#">Stratagems</a>
+</div>
+
+
+<!-- ════════════════════════════════════════
+     SECTION 1 – UNITS
+     ════════════════════════════════════════ -->
+<div class="section-label"><span>Units</span></div>
+
+<p class="compare-label">Current (requires horizontal scroll →)</p>
+<div class="old-wrap">
+  <table class="old-table">
+    <tr>
+      <th>Unit</th><th>M</th><th>T</th><th>SV</th><th>W</th><th>LD</th><th>OC</th><th>Abilities</th><th>Pain</th>
+    </tr>
+    <tr>
+      <td>Archon</td><td>7"</td><td>3</td><td>4+/2++</td><td>4</td><td>6+</td><td>1</td><td>Devious Mastermind, Overlord, Shadowfield, Soul Trap</td><td>Hatred Eternal</td>
+    </tr>
+    <tr>
+      <td>Cronos</td><td>7"</td><td>7</td><td>3+/6++/5+++</td><td>7</td><td>7+</td><td>2</td><td>Pain Engine</td><td>Pain Parasite</td>
+    </tr>
+    <tr>
+      <td>Haemonculus</td><td>7"</td><td>4</td><td>5+/6++/5+++</td><td>5</td><td>7+</td><td>1</td><td>Fear Incarnate, Pain Adept</td><td>Fleshcraft</td>
+    </tr>
+  </table>
+</div>
+
+<br>
+<p class="compare-label new">Proposed — stat chips, no scroll</p>
+
+<div class="unit-card">
+  <div class="unit-name">Archon</div>
+  <div class="stat-row">
+    <span class="stat"><b>M</b>7"</span>
+    <span class="stat"><b>T</b>3</span>
+    <span class="stat"><b>SV</b>4+/2++</span>
+    <span class="stat"><b>W</b>4</span>
+    <span class="stat"><b>LD</b>6+</span>
+    <span class="stat"><b>OC</b>1</span>
+  </div>
+  <div class="unit-abilities">
+    <span class="lbl">Abilities</span>Devious Mastermind, Overlord, Shadowfield, Soul Trap
+  </div>
+  <div class="unit-abilities">
+    <span class="lbl">Pain</span>Hatred Eternal
+  </div>
+</div>
+
+<div class="unit-card">
+  <div class="unit-name">Cronos</div>
+  <div class="stat-row">
+    <span class="stat"><b>M</b>7"</span>
+    <span class="stat"><b>T</b>7</span>
+    <span class="stat"><b>SV</b>3+/6++/5+++</span>
+    <span class="stat"><b>W</b>7</span>
+    <span class="stat"><b>LD</b>7+</span>
+    <span class="stat"><b>OC</b>2</span>
+  </div>
+  <div class="unit-abilities">
+    <span class="lbl">Abilities</span>Pain Engine
+  </div>
+  <div class="unit-abilities">
+    <span class="lbl">Pain</span>Pain Parasite
+  </div>
+</div>
+
+<div class="unit-card">
+  <div class="unit-name">Haemonculus</div>
+  <div class="stat-row">
+    <span class="stat"><b>M</b>7"</span>
+    <span class="stat"><b>T</b>4</span>
+    <span class="stat"><b>SV</b>5+/6++/5+++</span>
+    <span class="stat"><b>W</b>5</span>
+    <span class="stat"><b>LD</b>7+</span>
+    <span class="stat"><b>OC</b>1</span>
+  </div>
+  <div class="unit-abilities">
+    <span class="lbl">Abilities</span>Fear Incarnate, Pain Adept
+  </div>
+  <div class="unit-abilities">
+    <span class="lbl">Pain</span>Fleshcraft
+  </div>
+</div>
+
+
+<hr class="divider">
+
+
+<!-- ════════════════════════════════════════
+     SECTION 2 – WEAPONS
+     ════════════════════════════════════════ -->
+<div class="section-label"><span>Melee Weapons</span></div>
+
+<p class="compare-label">Current (requires horizontal scroll →)</p>
+<div class="old-wrap">
+  <table class="old-table">
+    <tr>
+      <th>Weapon</th><th>Unit</th><th>A</th><th>WS</th><th>S</th><th>AP</th><th>D</th><th>Keywords</th>
+    </tr>
+    <tr>
+      <td>Huskblade</td><td>Archon</td><td>4</td><td>2+</td><td>3</td><td>-2</td><td>3</td><td>Devastating Wounds</td>
+    </tr>
+    <tr>
+      <td>Klaive</td><td>Incubi</td><td>3</td><td>3+</td><td>5</td><td>-2</td><td>2</td><td>—</td>
+    </tr>
+    <tr>
+      <td>Lady's Blade</td><td>Lady Malys</td><td>6</td><td>2+</td><td>5</td><td>-3</td><td>3</td><td>Devastating Wounds, Hazardous</td>
+    </tr>
+  </table>
+</div>
+
+<br>
+<p class="compare-label new">Proposed — stacked stat line, no scroll</p>
+
+<div class="weapon-card">
+  <div class="weapon-header">
+    <span class="weapon-name">Huskblade</span>
+    <span class="weapon-unit">Archon</span>
+  </div>
+  <div class="weapon-stats">
+    <b>A</b>4<span class="sep">·</span><b>WS</b>2+<span class="sep">·</span><b>S</b>3<span class="sep">·</span><b>AP</b>-2<span class="sep">·</span><b>D</b>3
+  </div>
+  <div class="keyword-chips">
+    <span class="chip">Devastating Wounds</span>
+  </div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-header">
+    <span class="weapon-name">Klaive</span>
+    <span class="weapon-unit">Incubi</span>
+  </div>
+  <div class="weapon-stats">
+    <b>A</b>3<span class="sep">·</span><b>WS</b>3+<span class="sep">·</span><b>S</b>5<span class="sep">·</span><b>AP</b>-2<span class="sep">·</span><b>D</b>2
+  </div>
+</div>
+
+<div class="weapon-card">
+  <div class="weapon-header">
+    <span class="weapon-name">Lady's Blade</span>
+    <span class="weapon-unit">Lady Malys</span>
+  </div>
+  <div class="weapon-stats">
+    <b>A</b>6<span class="sep">·</span><b>WS</b>2+<span class="sep">·</span><b>S</b>5<span class="sep">·</span><b>AP</b>-3<span class="sep">·</span><b>D</b>3
+  </div>
+  <div class="keyword-chips">
+    <span class="chip">Devastating Wounds</span>
+    <span class="chip">Hazardous</span>
+  </div>
+</div>
+
+
+<hr class="divider">
+
+
+<!-- ════════════════════════════════════════
+     SECTION 3 – STRATAGEMS
+     ════════════════════════════════════════ -->
+<div class="section-label"><span>Stratagems</span></div>
+
+<p class="compare-label">Current (requires horizontal scroll →)</p>
+<div class="old-wrap">
+  <table class="old-table">
+    <tr><th>Stratagem</th><th>CP</th><th>When</th><th style="min-width:220px">Effect</th></tr>
+    <tr>
+      <td>Pounce on the Prey</td><td>1CP</td><td>Movement phase</td>
+      <td style="white-space:normal;min-width:220px">Just after a Drukhari Infantry unit disembarks from a Transport that made a Normal move: until end of turn, that unit is eligible to declare a charge.</td>
+    </tr>
+    <tr>
+      <td>Night Shield</td><td>1CP</td><td>Opp. Shooting phase</td>
+      <td style="white-space:normal;min-width:220px">Just after an enemy selects targets: one Drukhari Vehicle unit targeted gains a 4+ invulnerable save until end of phase.</td>
+    </tr>
+  </table>
+</div>
+
+<br>
+<p class="compare-label new">Proposed — stratagem cards, no scroll</p>
+
+<div class="strat-card">
+  <div class="strat-header">
+    <span class="strat-name">Pounce on the Prey</span>
+    <span class="strat-cp">1CP</span>
+  </div>
+  <div class="strat-when">Movement phase</div>
+  <div class="strat-effect">
+    Just after a <sc>Drukhari Infantry</sc> unit disembarks from a <sc>Transport</sc> that made a Normal move: until end of turn, that unit is eligible to declare a charge.
+  </div>
+</div>
+
+<div class="strat-card">
+  <div class="strat-header">
+    <span class="strat-name">Night Shield</span>
+    <span class="strat-cp">1CP</span>
+  </div>
+  <div class="strat-when">Opponent's Shooting phase</div>
+  <div class="strat-effect">
+    Just after an enemy selects targets: one <sc>Drukhari Vehicle</sc> unit targeted gains a 4+ invulnerable save until end of phase.
+  </div>
+</div>
+
+<div class="strat-card">
+  <div class="strat-header">
+    <span class="strat-name">Counter-Offensive</span>
+    <span class="strat-cp">2CP</span>
+  </div>
+  <div class="strat-when">Fight phase</div>
+  <div class="strat-effect">
+    Just after an enemy unit has fought: one unit from your army within Engagement Range of enemies that hasn't fought yet fights next.
+  </div>
+</div>
+
+
+<hr class="divider">
+
+
+<!-- ════════════════════════════════════════
+     SECTION 4 – COLLAPSIBLE GROUPS
+     (bonus idea for long sections)
+     ════════════════════════════════════════ -->
+<div class="section-label"><span>Bonus: collapsible sub-groups within a section</span></div>
+<p class="compare-label new">e.g. Core vs Detachment stratagems as expandable groups</p>
+
+<div class="collapse-section">
+  <button class="collapse-toggle open" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+    Core Stratagems <span class="arrow">▼</span>
+  </button>
+  <div class="collapse-body open">
+    <div class="strat-card">
+      <div class="strat-header"><span class="strat-name">Fire Overwatch</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-when">Opponent's Movement or Charge phase</div>
+      <div class="strat-effect">Just after an enemy unit moves or declares a charge: one eligible unit within 24" shoots that enemy (hits only on unmodified 6). Once per turn.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header"><span class="strat-name">Rapid Ingress</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-when">Opponent's Movement phase</div>
+      <div class="strat-effect">End of opponent's Movement phase: one unit in Reserves arrives as if it were the Reinforcements step.</div>
+    </div>
+  </div>
+</div>
+
+<div class="collapse-section">
+  <button class="collapse-toggle" onclick="this.classList.toggle('open');this.nextElementSibling.classList.toggle('open')">
+    Skysplinter Assault <span class="arrow">▼</span>
+  </button>
+  <div class="collapse-body">
+    <div class="strat-card">
+      <div class="strat-header"><span class="strat-name">Skyborne Annihilation</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-when">Shooting phase</div>
+      <div class="strat-effect">One <sc>Drukhari</sc> unit that disembarked from a <sc>Transport</sc> this turn gains <strong>[Sustained Hits 1]</strong> on ranged weapons.</div>
+    </div>
+    <div class="strat-card">
+      <div class="strat-header"><span class="strat-name">Swooping Mockery</span><span class="strat-cp">1CP</span></div>
+      <div class="strat-when">Opponent's Movement phase</div>
+      <div class="strat-effect">Just after an enemy unit ends a move: one <sc>Drukhari Transport</sc> within 9" makes a Normal move of up to 6".</div>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
