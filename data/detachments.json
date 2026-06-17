@@ -1,0 +1,45 @@
+{
+  "_note": "Rules + stratagems ported from the legacy reference (accurate). Enhancements are PLACEHOLDERS — replace name/pts/text with real codex values (verified:false until you do).",
+  "detachments": [
+    {
+      "id": "skysplinter",
+      "name": "Skysplinter Assault",
+      "ruleName": "Rain of Cruelty",
+      "ruleText": "Each time a DRUKHARI unit from your army disembarks from a TRANSPORT, until the end of the turn: ranged weapons equipped by models in that unit have the [Ignores Cover] ability, and melee weapons equipped by models in that unit have the [Lance] ability.",
+      "enhancements": [
+        { "id": "sky_enh_1", "name": "Placeholder Enhancement A", "pts": 15, "text": "TODO: add from codex.", "verified": false },
+        { "id": "sky_enh_2", "name": "Placeholder Enhancement B", "pts": 20, "text": "TODO: add from codex.", "verified": false },
+        { "id": "sky_enh_3", "name": "Placeholder Enhancement C", "pts": 25, "text": "TODO: add from codex.", "verified": false },
+        { "id": "sky_enh_4", "name": "Placeholder Enhancement D", "pts": 30, "text": "TODO: add from codex.", "verified": false }
+      ],
+      "stratagems": [
+        { "name": "Vicious Blades", "cp": "1CP", "when": "Fight phase", "effect": "Just after a DRUKHARI TRANSPORT selects its targets: after it fights, select one targeted enemy unit. Roll D6 for each embarked model (+1 if WRACKS): each 5+ inflicts 1 mortal wound (max 6)." },
+        { "name": "Wraithlike Retreat", "cp": "1CP", "when": "End of Fight phase", "effect": "One DRUKHARI INFANTRY unit that fought makes a Normal or Fall Back move. Unless WYCHES, it must end within 3\" horizontal / 5\" vertical of a friendly DRUKHARI TRANSPORT and embark within it." },
+        { "name": "Pounce on the Prey", "cp": "1CP", "when": "Movement phase", "effect": "Just after a DRUKHARI INFANTRY unit disembarks from a TRANSPORT that made a Normal move: until end of turn, that unit is eligible to declare a charge." },
+        { "name": "Skyborne Annihilation", "cp": "1CP", "when": "Shooting phase", "effect": "One DRUKHARI unit that hasn't shot this phase and disembarked from a TRANSPORT this turn gains [Sustained Hits 1] on ranged weapons (or [Sustained Hits 2] if KABALITE WARRIORS or HAND OF THE ARCHON)." },
+        { "name": "Swooping Mockery", "cp": "1CP", "when": "Opponent's Movement phase", "effect": "Just after an enemy unit ends a Normal, Advance or Fall Back move: one DRUKHARI TRANSPORT within 9\" makes a Normal move of up to 6\"." },
+        { "name": "Night Shield", "cp": "1CP", "when": "Opponent's Shooting phase", "effect": "Just after an enemy selects targets: one DRUKHARI VEHICLE unit targeted gains a 4+ invulnerable save until end of phase." }
+      ]
+    },
+    {
+      "id": "reapers",
+      "name": "Reaper's Wager",
+      "ruleName": "Callous Competition",
+      "ruleText": "At the start of the battle, DRUKHARI units are winning the wager. Each time a DRUKHARI unit destroys an enemy unit, DRUKHARI units are winning; each time a HARLEQUINS unit destroys an enemy unit, HARLEQUINS units are winning (the other faction is losing). Each time a DRUKHARI or HARLEQUINS model makes an attack: if winning the wager, re-roll a Hit roll of 1; if losing, re-roll a Hit roll of 1 AND a Wound roll of 1 instead.",
+      "enhancements": [
+        { "id": "reap_enh_1", "name": "Placeholder Enhancement A", "pts": 15, "text": "TODO: add from codex.", "verified": false },
+        { "id": "reap_enh_2", "name": "Placeholder Enhancement B", "pts": 20, "text": "TODO: add from codex.", "verified": false },
+        { "id": "reap_enh_3", "name": "Placeholder Enhancement C", "pts": 25, "text": "TODO: add from codex.", "verified": false },
+        { "id": "reap_enh_4", "name": "Placeholder Enhancement D", "pts": 30, "text": "TODO: add from codex.", "verified": false }
+      ],
+      "stratagems": [
+        { "name": "Malicious Frenzy", "cp": "1CP", "when": "Shooting or Fight phase", "effect": "One DRUKHARI or HARLEQUINS unit that hasn't shot or fought this phase: select [Lethal Hits] or [Sustained Hits 1]. Until end of phase, that unit's weapons have the selected ability." },
+        { "name": "Fateful Role", "cp": "1CP", "when": "Opponent's Fight phase", "effect": "Just after an enemy selects targets: one targeted DRUKHARI or HARLEQUINS unit — each time a model is destroyed without having fought, roll D6 (+1 if losing the wager): on 4+ that model fights before removal." },
+        { "name": "Murderer's Circus", "cp": "1CP", "when": "Opponent's Fight phase", "effect": "Just after an enemy selects targets: one targeted DRUKHARI or HARLEQUINS unit — until end of phase, each time an attack targets your unit, subtract 1 from the Hit roll." },
+        { "name": "Shorten the Odds", "cp": "1CP", "when": "Movement phase", "effect": "Just after a DRUKHARI or HARLEQUINS unit Advances: until end of turn, that unit is eligible to shoot and declare a charge in a turn it Advanced." },
+        { "name": "Scintillating Tempo", "cp": "1CP", "when": "Movement or Charge phase", "effect": "Just after a DRUKHARI or HARLEQUINS unit moves, is set up, or declares a charge: until end of turn, enemies cannot use Fire Overwatch to shoot at your unit." },
+        { "name": "Dance Macabre", "cp": "2CP", "when": "Opponent's Movement phase", "effect": "Just after an enemy unit ends a Normal, Advance or Fall Back move: one DRUKHARI INFANTRY or HARLEQUINS INFANTRY unit within 9\" makes a Normal move of up to D6\" (or 6\" if losing the wager)." }
+      ]
+    }
+  ]
+}

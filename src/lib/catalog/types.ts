@@ -111,3 +111,28 @@ export interface Catalog {
   weapons: Weapon[];
   abilities: Ability[];
 }
+
+export interface Enhancement {
+  id: string;
+  name: string;
+  pts: number;
+  text: string;
+  /** false = placeholder pending real codex values. */
+  verified: boolean;
+}
+
+export interface Stratagem {
+  name: string;
+  cp: string;
+  when: string;
+  effect: string;
+}
+
+export interface Detachment {
+  id: string;
+  name: string;
+  ruleName: string;
+  ruleText: string;
+  enhancements: Enhancement[];
+  stratagems: Stratagem[];
+}

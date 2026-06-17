@@ -1,6 +1,6 @@
 // User data: saved army lists, persisted to localStorage.
 // (IndexedDB + export/import comes later; localStorage is fine for this size.)
-import { pointsForSize, getDatasheet } from '../catalog';
+import { pointsForSize, getDatasheet, getEnhancement } from '../catalog';
 
 export type ListMode = 'official' | 'draft';
 
@@ -8,6 +8,10 @@ export interface ListUnit {
   uid: string; // unique within the list
   datasheetId: string;
   size: number; // model count (matches a points bracket)
+  /** Selected detachment enhancement id (characters only). */
+  enhancementId?: string;
+  /** Equipped weapon ids; undefined = all of the datasheet's weapons. */
+  loadout?: string[];
   notes?: string;
 }
 
@@ -85,10 +89,39 @@ class ListStore {
     });
   }
 
+  /** Assign (or clear, with undefined) a detachment enhancement on a unit. */
+  setEnhancement(listId: string, unitUid: string, enhancementId: string | undefined) {
+    this.mutate(listId, (l) => {
+      const u = l.units.find((x) => x.uid === unitUid);
+      if (u) u.enhancementId = enhancementId;
+    });
+  }
+
+  /** Toggle a weapon in a unit's loadout. undefined loadout = "all"; first toggle materializes the full set. */
+  toggleLoadout(listId: string, unitUid: string, weaponId: string, allIds: string[]) {
+    this.mutate(listId, (l) => {
+      const u = l.units.find((x) => x.uid === unitUid);
+      if (!u) return;
+      const current = u.loadout ?? allIds.slice();
+      u.loadout = current.includes(weaponId)
+        ? current.filter((w) => w !== weaponId)
+        : [...current, weaponId];
+    });
+  }
+
+  /** Changing detachment clears enhancements (they belong to a detachment). */
+  setDetachment(listId: string, detachmentId: string | undefined) {
+    this.mutate(listId, (l) => {
+      l.detachment = detachmentId;
+      l.units = l.units.map((u) => ({ ...u, enhancementId: undefined }));
+    });
+  }
+
   total(list: ArmyList): number {
     return list.units.reduce((sum, u) => {
       const d = getDatasheet(u.datasheetId);
-      return sum + (d ? pointsForSize(d, u.size) : 0);
+      const enh = getEnhancement(u.enhancementId);
+      return sum + (d ? pointsForSize(d, u.size) : 0) + (enh?.pts ?? 0);
     }, 0);
   }
 

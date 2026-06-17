@@ -1,6 +1,8 @@
 <script lang="ts">
   import { listStore } from '../lib/store/lists.svelte';
-  import { catalog, getDatasheet, validSizes, pointsForSize, pointsConfirmed } from '../lib/catalog';
+  import { catalog } from '../lib/catalog';
+  import DetachmentPanel from '../components/DetachmentPanel.svelte';
+  import ListUnitRow from '../components/ListUnitRow.svelte';
 
   let newName = $state('');
   let adding = $state(false);
@@ -10,12 +12,6 @@
   function createList() {
     listStore.create(newName || 'New list');
     newName = '';
-  }
-
-  function cycleSize(unitUid: string, datasheetId: string, current: number) {
-    const sizes = validSizes(getDatasheet(datasheetId)!);
-    const next = sizes[(sizes.indexOf(current) + 1) % sizes.length];
-    listStore.setUnitSize(active!.id, unitUid, next);
   }
 </script>
 
@@ -59,20 +55,10 @@
     </span>
   </div>
 
+  <DetachmentPanel list={active} />
+
   {#each active.units as u (u.uid)}
-    {@const d = getDatasheet(u.datasheetId)}
-    {#if d}
-      <div class="unit-row">
-        <div class="u-main">
-          <span class="u-name small-caps">{d.name}</span>
-          <button class="size" onclick={() => cycleSize(u.uid, u.datasheetId, u.size)}>{u.size} {u.size === 1 ? 'model' : 'models'}</button>
-        </div>
-        <div class="u-right">
-          <span class="u-pts" class:unconfirmed={!pointsConfirmed(d, u.size)}>{pointsForSize(d, u.size)} pts</span>
-          <button class="rm" onclick={() => listStore.removeUnit(active.id, u.uid)} aria-label="Remove">✕</button>
-        </div>
-      </div>
-    {/if}
+    <ListUnitRow list={active} unit={u} />
   {/each}
 
   <button class="add-toggle" onclick={() => (adding = !adding)}>{adding ? 'Close' : '+ Add unit'}</button>
@@ -101,7 +87,7 @@
   .primary { background: var(--accent-dim); border-color: var(--accent); white-space: nowrap; }
   .empty { color: var(--text-dim); text-align: center; padding: 20px; }
 
-  .list-row, .unit-row, .pick { width: 100%; text-align: left; }
+  .list-row, .pick { width: 100%; text-align: left; }
   .list-row {
     display: flex; flex-direction: column; gap: 4px; background: var(--surface);
     border: 1px solid var(--border); border-radius: var(--radius); padding: 12px; margin-bottom: 8px;
@@ -122,19 +108,6 @@
   .meta-row { display: flex; align-items: center; justify-content: space-between; margin-bottom: 12px; }
   .total { font-weight: 700; }
   .total.over { color: var(--danger); }
-
-  .unit-row {
-    display: flex; align-items: center; justify-content: space-between;
-    background: var(--surface); border: 1px solid var(--border); border-radius: 8px;
-    padding: 8px 10px; margin-bottom: 6px;
-  }
-  .u-main { display: flex; flex-direction: column; gap: 2px; }
-  .u-name { font-size: 15px; font-weight: 600; }
-  .size { font-size: 12px; color: var(--text-dim); background: var(--surface-2); padding: 2px 8px; min-height: 0; align-self: flex-start; }
-  .u-right { display: flex; align-items: center; gap: 10px; }
-  .u-pts { color: var(--accent); font-weight: 700; font-size: 14px; }
-  .u-pts.unconfirmed { opacity: 0.5; }
-  .rm { background: none; border: none; color: var(--text-dim); min-height: 36px; padding: 0 4px; }
 
   .add-toggle { width: 100%; margin: 10px 0; }
   .picker { display: flex; flex-direction: column; gap: 4px; }

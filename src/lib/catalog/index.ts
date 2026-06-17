@@ -1,9 +1,32 @@
 // Typed access to the catalog. The rest of the app queries data through here
 // rather than reaching into the JSON, so storage/source can change later.
 import catalogJson from '../../../data/catalog.json';
-import type { Catalog, Datasheet, Weapon, Ability } from './types';
+import detachmentsJson from '../../../data/detachments.json';
+import type { Catalog, Datasheet, Weapon, Ability, Detachment, Enhancement } from './types';
 
 export const catalog = catalogJson as Catalog;
+export const detachments = (detachmentsJson as { detachments: Detachment[] }).detachments;
+
+const detachmentById = new Map<string, Detachment>(detachments.map((d) => [d.id, d]));
+
+export function getDetachment(id: string | undefined): Detachment | undefined {
+  return id ? detachmentById.get(id) : undefined;
+}
+
+/** Find an enhancement (across all detachments) by id. */
+export function getEnhancement(id: string | undefined): Enhancement | undefined {
+  if (!id) return undefined;
+  for (const d of detachments) {
+    const e = d.enhancements.find((x) => x.id === id);
+    if (e) return e;
+  }
+  return undefined;
+}
+
+/** Can this datasheet take a detachment enhancement? (generic characters only) */
+export function canTakeEnhancement(d: Datasheet): boolean {
+  return d.role === 'Character';
+}
 
 const slug = (s: string) =>
   s.toLowerCase().trim().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
