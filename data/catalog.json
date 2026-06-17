@@ -5,108 +5,1785 @@
     "edition": "11th"
   },
   "weapons": [
-    { "id": "splinter_pistol", "name": "Splinter Pistol", "kind": "ranged", "range": "12\"", "a": "1", "skill": "3+", "s": "2", "ap": "0", "d": "1", "keywords": ["Anti-Infantry 3+", "Assault", "Pistol"] },
-    { "id": "blast_pistol_archon", "name": "Blast Pistol", "kind": "ranged", "range": "6\"", "a": "1", "skill": "3+", "s": "8", "ap": "-3", "d": "D3", "keywords": ["Pistol"] },
-    { "id": "blast_pistol_kabalite", "name": "Blast Pistol", "kind": "ranged", "range": "6\"", "a": "1", "skill": "3+", "s": "8", "ap": "-4", "d": "D3", "keywords": ["Pistol"] },
-    { "id": "splinter_rifle", "name": "Splinter Rifle", "kind": "ranged", "range": "24\"", "a": "2", "skill": "3+", "s": "2", "ap": "0", "d": "1", "keywords": ["Anti-Infantry 3+", "Assault"] },
-    { "id": "blaster", "name": "Blaster", "kind": "ranged", "range": "18\"", "a": "1", "skill": "3+", "s": "8", "ap": "-4", "d": "D6+1", "keywords": ["Assault"] },
-    { "id": "dark_lance_infantry", "name": "Dark Lance", "kind": "ranged", "range": "36\"", "a": "1", "skill": "4+", "s": "12", "ap": "-3", "d": "D6+2", "keywords": ["Heavy"] },
-    { "id": "shredder", "name": "Shredder", "kind": "ranged", "range": "18\"", "a": "D6", "skill": "N/A", "s": "6", "ap": "0", "d": "1", "keywords": ["Assault", "Torrent"] },
-    { "id": "splinter_cannon_infantry", "name": "Splinter Cannon", "kind": "ranged", "range": "36\"", "a": "3", "skill": "4+", "s": "3", "ap": "-1", "d": "2", "keywords": ["Anti-Infantry 3+", "Heavy", "Sustained Hits 1"] },
-    { "id": "dark_lance_vehicle", "name": "Dark Lance", "kind": "ranged", "range": "36\"", "a": "1", "skill": "3+", "s": "12", "ap": "-3", "d": "D6+2", "keywords": [] },
-    { "id": "disintegrator_cannon", "name": "Disintegrator Cannon", "kind": "ranged", "range": "36\"", "a": "3", "skill": "3+", "s": "6", "ap": "-3", "d": "2", "keywords": [] },
-    { "id": "splinter_cannon_venom", "name": "Splinter Cannon", "kind": "ranged", "range": "36\"", "a": "3", "skill": "3+", "s": "3", "ap": "-1", "d": "2", "keywords": ["Anti-Infantry 3+", "Sustained Hits 1"] },
-    { "id": "twin_splinter_rifle", "name": "Twin Splinter Rifle", "kind": "ranged", "range": "24\"", "a": "2", "skill": "3+", "s": "2", "ap": "0", "d": "1", "keywords": ["Anti-Infantry 3+", "Assault", "Rapid Fire 2", "Twin-Linked"] },
-
-    { "id": "close_combat_weapon", "name": "Close Combat Weapon", "kind": "melee", "a": "2", "skill": "3+", "s": "3", "ap": "0", "d": "1", "keywords": [] },
-    { "id": "agoniser", "name": "Agoniser", "kind": "melee", "a": "7", "skill": "2+", "s": "4", "ap": "-2", "d": "1", "keywords": ["Anti-Infantry 3+"] },
-    { "id": "huskblade", "name": "Huskblade", "kind": "melee", "a": "4", "skill": "2+", "s": "3", "ap": "-2", "d": "3", "keywords": ["Devastating Wounds"] },
-    { "id": "mastercrafted_power_weapon", "name": "Master-Crafted Power Weapon", "kind": "melee", "a": "5", "skill": "2+", "s": "4", "ap": "-2", "d": "2", "keywords": [] },
-    { "id": "power_weapon_infantry", "name": "Power Weapon", "kind": "melee", "a": "3", "skill": "3+", "s": "3", "ap": "-2", "d": "1", "keywords": ["Anti-Infantry 3+"] },
-    { "id": "demiklaives_dual", "name": "Demiklaives (Dual)", "kind": "melee", "a": "6", "skill": "3+", "s": "4", "ap": "-2", "d": "1", "keywords": [] },
-    { "id": "demiklaives_single", "name": "Demiklaives (Single)", "kind": "melee", "a": "4", "skill": "3+", "s": "5", "ap": "-2", "d": "2", "keywords": [] },
-    { "id": "klaive", "name": "Klaive", "kind": "melee", "a": "3", "skill": "3+", "s": "5", "ap": "-2", "d": "2", "keywords": [] },
-    { "id": "bladevanes_venom", "name": "Bladevanes", "kind": "melee", "a": "3", "skill": "4+", "s": "5", "ap": "-1", "d": "1", "keywords": [] },
-    { "id": "bladevanes_chainsnares_raider", "name": "Bladevanes and Chainsnares", "kind": "melee", "a": "D3+3", "skill": "4+", "s": "6", "ap": "-1", "d": "1", "keywords": [] }
+    {
+      "id": "baleblast",
+      "name": "Baleblast",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "2",
+      "skill": "3+",
+      "s": "5",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Assault",
+        "Devastating Wounds",
+        "Ignores Cover"
+      ]
+    },
+    {
+      "id": "blast_pistol",
+      "name": "Blast Pistol",
+      "kind": "ranged",
+      "range": "6\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "8",
+      "ap": "-3",
+      "d": "D3",
+      "keywords": [
+        "Pistol"
+      ]
+    },
+    {
+      "id": "blast_pistol__kabalite_warriors",
+      "name": "Blast Pistol",
+      "kind": "ranged",
+      "range": "6\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "8",
+      "ap": "-4",
+      "d": "D3",
+      "keywords": [
+        "Pistol"
+      ]
+    },
+    {
+      "id": "blaster",
+      "name": "Blaster",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "8",
+      "ap": "-4",
+      "d": "D6+1",
+      "keywords": [
+        "Assault"
+      ]
+    },
+    {
+      "id": "dark_lance",
+      "name": "Dark Lance",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "1",
+      "skill": "4+",
+      "s": "12",
+      "ap": "-3",
+      "d": "D6+2",
+      "keywords": [
+        "Heavy"
+      ]
+    },
+    {
+      "id": "dark_lance__raider",
+      "name": "Dark Lance",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "12",
+      "ap": "-3",
+      "d": "D6+2",
+      "keywords": []
+    },
+    {
+      "id": "disintegrator_cannon",
+      "name": "Disintegrator Cannon",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "3",
+      "skill": "3+",
+      "s": "6",
+      "ap": "-3",
+      "d": "2",
+      "keywords": []
+    },
+    {
+      "id": "heat_lance",
+      "name": "Heat Lance",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "14",
+      "ap": "-4",
+      "d": "D6",
+      "keywords": [
+        "Assault",
+        "Melta 3"
+      ]
+    },
+    {
+      "id": "haywire_blaster",
+      "name": "Haywire Blaster",
+      "kind": "ranged",
+      "range": "24\"",
+      "a": "2",
+      "skill": "4+",
+      "s": "3",
+      "ap": "-1",
+      "d": "3",
+      "keywords": [
+        "Anti-Vehicle 4+",
+        "Devastating Wounds",
+        "Heavy"
+      ]
+    },
+    {
+      "id": "hexrifle",
+      "name": "Hexrifle",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "8",
+      "ap": "-2",
+      "d": "3",
+      "keywords": [
+        "Heavy",
+        "Precision"
+      ]
+    },
+    {
+      "id": "liquifier_gun",
+      "name": "Liquifier Gun",
+      "kind": "ranged",
+      "range": "12\"",
+      "a": "D6",
+      "skill": "N/A",
+      "s": "4",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Torrent"
+      ]
+    },
+    {
+      "id": "ossefactor",
+      "name": "Ossefactor",
+      "kind": "ranged",
+      "range": "24\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "2",
+      "ap": "-2",
+      "d": "2",
+      "keywords": [
+        "Anti-Infantry 4+",
+        "Devastating Wounds"
+      ]
+    },
+    {
+      "id": "shardcarbine",
+      "name": "Shardcarbine",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "3",
+      "skill": "3+",
+      "s": "2",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Assault"
+      ]
+    },
+    {
+      "id": "shredder",
+      "name": "Shredder",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "D6",
+      "skill": "N/A",
+      "s": "6",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Assault",
+        "Torrent"
+      ]
+    },
+    {
+      "id": "spirit_syphon",
+      "name": "Spirit Syphon",
+      "kind": "ranged",
+      "range": "12\"",
+      "a": "D6",
+      "skill": "N/A",
+      "s": "5",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Ignores Cover",
+        "Torrent"
+      ]
+    },
+    {
+      "id": "spirit_vortex",
+      "name": "Spirit Vortex",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "D6",
+      "skill": "3+",
+      "s": "5",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Blast",
+        "Ignores Cover"
+      ]
+    },
+    {
+      "id": "splinter_cannon",
+      "name": "Splinter Cannon",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "3",
+      "skill": "4+",
+      "s": "3",
+      "ap": "-1",
+      "d": "2",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Heavy",
+        "Sustained Hits 1"
+      ]
+    },
+    {
+      "id": "splinter_cannon__venom",
+      "name": "Splinter Cannon",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "3",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-1",
+      "d": "2",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Sustained Hits 1"
+      ]
+    },
+    {
+      "id": "splinter_pistol",
+      "name": "Splinter Pistol",
+      "kind": "ranged",
+      "range": "12\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "2",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Assault",
+        "Pistol"
+      ]
+    },
+    {
+      "id": "splinter_pods",
+      "name": "Splinter Pods",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "2",
+      "skill": "3+",
+      "s": "2",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Assault",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "splinter_rifle",
+      "name": "Splinter Rifle",
+      "kind": "ranged",
+      "range": "24\"",
+      "a": "2",
+      "skill": "3+",
+      "s": "2",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Assault"
+      ]
+    },
+    {
+      "id": "stinger_pod",
+      "name": "Stinger Pod",
+      "kind": "ranged",
+      "range": "24\"",
+      "a": "2D6",
+      "skill": "3+",
+      "s": "5",
+      "ap": "0",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "stinger_pistol",
+      "name": "Stinger Pistol",
+      "kind": "ranged",
+      "range": "12\"",
+      "a": "1",
+      "skill": "2+",
+      "s": "2",
+      "ap": "-1",
+      "d": "D3",
+      "keywords": [
+        "Anti-Infantry 2+",
+        "Pistol",
+        "Precision"
+      ]
+    },
+    {
+      "id": "stinger_pistol__kabalite_agents",
+      "name": "Stinger Pistol",
+      "kind": "ranged",
+      "range": "12\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "2",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 2+",
+        "Pistol"
+      ]
+    },
+    {
+      "id": "twin_haywire_blaster",
+      "name": "Twin Haywire Blaster",
+      "kind": "ranged",
+      "range": "24\"",
+      "a": "2",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-1",
+      "d": "3",
+      "keywords": [
+        "Anti-Vehicle 4+",
+        "Devastating Wounds",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "twin_heat_lance",
+      "name": "Twin Heat Lance",
+      "kind": "ranged",
+      "range": "18\"",
+      "a": "1",
+      "skill": "3+",
+      "s": "14",
+      "ap": "-4",
+      "d": "D6",
+      "keywords": [
+        "Assault",
+        "Melta 3",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "twin_liquifier_gun",
+      "name": "Twin Liquifier Gun",
+      "kind": "ranged",
+      "range": "12\"",
+      "a": "D6",
+      "skill": "N/A",
+      "s": "4",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Torrent",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "twin_splinter_cannon",
+      "name": "Twin Splinter Cannon",
+      "kind": "ranged",
+      "range": "36\"",
+      "a": "3",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-1",
+      "d": "2",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Sustained Hits 1",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "twin_splinter_rifle",
+      "name": "Twin Splinter Rifle",
+      "kind": "ranged",
+      "range": "24\"",
+      "a": "2",
+      "skill": "3+",
+      "s": "2",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Assault",
+        "Rapid Fire 2",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "agoniser",
+      "name": "Agoniser",
+      "kind": "melee",
+      "a": "7",
+      "skill": "2+",
+      "s": "4",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+"
+      ]
+    },
+    {
+      "id": "archite_glaive_and_agoniser",
+      "name": "Archite Glaive and Agoniser",
+      "kind": "melee",
+      "a": "7",
+      "skill": "2+",
+      "s": "3",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Precision"
+      ]
+    },
+    {
+      "id": "bladevanes",
+      "name": "Bladevanes",
+      "kind": "melee",
+      "a": "3",
+      "skill": "4+",
+      "s": "6",
+      "ap": "-1",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "bladevanes__venom",
+      "name": "Bladevanes",
+      "kind": "melee",
+      "a": "3",
+      "skill": "4+",
+      "s": "5",
+      "ap": "-1",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "bladevanes__reavers",
+      "name": "Bladevanes",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Lance"
+      ]
+    },
+    {
+      "id": "bladevanes_and_chainsnares",
+      "name": "Bladevanes and Chainsnares",
+      "kind": "melee",
+      "a": "D3+3",
+      "skill": "4+",
+      "s": "6",
+      "ap": "-1",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "chain_flails",
+      "name": "Chain-flails",
+      "kind": "melee",
+      "a": "8",
+      "skill": "3+",
+      "s": "6",
+      "ap": "-1",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "close_combat_weapon",
+      "name": "Close Combat Weapon",
+      "kind": "melee",
+      "a": "2",
+      "skill": "3+",
+      "s": "3",
+      "ap": "0",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "demiklaives_dual",
+      "name": "Demiklaives (Dual)",
+      "kind": "melee",
+      "a": "6",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-2",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "demiklaives_single",
+      "name": "Demiklaives (Single)",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "5",
+      "ap": "-2",
+      "d": "2",
+      "keywords": []
+    },
+    {
+      "id": "executioners_demiklaives_dual",
+      "name": "Executioner's Demiklaives (Dual)",
+      "kind": "melee",
+      "a": "8",
+      "skill": "2+",
+      "s": "5",
+      "ap": "-2",
+      "d": "2",
+      "keywords": [
+        "Devastating Wounds"
+      ]
+    },
+    {
+      "id": "executioners_demiklaives_single",
+      "name": "Executioner's Demiklaives (Single)",
+      "kind": "melee",
+      "a": "6",
+      "skill": "2+",
+      "s": "6",
+      "ap": "-2",
+      "d": "3",
+      "keywords": [
+        "Devastating Wounds"
+      ]
+    },
+    {
+      "id": "gladiatorial_weapons",
+      "name": "Gladiatorial Weapons",
+      "kind": "melee",
+      "a": "5",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-2",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "glimmersteel_blade",
+      "name": "Glimmersteel Blade",
+      "kind": "melee",
+      "a": "3",
+      "skill": "3+",
+      "s": "5",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Devastating Wounds"
+      ]
+    },
+    {
+      "id": "haemonculus_tools_and_scissorhands",
+      "name": "Haemonculus Tools and Scissorhands",
+      "kind": "melee",
+      "a": "5",
+      "skill": "2+",
+      "s": "3",
+      "ap": "-1",
+      "d": "D3",
+      "keywords": [
+        "Anti-Infantry 2+",
+        "Precision"
+      ]
+    },
+    {
+      "id": "hekatarii_blade",
+      "name": "Hekatarii Blade",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-1",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "hellglaive",
+      "name": "Hellglaive",
+      "kind": "melee",
+      "a": "3",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-1",
+      "d": "2",
+      "keywords": [
+        "Lance",
+        "Sustained Hits 1"
+      ]
+    },
+    {
+      "id": "huskblade",
+      "name": "Huskblade",
+      "kind": "melee",
+      "a": "4",
+      "skill": "2+",
+      "s": "3",
+      "ap": "-2",
+      "d": "3",
+      "keywords": [
+        "Devastating Wounds"
+      ]
+    },
+    {
+      "id": "klaive",
+      "name": "Klaive",
+      "kind": "melee",
+      "a": "3",
+      "skill": "3+",
+      "s": "5",
+      "ap": "-2",
+      "d": "2",
+      "keywords": []
+    },
+    {
+      "id": "ladys_blade",
+      "name": "Lady's Blade",
+      "kind": "melee",
+      "a": "6",
+      "skill": "2+",
+      "s": "5",
+      "ap": "-3",
+      "d": "3",
+      "keywords": [
+        "Devastating Wounds",
+        "Hazardous"
+      ]
+    },
+    {
+      "id": "leliths_blades",
+      "name": "Lelith's Blades",
+      "kind": "melee",
+      "a": "8",
+      "skill": "2+",
+      "s": "3",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 2+",
+        "Precision",
+        "Sustained Hits 2"
+      ]
+    },
+    {
+      "id": "macro_scalpel",
+      "name": "Macro-Scalpel",
+      "kind": "melee",
+      "a": "5",
+      "skill": "3+",
+      "s": "7",
+      "ap": "-2",
+      "d": "2",
+      "keywords": []
+    },
+    {
+      "id": "master_crafted_power_weapon",
+      "name": "Master-Crafted Power Weapon",
+      "kind": "melee",
+      "a": "5",
+      "skill": "2+",
+      "s": "4",
+      "ap": "-2",
+      "d": "2",
+      "keywords": []
+    },
+    {
+      "id": "pain_sculptors",
+      "name": "Pain Sculptors",
+      "kind": "melee",
+      "a": "3",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 4+",
+        "Twin-Linked"
+      ]
+    },
+    {
+      "id": "power_weapon",
+      "name": "Power Weapon",
+      "kind": "melee",
+      "a": "5",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+"
+      ]
+    },
+    {
+      "id": "power_weapon__hellions",
+      "name": "Power Weapon",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+",
+        "Lance",
+        "Sustained Hits 1"
+      ]
+    },
+    {
+      "id": "power_weapon__kabalite_agents",
+      "name": "Power Weapon",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+"
+      ]
+    },
+    {
+      "id": "power_weapon__kabalite_warriors",
+      "name": "Power Weapon",
+      "kind": "melee",
+      "a": "3",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-2",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 3+"
+      ]
+    },
+    {
+      "id": "razor_fan",
+      "name": "Razor Fan",
+      "kind": "melee",
+      "a": "6",
+      "skill": "2+",
+      "s": "3",
+      "ap": "0",
+      "d": "1",
+      "keywords": [
+        "Extra Attacks"
+      ]
+    },
+    {
+      "id": "razorflail",
+      "name": "Razorflail",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-2",
+      "d": "1",
+      "keywords": []
+    },
+    {
+      "id": "spirit_leech_tentacles",
+      "name": "Spirit-Leech Tentacles",
+      "kind": "melee",
+      "a": "6",
+      "skill": "3+",
+      "s": "5",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 2+"
+      ]
+    },
+    {
+      "id": "stunclaw",
+      "name": "Stunclaw",
+      "kind": "melee",
+      "a": "4",
+      "skill": "3+",
+      "s": "3",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Devastating Wounds",
+        "Lance",
+        "Precision"
+      ]
+    },
+    {
+      "id": "talos_ichor_injector",
+      "name": "Talos Ichor Injector",
+      "kind": "melee",
+      "a": "1",
+      "skill": "2+",
+      "s": "8",
+      "ap": "-2",
+      "d": "D6",
+      "keywords": [
+        "Extra Attacks"
+      ]
+    },
+    {
+      "id": "talos_gauntlet",
+      "name": "Talos Gauntlet",
+      "kind": "melee",
+      "a": "5",
+      "skill": "4+",
+      "s": "9",
+      "ap": "-2",
+      "d": "3",
+      "keywords": []
+    },
+    {
+      "id": "torturers_tool",
+      "name": "Torturer's Tool",
+      "kind": "melee",
+      "a": "2",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 4+"
+      ]
+    },
+    {
+      "id": "twin_torturers_tools",
+      "name": "Twin Torturer's Tools",
+      "kind": "melee",
+      "a": "2",
+      "skill": "3+",
+      "s": "4",
+      "ap": "-1",
+      "d": "1",
+      "keywords": [
+        "Anti-Infantry 4+",
+        "Twin-Linked"
+      ]
+    }
   ],
   "abilities": [
-    { "id": "shadowfield", "name": "Shadowfield", "text": "This model has a 2+ invulnerable save. The first time it fails a saving throw made using this ability, it loses the Shadowfield for the rest of the battle (the save reverts to its profile)." },
-    { "id": "overlord", "name": "Overlord", "text": "While this model is leading a unit, each time a model in that unit makes an attack, re-roll a Hit roll of 1." },
-    { "id": "tormentors", "name": "Tormentors", "text": "Each time a model in this unit makes a melee attack, an unmodified Wound roll of 6 inflicts a mortal wound in addition to normal damage." },
-    { "id": "rapid_deployment", "name": "Rapid Deployment", "text": "Pain token ability — see Pain reference." }
+    {
+      "id": "aerialists",
+      "name": "Aerialists",
+      "text": "At the end of the Fight phase, if there are no models currently embarked within this Transport, you can select one friendly Drukhari Infantry unit that has 6 or fewer models that is wholly within 6\" of this Transport (you cannot select a unit that can Fly). Unless that unit is within Engagement Range of one or more enemy units, it can embark within this Transport."
+    },
+    {
+      "id": "aethersails",
+      "name": "Aethersails",
+      "text": "While one or more Drukhari units are embarked within this model, you can re-roll Advance and Charge rolls made for this model."
+    },
+    {
+      "id": "airborne_evasion",
+      "name": "Airborne Evasion",
+      "text": "In your Shooting phase, after this unit has shot, if it is not within Engagement Range of any enemy units, it can make a Normal move of up to 6\". If it does, until the end of the turn, this unit is not eligible to declare a charge."
+    },
+    {
+      "id": "archons_retinue",
+      "name": "Archon's Retinue",
+      "text": "If this unit has a Leader unit attached to it during the Declare Battle Formations step, that Leader unit gains the Scouts 7\" ability."
+    },
+    {
+      "id": "archons_will",
+      "name": "Archon's Will",
+      "text": "At the start of the first battle round, select one objective marker on the battlefield. Until the end of the battle, while this unit is within range of that objective marker, unless this unit is Battle-shocked, models in this unit have a 5+ Invulnerable Save and an Objective Control characteristic of 3."
+    },
+    {
+      "id": "bloody_spectacle",
+      "name": "Bloody Spectacle",
+      "text": "Each time this model makes a melee attack that targets a Character unit, you can re-roll the Hit roll and you can re-roll the Wound roll. Each time this model's unit destroys a Character model, you gain 1CP."
+    },
+    {
+      "id": "blur_of_blades",
+      "name": "Blur of Blades",
+      "text": "While this model is leading a unit, models in that unit have the Fights First ability."
+    },
+    {
+      "id": "cluster_caltrops",
+      "name": "Cluster Caltrops",
+      "text": "Each time you roll to inflict wounds using this unit's Eviscerating Fly-by ability, you can re-roll one D6 for each model in this unit equipped with cluster caltrops."
+    },
+    {
+      "id": "cruel_enforcers",
+      "name": "Cruel Enforcers",
+      "text": "At the end of your Command phase, if this unit is within range of an objective marker you control, that objective marker remains under you control, until your opponent's Level of Control over that objective marker is greater than yours at the end of a phase."
+    },
+    {
+      "id": "damaged_1_4_wounds_remaining",
+      "name": "Damaged: 1-4 Wounds Remaining",
+      "text": "While this model has 1-4 wounds remaining, each time this model makes an attack, subtract 1 from the Hit roll."
+    },
+    {
+      "id": "devious_mastermind",
+      "name": "Devious Mastermind",
+      "text": "Once per battle round, one model from your army with this ability can use it when its unit is targeted with a stratagem. If it does, reduce the CP cost of that use of that Stratagem by 1CP."
+    },
+    {
+      "id": "devoted_to_pain",
+      "name": "Devoted to Pain",
+      "text": "If a model in this unit is equipped with 2 macro-scalpels, those weapons have the [Twin-Linked] ability."
+    },
+    {
+      "id": "eradicate_the_foe",
+      "name": "Eradicate the Foe",
+      "text": "Each time this model makes an attack that targets an enemy unit that is at its Starting Strength, you can re-roll the Hit roll."
+    },
+    {
+      "id": "eviscerating_fly_by",
+      "name": "Eviscerating Fly-by",
+      "text": "Each time this unit ends a Normal or Advance move, you can select one enemy unit (excluding Monsterand Vehicle units) that it moved over during that move, then roll one D6 for each model in this unit: for each 4+, that enemy unit suffers 1 mortal wound."
+    },
+    {
+      "id": "fear_incarnate_aura",
+      "name": "Fear Incarnate (Aura)",
+      "text": "While an enemy unit is within 6\" of this model, worsen the Leadership characteristic of models in that unit by 1. In addition, in the Battle-shock step of your opponent's Command phase, if such an enemy unit is below its Starting Strength, it must take a Battle-shock test."
+    },
+    {
+      "id": "grav_talon",
+      "name": "Grav Talon",
+      "text": "The bearer's melee weapons have an Armour Penetration characteristic of -2 and the [Lethal Hits] ability."
+    },
+    {
+      "id": "incubi_shrine_token",
+      "name": "Incubi Shrine Token",
+      "text": "Once per battle for each Incubi Shrine token this unit has, you can change the result of one Hit roll or one Wound roll made for a Klaivex or Incubi model in this unit to an unmodified 6."
+    },
+    {
+      "id": "kabalite_icon",
+      "name": "Kabalite Icon",
+      "text": "While the bearer's unit is not Battle-shocked, add 1 to the bearer's Objective Control characteristic."
+    },
+    {
+      "id": "masters_of_the_shadowed_sky",
+      "name": "Masters of the Shadowed Sky",
+      "text": "At the end of your Command phase, if this model is within range of an objective marker you control, and if one or more Kabalite Warriors units are embarked within it, that objective marker remains under your control until your opponent's Level of Control over that objective marker is greater than yours at the end of a phase."
+    },
+    {
+      "id": "mind_like_a_steel_trap_aura",
+      "name": "Mind Like a Steel Trap [Aura]",
+      "text": "Each time your opponent targets a unit from their army with a Stratagem, if that unit is within 12\" of this model, increase the cost of that use of that Stratagem by 1CP."
+    },
+    {
+      "id": "no_escape",
+      "name": "No Escape",
+      "text": "Each time an enemy unit (excluding Monsters and Vehicles) within Engagement Range of one or more units from your army with this ability Falls Back, all models in that enemy unit must take Desperate Escape test. When doing so, if that enemy unit is Battle-shocked, subtract 1 from each of those tests."
+    },
+    {
+      "id": "onslaught",
+      "name": "Onslaught",
+      "text": "While this model is leading a unit, each time a model in that unit makes a Pile-In or Consolidation move, it can move up to 6\" instead of up to 3\"."
+    },
+    {
+      "id": "overlord",
+      "name": "Overlord",
+      "text": "Once per battle, at the start of any phase, you can select one friendly Drukhari unit that is Battle-shocked and within 12\" of this model. That unit is no longer Battle-shocked."
+    },
+    {
+      "id": "pain_adept",
+      "name": "Pain Adept",
+      "text": "In your Command phase, if one or more models from your army with this ability are on the battlefield, roll one D6: on a 4+, you gain 1 Pain token."
+    },
+    {
+      "id": "pain_engine_aura",
+      "name": "Pain Engine (Aura)",
+      "text": "Each time you spend 1 Pain token to Empower a friendly unit within 9\" of this unit, roll one D6, adding 1 to the result if one or more models in this unit are not equipped with a spirit vortex: on a 5+, you gain 1 Pain token. Designer's Note: Pain tokens you spend for reasons other than Empowering a unit do not trigger this ability."
+    },
+    {
+      "id": "phantasm_grenade_launcher",
+      "name": "Phantasm Grenade Launcher",
+      "text": "The bearer's unit has the Smoke and Grenades keywords."
+    },
+    {
+      "id": "precognisant",
+      "name": "Precognisant",
+      "text": "If you army includes this model, after both players have deployed their armies, select up to three Drukhari units from your army and redeploy them. When doing so, you can set those units up in Strategic Reserves if you wish, regardless of how many units are already in Strategic Reserves."
+    },
+    {
+      "id": "shade_weavers",
+      "name": "Shade Weavers",
+      "text": "This unit cannot be targeted by ranged attacks unless the attacking model is within 18\"."
+    },
+    {
+      "id": "shadowfield",
+      "name": "Shadowfield",
+      "text": "You cannot re-roll invulnerable saving throws made for the bearer. The first time an invulnerable saving throw made for the bearer is failed, until the end of the battle, the bearer has no invulnerable save."
+    },
+    {
+      "id": "silent_executioner",
+      "name": "Silent Executioner",
+      "text": "Each time this model make an attack that targets a unit that is below its Starting Strength, you can re-roll the Hit roll. If that target is Below Half-Strength, you can re-roll the Wound roll as well."
+    },
+    {
+      "id": "skyboard_evasion",
+      "name": "Skyboard Evasion",
+      "text": "Once per turn, when an enemy unit ends a Normal, Advance or Fall Back move within 9\" of this unit, this unit can make a Normal move of up to D6\"."
+    },
+    {
+      "id": "soul_trap",
+      "name": "Soul Trap",
+      "text": "Add 1 to the Attacks and Strength characteristics of the bearer's melee weapons. The first time the bearer makes a melee attack that destroys an enemy model, after all the bearer's attacks have been resolved, until the end of the battle, add an additional 1 to the Attacks and Strength characteristics of the bearer's melee weapons."
+    },
+    {
+      "id": "speed_of_the_kill",
+      "name": "Speed of the Kill",
+      "text": "Each time a Wyches unit disembarks from this model (excluding Emergency Disembarkations), models in that Wyches unit must be setup wholly within 6\" of this model."
+    },
+    {
+      "id": "storm_of_blades",
+      "name": "Storm of Blades",
+      "text": "While this model is leading a unit, melee weapons equipped by models in that unit have the [Sustained Hits 1] ability."
+    },
+    {
+      "id": "stimm_needler",
+      "name": "Stimm-needler",
+      "text": "Once per turn, the first time a saving throw is failed for a model in the bearer's unit, change the Damage characteristic of that attack to 0."
+    },
+    {
+      "id": "thrilling_spectacle",
+      "name": "Thrilling Spectacle",
+      "text": "Once per battle, at the start of the Fight phase, this model can use this ability. If it does, until the end of the phase, this model has a 3+ invulnerable save and change the Attacks characteristic of melee weapons equipped by this model to 12."
+    },
+    {
+      "id": "tormentors",
+      "name": "Tormentors",
+      "text": "At the start of the Fight phase, each enemy unit within Engagement Range of one or more units with this ability must take a Battle-shock test. Each time a model in this unit makes a melee attack that targets a Battle-shocked unit, add 1 to the Hit roll."
+    },
+    {
+      "id": "torture_device",
+      "name": "Torture Device",
+      "text": "Each time this unit destroys an enemy unit, you gain 1 additional Pain token."
+    },
+    {
+      "id": "torturers_craft",
+      "name": "Torturer's Craft",
+      "text": "In your Shooting phase and the Fight phase, after this unit has shot or fought, select one enemy unit (excluding Vehicles) hit by one or more of those attacks. That units must take a Battle-shock test."
+    },
+    {
+      "id": "vanguard_of_the_dark_city",
+      "name": "Vanguard of the Dark City",
+      "text": "At the start of your Command phase, select one of the abilities in the Vanguard of the Dark City section (see left) for this model. Until the start of your next Command phase, this model has that ability."
+    },
+    {
+      "id": "visions_of_butchery",
+      "name": "Visions of Butchery",
+      "text": "While one or more Wracks units are embarked within this model, for each Wracks model embarked within this model, add 1 to the Attacks characteristic of this model's Bladevanes and chainsnares."
+    },
+    {
+      "id": "acrobatic_gladiators",
+      "name": "Acrobatic Gladiators",
+      "text": "At the start of your Charge phase, you can spend 1 Pain token to Empower this unit. While Empowered, this unit is eligible to declare a charge in a turn in which it Advanced or Fell Back."
+    },
+    {
+      "id": "agonising_suppression",
+      "name": "Agonising Suppression",
+      "text": "In your Shooting phase, when you select this model to shoot, you can spend 1 Pain token to Empower this model. While Empowered, after this model has shot, select one enemy unit hit by one or more of those attacks. Until the start of your next turn, that enemy unit is suppressed. While a unit is suppressed, each time a model in that unit makes an attack, subtract 1 from the Hit roll."
+    },
+    {
+      "id": "archon_of_the_poisoned_tongue",
+      "name": "Archon of the Poisoned Tongue",
+      "text": "In your Shooting phase or the Fight phase, when you select this model's unit to shoot or fight, you can spend 1 Pain token to Empower that unit. If you do, select one of the following abilities: [Sustained Hits 1]; [Lethal Hits]. Until the end of the phase, while that unit is Empowered, weapons equipped by models in that unit have that selected ability."
+    },
+    {
+      "id": "assassins_poisons",
+      "name": "Assassins' Poisons",
+      "text": "In your Shooting phase or the Fight phase, when you select this unit to shoot or fight, you can spend 1 Pain token to Empower this unit. While Empowered, weapons equipped by models in this unit (excluding Blast pistols, blasters and dark lances) have the [Lethal Hits] and [Precision] abilities."
+    },
+    {
+      "id": "battlefield_butchery",
+      "name": "Battlefield Butchery",
+      "text": "In the Fight phase, when you select this unit to fight, you can spend 1 Pain token to Empower this unit. While Empowered, add 1 to the Attacks and Strength characteristics of this unit's melee weapons."
+    },
+    {
+      "id": "brides_of_death",
+      "name": "Brides of Death",
+      "text": "In the Fight phase, when you select this model's unit to fight, you can spend 1 Pain token to Empower that unit. While that unit is Empowered, each time a model in that unit makes a melee attack, improve the Strength and Armour Penetration characteristics of that attack by 1."
+    },
+    {
+      "id": "decapitating_strikes",
+      "name": "Decapitating Strikes",
+      "text": "In the Fight phase, when you select this unit to fight, you can spend 1 Pain token to Empower this unit. While Empowered, each time a model in this unit makes a melee attack that targets an Infantry unit, that attack has the [Devastating Wounds] ability."
+    },
+    {
+      "id": "experimental_enhancements",
+      "name": "Experimental Enhancements",
+      "text": "In the Fight phase, when you select this unit to fight, you can spend 1 Pain token to Empower this unit. Each time you do, select one of the following to apply to this unit until the end of the phase: Melee weapons equipped by non-Character models in this unit have an Attacks characteristic of 3. Melee weapons equipped by non-Character models in this unit have an Attacks characteristic of 4 and the [Hazardous] ability."
+    },
+    {
+      "id": "fade_away",
+      "name": "Fade Away",
+      "text": "At the end of your opponent's Fight phase, if this unit is not within Engagement Range of one or more enemy units, you can spend 1 Pain token to Empower this unit. Each time you do, remove this unit from the battlefield and place it into Strategic Reserves."
+    },
+    {
+      "id": "fleshcraft",
+      "name": "Fleshcraft",
+      "text": "In your Command phase, you can spend 1 Pain token to Empower this model's unit. Each time you do, you can return up to D3+1 destroyed Bodyguard models to that unit."
+    },
+    {
+      "id": "hatred_eternal",
+      "name": "Hatred Eternal",
+      "text": "In your Shooting or the Fight phase, when you select this model's unit to shoot or fight, you can spend 1 Pain token to Empower that unit. While that unit is Empowered, each time a model in that unit makes an attack, you can re-roll the Hit roll."
+    },
+    {
+      "id": "lithe_agility",
+      "name": "Lithe Agility",
+      "text": "In your Movement phase when you select this model's unit to Advance, or in your Charge phase before you make a Charge roll for this model's unit, you can spend 1 Pain token to Empower that unit. While that unit is Empowered, you can re-roll Advance and Charge rolls made for that unit."
+    },
+    {
+      "id": "master_of_blades",
+      "name": "Master of Blades",
+      "text": "In the Fight phase, when you select this model's unit to fight, you can spend 1 Pain token to Empower that unit. While that unit is Empowered, each time a model in that unit makes a melee attack, add 1 to the Wound roll."
+    },
+    {
+      "id": "matchless_swiftness",
+      "name": "Matchless Swiftness",
+      "text": "In your Movement phase, when you select this unit to Advance, you can spend 1 Pain token to Empower this unit. While Empowered, each time this unit Advances, do not make an Advance roll. Instead, until the end of the phase, add 8\" to the Move characteristic of models in this unit."
+    },
+    {
+      "id": "mindless_killing_machines",
+      "name": "Mindless Killing Machines",
+      "text": "At the start of the Fight phase, you can spend 1 Pain token to Empower this unit. While Empowered, each time a model in this unit is destroyed by a melee attack, if that model has not fought this phase, roll one D6. On a 2+, do not remove it from play; that destroyed model can fight after the attacking unit has finished making its attacks, and it is then removed from play."
+    },
+    {
+      "id": "pain_parasite",
+      "name": "Pain Parasite",
+      "text": "In your Shooting phase or the Fight phase, when you select this unit to shoot or fight, you can spend 1 Pain token to Empower this unit. While Empowered, each time this unit shoots or fights, after it has resolved its attacks, if one or more enemy models were destroyed as a result of those attacks, one model in this unit regains up to 3 lost wounds (if all models in this unit have their starting number of wounds and this unit is below its Starting Strength, 1 model is returned to this unit with 3 wounds remaining)."
+    },
+    {
+      "id": "rapid_deployment",
+      "name": "Rapid Deployment",
+      "text": "In your Movement phase, when you select this model to Advance, you can spend 1 Pain token to Empower this model. While Empowered, units can disembark from this model after it has Advanced. Units that do so count as having made a Normal move that phase, and cannot declare a charge in the same turn, but can otherwise act normally in the remainder of the turn."
+    },
+    {
+      "id": "sadistic_raiders",
+      "name": "Sadistic Raiders",
+      "text": "In your Shooting phase or the Fight phase, when you select this unit to shoot or fight, you can spend 1 Pain token to Empower this unit. While Empowered, each time a model in this unit makes an attack, re-roll a Wound roll of 1. If the target is within range of an objective marker, you can re-roll the Wound roll instead."
+    },
+    {
+      "id": "splinter_racks",
+      "name": "Splinter Racks",
+      "text": "In your Shooting phase, when you select this model to shoot, you can spend 1 Pain token to Empower this model. While Empowered, if one or more units are embarked within this model, each time this model makes an attack with a ranged weapon that has the Anti ability, you can re-roll the Hit roll."
+    },
+    {
+      "id": "winged_strike",
+      "name": "Winged Strike",
+      "text": "In your Shooting phase, when you select this unit to shoot, you can spend 1 Pain token to Empower this unit. While Empowered, each time a model in this unit makes a range attack, you can re-roll the Hit roll."
+    }
   ],
   "datasheets": [
     {
       "id": "archon",
       "name": "Archon",
-      "role": "Character",
-      "keywords": ["CHARACTER", "INFANTRY", "DRUKHARI", "KABAL", "ARCHON"],
-      "stats": { "m": "7\"", "t": 3, "sv": "4+, 2++", "w": 4, "ld": "6+", "oc": 1 },
-      "composition": { "min": 1, "max": 1, "note": "1 Archon" },
-      "weapons": ["splinter_pistol", "blast_pistol_archon", "agoniser", "huskblade", "mastercrafted_power_weapon"],
-      "abilities": ["Devious Mastermind", "overlord", "shadowfield", "Soul Trap"],
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "4+, 2++",
+        "w": 4,
+        "ld": "6+",
+        "oc": 1
+      },
+      "abilities": [
+        "Devious Mastermind",
+        "Overlord",
+        "Shadowfield",
+        "Soul Trap"
+      ],
       "pain": "Hatred Eternal",
-      "points": [{ "models": 1, "pts": 75, "verified": false }],
-      "canLead": ["kabalite_warriors", "incubi"]
+      "weapons": [
+        "blast_pistol",
+        "splinter_pistol",
+        "agoniser",
+        "huskblade",
+        "master_crafted_power_weapon"
+      ],
+      "role": "Character",
+      "points": [
+        {
+          "models": 1,
+          "pts": 75,
+          "verified": false
+        }
+      ],
+      "canLead": [
+        "kabalite_warriors",
+        "incubi"
+      ]
+    },
+    {
+      "id": "cronos",
+      "name": "Cronos",
+      "stats": {
+        "m": "7\"",
+        "t": 7,
+        "sv": "3+, 6++, 5+++",
+        "w": 7,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "Pain Engine"
+      ],
+      "pain": "Pain Parasite",
+      "weapons": [
+        "spirit_syphon",
+        "spirit_vortex",
+        "spirit_leech_tentacles"
+      ],
+      "role": "Vehicle",
+      "points": []
+    },
+    {
+      "id": "drazhar",
+      "name": "Drazhar",
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "2+, 4++",
+        "w": 5,
+        "ld": "6+",
+        "oc": 1
+      },
+      "abilities": [
+        "Onslaught",
+        "Silent Executioner"
+      ],
+      "pain": "Master of Blades",
+      "weapons": [
+        "executioners_demiklaives_dual",
+        "executioners_demiklaives_single"
+      ],
+      "role": "Character",
+      "points": []
+    },
+    {
+      "id": "haemonculus",
+      "name": "Haemonculus",
+      "stats": {
+        "m": "7\"",
+        "t": 4,
+        "sv": "5+, 6++, 5+++",
+        "w": 5,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Fear Incarnate",
+        "Pain Adept"
+      ],
+      "pain": "Fleshcraft",
+      "weapons": [
+        "stinger_pistol",
+        "haemonculus_tools_and_scissorhands"
+      ],
+      "role": "Character",
+      "points": []
+    },
+    {
+      "id": "hand_of_the_archon",
+      "name": "Hand of the Archon",
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "4+, 6++",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Archon's Will",
+        "Archon's Retinue",
+        "Stimm-needler"
+      ],
+      "pain": "Assassins' Poisons",
+      "weapons": [],
+      "role": "Infantry",
+      "points": []
+    },
+    {
+      "id": "hellions",
+      "name": "Hellions",
+      "stats": {
+        "m": "14\"",
+        "t": 4,
+        "sv": "4+, 6++",
+        "w": 2,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Phantasm Grenade Launcher",
+        "Skyboard Evasion"
+      ],
+      "pain": "Battlefield Butchery",
+      "weapons": [
+        "splinter_pistol",
+        "splinter_pods",
+        "hellglaive",
+        "power_weapon__hellions",
+        "stunclaw"
+      ],
+      "role": "Infantry",
+      "points": []
     },
     {
       "id": "incubi",
       "name": "Incubi",
-      "role": "Infantry",
-      "keywords": ["INFANTRY", "DRUKHARI", "INCUBI"],
-      "stats": { "m": "7\"", "t": 3, "sv": "3+, 5++", "w": 1, "ld": "6+", "oc": 1 },
-      "composition": { "min": 3, "max": 10, "note": "1 Klaivex + 2-9 Incubi" },
-      "weapons": ["demiklaives_dual", "demiklaives_single", "klaive"],
-      "abilities": ["tormentors", "Incubi Shrine Token"],
-      "pain": "Decapitating Strikes",
-      "points": [
-        { "models": 3, "pts": 75, "verified": false },
-        { "models": 6, "pts": 150, "verified": false },
-        { "models": 9, "pts": 225, "verified": false }
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "3+, 5++",
+        "w": 1,
+        "ld": "6+",
+        "oc": 1
+      },
+      "abilities": [
+        "Incubi Shrine Token",
+        "Tormentors"
       ],
-      "splittable": false
+      "pain": "Decapitating Strikes",
+      "weapons": [
+        "demiklaives_dual",
+        "demiklaives_single",
+        "klaive"
+      ],
+      "role": "Infantry",
+      "points": [
+        {
+          "models": 3,
+          "pts": 75,
+          "verified": false
+        },
+        {
+          "models": 6,
+          "pts": 150,
+          "verified": false
+        },
+        {
+          "models": 9,
+          "pts": 225,
+          "verified": false
+        }
+      ]
     },
     {
       "id": "kabalite_warriors",
       "name": "Kabalite Warriors",
-      "role": "Battleline",
-      "keywords": ["BATTLELINE", "INFANTRY", "DRUKHARI", "KABAL"],
-      "stats": { "m": "7\"", "t": 3, "sv": "4+, 6++", "w": 1, "ld": "7+", "oc": 2 },
-      "composition": { "min": 5, "max": 10, "note": "1 Sybarite + 4 or 9 Kabalite Warriors" },
-      "weapons": ["splinter_pistol", "splinter_rifle", "blast_pistol_kabalite", "blaster", "dark_lance_infantry", "shredder", "splinter_cannon_infantry", "close_combat_weapon", "power_weapon_infantry"],
-      "abilities": ["Cruel Enforcers", "Kabalite Icon", "Phantasm Grenade Launcher"],
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "4+, 6++",
+        "w": 1,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "Cruel Enforcers",
+        "Kabalite Icon",
+        "Phantasm Grenade Launcher"
+      ],
       "pain": "Sadistic Raiders",
+      "weapons": [
+        "blast_pistol",
+        "blast_pistol__kabalite_warriors",
+        "blaster",
+        "dark_lance",
+        "shredder",
+        "splinter_cannon",
+        "splinter_pistol",
+        "splinter_rifle",
+        "close_combat_weapon",
+        "power_weapon__kabalite_warriors"
+      ],
+      "role": "Infantry",
       "points": [
-        { "models": 5, "pts": 100, "verified": false },
-        { "models": 10, "pts": 200, "verified": false }
+        {
+          "models": 5,
+          "pts": 100,
+          "verified": false
+        },
+        {
+          "models": 10,
+          "pts": 200,
+          "verified": false
+        }
       ],
       "splittable": true
     },
     {
-      "id": "venom",
-      "name": "Venom",
-      "role": "Transport",
-      "keywords": ["VEHICLE", "TRANSPORT", "FLY", "DRUKHARI"],
-      "stats": { "m": "14\"", "t": 6, "sv": "4+, 6++", "w": 6, "ld": "7+", "oc": 1 },
-      "composition": { "min": 1, "max": 1, "note": "1 Venom" },
-      "weapons": ["splinter_cannon_venom", "twin_splinter_rifle", "bladevanes_venom"],
-      "abilities": ["Aerialists", "Deadly Demise 1"],
-      "pain": "Rapid Deployment",
-      "points": [{ "models": 1, "pts": 70, "verified": false }],
-      "transport": { "capacity": 5, "splitGroupSize": 5, "notes": "Can carry one DRUKHARI INFANTRY unit; a unit may embark split into groups of 5." }
+      "id": "klaivex",
+      "name": "Klaivex",
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "3+, 5++",
+        "w": 2,
+        "ld": "6+",
+        "oc": 1
+      },
+      "abilities": [
+        "Incubi Shrine Token",
+        "Tormentors"
+      ],
+      "pain": "Decapitating Strikes",
+      "weapons": [],
+      "role": "Infantry",
+      "points": []
+    },
+    {
+      "id": "lady_malys",
+      "name": "Lady Malys",
+      "stats": {
+        "m": "7\"",
+        "t": 3,
+        "sv": "4+, 4++, 5+++",
+        "w": 5,
+        "ld": "6+",
+        "oc": 2
+      },
+      "abilities": [
+        "Mind Like a Steel Trap",
+        "Precognisant"
+      ],
+      "pain": "Poisoned Tongue",
+      "weapons": [
+        "ladys_blade",
+        "razor_fan"
+      ],
+      "role": "Character",
+      "points": []
+    },
+    {
+      "id": "lelith_hesperax",
+      "name": "Lelith Hesperax",
+      "stats": {
+        "m": "8\"",
+        "t": 3,
+        "sv": "6+, 4++",
+        "w": 4,
+        "ld": "6+",
+        "oc": 1
+      },
+      "abilities": [
+        "Blur of Blades",
+        "Thrilling Spectacle"
+      ],
+      "pain": "Brides of Death",
+      "weapons": [
+        "leliths_blades"
+      ],
+      "role": "Character",
+      "points": []
+    },
+    {
+      "id": "mandrakes",
+      "name": "Mandrakes",
+      "stats": {
+        "m": "8\"",
+        "t": 3,
+        "sv": "7+, 5++",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Infiltrators",
+        "Shade Weavers",
+        "Stealth"
+      ],
+      "pain": "Fade Away",
+      "weapons": [
+        "baleblast",
+        "glimmersteel_blade"
+      ],
+      "role": "Infantry",
+      "points": []
     },
     {
       "id": "raider",
       "name": "Raider",
-      "role": "Transport",
-      "keywords": ["VEHICLE", "TRANSPORT", "DRUKHARI"],
-      "stats": { "m": "14\"", "t": 8, "sv": "4+, 6++", "w": 10, "ld": "7+", "oc": 2 },
-      "composition": { "min": 1, "max": 1, "note": "1 Raider" },
-      "weapons": ["dark_lance_vehicle", "disintegrator_cannon", "bladevanes_chainsnares_raider"],
-      "abilities": ["Aethersails", "Deadly Demise D3"],
+      "stats": {
+        "m": "14\"",
+        "t": 8,
+        "sv": "4+, 6++",
+        "w": 10,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "Aethersails",
+        "Masters...",
+        "Speed...",
+        "Vanguard...",
+        "Deadly Demise D3"
+      ],
       "pain": "Splinter Racks",
-      "points": [{ "models": 1, "pts": 85, "verified": false }],
-      "transport": { "capacity": 11, "notes": "Can carry one DRUKHARI INFANTRY unit of up to 11 models." }
+      "weapons": [
+        "dark_lance__raider",
+        "disintegrator_cannon",
+        "bladevanes_and_chainsnares"
+      ],
+      "role": "Transport",
+      "points": [
+        {
+          "models": 1,
+          "pts": 85,
+          "verified": false
+        }
+      ],
+      "transport": {
+        "capacity": 11,
+        "notes": "Can carry one DRUKHARI INFANTRY unit of up to 11 models."
+      }
+    },
+    {
+      "id": "ravager",
+      "name": "Ravager",
+      "stats": {
+        "m": "14\"",
+        "t": 9,
+        "sv": "4+, 6++",
+        "w": 11,
+        "ld": "7+",
+        "oc": 3
+      },
+      "abilities": [
+        "Damaged",
+        "Eradicate the Foe",
+        "Deadly Demise D3"
+      ],
+      "pain": "Agonising Suppression",
+      "weapons": [
+        "dark_lance__raider",
+        "disintegrator_cannon",
+        "bladevanes"
+      ],
+      "role": "Vehicle",
+      "points": []
+    },
+    {
+      "id": "reavers",
+      "name": "Reavers",
+      "stats": {
+        "m": "16\"",
+        "t": 4,
+        "sv": "4+, 6++",
+        "w": 2,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "Cluster Caltrops",
+        "Eviscerating Fly-by",
+        "Grav Talon"
+      ],
+      "pain": "Matchless Swiftness",
+      "weapons": [
+        "blaster",
+        "heat_lance",
+        "splinter_rifle",
+        "bladevanes__reavers"
+      ],
+      "role": "Infantry",
+      "points": []
+    },
+    {
+      "id": "scourges",
+      "name": "Scourges",
+      "stats": {
+        "m": "14\"",
+        "t": 3,
+        "sv": "4+, 5++",
+        "w": 1,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Airborne Evasion"
+      ],
+      "pain": "Winged Strike",
+      "weapons": [
+        "blaster",
+        "dark_lance",
+        "heat_lance",
+        "haywire_blaster",
+        "shardcarbine",
+        "shredder",
+        "splinter_cannon",
+        "splinter_pistol",
+        "close_combat_weapon",
+        "power_weapon__kabalite_warriors"
+      ],
+      "role": "Infantry",
+      "points": []
+    },
+    {
+      "id": "succubus",
+      "name": "Succubus",
+      "stats": {
+        "m": "8\"",
+        "t": 3,
+        "sv": "6+, 4++",
+        "w": 4,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Bloody Spectacle",
+        "Storm of Blades"
+      ],
+      "pain": "Lithe Agility",
+      "weapons": [
+        "archite_glaive_and_agoniser"
+      ],
+      "role": "Character",
+      "points": []
+    },
+    {
+      "id": "talos",
+      "name": "Talos",
+      "stats": {
+        "m": "7\"",
+        "t": 7,
+        "sv": "3+, 6++, 5+++",
+        "w": 7,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "Devoted to Pain",
+        "Torture Device"
+      ],
+      "pain": "Mindless Killing Machines",
+      "weapons": [
+        "stinger_pod",
+        "twin_haywire_blaster",
+        "twin_heat_lance",
+        "twin_liquifier_gun",
+        "twin_splinter_cannon",
+        "chain_flails",
+        "macro_scalpel",
+        "talos_ichor_injector",
+        "talos_gauntlet"
+      ],
+      "role": "Vehicle",
+      "points": []
+    },
+    {
+      "id": "venom",
+      "name": "Venom",
+      "stats": {
+        "m": "14\"",
+        "t": 6,
+        "sv": "4+, 6++",
+        "w": 6,
+        "ld": "7+",
+        "oc": 1
+      },
+      "abilities": [
+        "Aerialists",
+        "Deadly Demise 1"
+      ],
+      "pain": "Rapid Deployment",
+      "weapons": [
+        "splinter_cannon__venom",
+        "twin_splinter_rifle",
+        "bladevanes__venom"
+      ],
+      "role": "Transport",
+      "points": [
+        {
+          "models": 1,
+          "pts": 70,
+          "verified": false
+        }
+      ],
+      "transport": {
+        "capacity": 5,
+        "splitGroupSize": 5,
+        "notes": "Can carry one DRUKHARI INFANTRY unit; a unit may embark split into groups of 5."
+      }
+    },
+    {
+      "id": "wracks",
+      "name": "Wracks",
+      "stats": {
+        "m": "7\"",
+        "t": 4,
+        "sv": "5+, 6++",
+        "w": 2,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "Torturer's Craft"
+      ],
+      "pain": "Experimental Enhancements",
+      "weapons": [
+        "hexrifle",
+        "liquifier_gun",
+        "ossefactor",
+        "stinger_pistol__kabalite_agents",
+        "power_weapon__kabalite_warriors",
+        "torturers_tool",
+        "twin_torturers_tools"
+      ],
+      "role": "Infantry",
+      "points": []
+    },
+    {
+      "id": "wyches",
+      "name": "Wyches",
+      "stats": {
+        "m": "8\"",
+        "t": 3,
+        "sv": "6+, 6++*",
+        "w": 1,
+        "ld": "7+",
+        "oc": 2
+      },
+      "abilities": [
+        "No Escape",
+        "4++ versus Melee"
+      ],
+      "pain": "Acrobatic Gladiators",
+      "weapons": [
+        "blast_pistol",
+        "splinter_pistol",
+        "gladiatorial_weapons",
+        "hekatarii_blade",
+        "power_weapon"
+      ],
+      "role": "Infantry",
+      "points": []
     }
   ]
 }

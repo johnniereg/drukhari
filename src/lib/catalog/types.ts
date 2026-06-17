@@ -65,14 +65,29 @@ export interface UnitComposition {
   note?: string;
 }
 
+/** A secondary model statline within a datasheet (e.g. Sybarite, Klaivex). */
+export interface ModelProfile {
+  name: string;
+  m: string;
+  t: string;
+  sv: string;
+  w: string;
+  ld: string;
+  oc: string;
+}
+
 export interface Datasheet {
   id: string;
   name: string;
-  /** Battlefield role for grouping, e.g. "Character", "Battleline", "Transport". */
+  /** Battlefield role for grouping, e.g. "Character", "Transport", "Vehicle". */
   role: string;
-  keywords: string[];
+  /** Not present in the legacy data; enriched later. */
+  keywords?: string[];
   stats: Statline;
-  composition: UnitComposition;
+  /** Not present in the legacy data; enriched later. */
+  composition?: UnitComposition;
+  /** Additional model statlines (champions, etc.). */
+  modelProfiles?: ModelProfile[];
   /** Weapon ids this datasheet can field. */
   weapons: string[];
   /** Ability ids + free-text ability names not yet modelled. */

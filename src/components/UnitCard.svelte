@@ -19,7 +19,7 @@
       <span class="role">{unit.role}</span>
     </div>
     <div class="right">
-      <span class="pts">{startingPoints(unit)} pts</span>
+      <span class="pts">{startingPoints(unit) ? `${startingPoints(unit)} pts` : '— pts'}</span>
       <span class="chev" class:open>›</span>
     </div>
   </button>
