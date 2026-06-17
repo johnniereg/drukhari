@@ -5,6 +5,9 @@ import type { Catalog, Datasheet, Weapon, Ability } from './types';
 
 export const catalog = catalogJson as Catalog;
 
+const slug = (s: string) =>
+  s.toLowerCase().trim().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
+
 const weaponById = new Map<string, Weapon>(catalog.weapons.map((w) => [w.id, w]));
 const abilityById = new Map<string, Ability>(catalog.abilities.map((a) => [a.id, a]));
 const datasheetById = new Map<string, Datasheet>(catalog.datasheets.map((d) => [d.id, d]));
@@ -17,9 +20,9 @@ export function getDatasheet(id: string): Datasheet | undefined {
   return datasheetById.get(id);
 }
 
-/** Resolve an ability id to its full definition, or fall back to a free-text name. */
+/** Resolve an ability by id or display name to its full definition; fall back to the bare name. */
 export function resolveAbility(idOrName: string): { name: string; text?: string } {
-  const a = abilityById.get(idOrName);
+  const a = abilityById.get(idOrName) ?? abilityById.get(slug(idOrName));
   return a ? { name: a.name, text: a.text } : { name: idOrName };
 }
 
