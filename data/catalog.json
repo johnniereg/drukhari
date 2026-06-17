@@ -1,0 +1,112 @@
+{
+  "meta": {
+    "pointsVersion": "PLACEHOLDER — confirm against current MFM",
+    "updated": "2026-06-17",
+    "edition": "11th"
+  },
+  "weapons": [
+    { "id": "splinter_pistol", "name": "Splinter Pistol", "kind": "ranged", "range": "12\"", "a": "1", "skill": "3+", "s": "2", "ap": "0", "d": "1", "keywords": ["Anti-Infantry 3+", "Assault", "Pistol"] },
+    { "id": "blast_pistol_archon", "name": "Blast Pistol", "kind": "ranged", "range": "6\"", "a": "1", "skill": "3+", "s": "8", "ap": "-3", "d": "D3", "keywords": ["Pistol"] },
+    { "id": "blast_pistol_kabalite", "name": "Blast Pistol", "kind": "ranged", "range": "6\"", "a": "1", "skill": "3+", "s": "8", "ap": "-4", "d": "D3", "keywords": ["Pistol"] },
+    { "id": "splinter_rifle", "name": "Splinter Rifle", "kind": "ranged", "range": "24\"", "a": "2", "skill": "3+", "s": "2", "ap": "0", "d": "1", "keywords": ["Anti-Infantry 3+", "Assault"] },
+    { "id": "blaster", "name": "Blaster", "kind": "ranged", "range": "18\"", "a": "1", "skill": "3+", "s": "8", "ap": "-4", "d": "D6+1", "keywords": ["Assault"] },
+    { "id": "dark_lance_infantry", "name": "Dark Lance", "kind": "ranged", "range": "36\"", "a": "1", "skill": "4+", "s": "12", "ap": "-3", "d": "D6+2", "keywords": ["Heavy"] },
+    { "id": "shredder", "name": "Shredder", "kind": "ranged", "range": "18\"", "a": "D6", "skill": "N/A", "s": "6", "ap": "0", "d": "1", "keywords": ["Assault", "Torrent"] },
+    { "id": "splinter_cannon_infantry", "name": "Splinter Cannon", "kind": "ranged", "range": "36\"", "a": "3", "skill": "4+", "s": "3", "ap": "-1", "d": "2", "keywords": ["Anti-Infantry 3+", "Heavy", "Sustained Hits 1"] },
+    { "id": "dark_lance_vehicle", "name": "Dark Lance", "kind": "ranged", "range": "36\"", "a": "1", "skill": "3+", "s": "12", "ap": "-3", "d": "D6+2", "keywords": [] },
+    { "id": "disintegrator_cannon", "name": "Disintegrator Cannon", "kind": "ranged", "range": "36\"", "a": "3", "skill": "3+", "s": "6", "ap": "-3", "d": "2", "keywords": [] },
+    { "id": "splinter_cannon_venom", "name": "Splinter Cannon", "kind": "ranged", "range": "36\"", "a": "3", "skill": "3+", "s": "3", "ap": "-1", "d": "2", "keywords": ["Anti-Infantry 3+", "Sustained Hits 1"] },
+    { "id": "twin_splinter_rifle", "name": "Twin Splinter Rifle", "kind": "ranged", "range": "24\"", "a": "2", "skill": "3+", "s": "2", "ap": "0", "d": "1", "keywords": ["Anti-Infantry 3+", "Assault", "Rapid Fire 2", "Twin-Linked"] },
+
+    { "id": "close_combat_weapon", "name": "Close Combat Weapon", "kind": "melee", "a": "2", "skill": "3+", "s": "3", "ap": "0", "d": "1", "keywords": [] },
+    { "id": "agoniser", "name": "Agoniser", "kind": "melee", "a": "7", "skill": "2+", "s": "4", "ap": "-2", "d": "1", "keywords": ["Anti-Infantry 3+"] },
+    { "id": "huskblade", "name": "Huskblade", "kind": "melee", "a": "4", "skill": "2+", "s": "3", "ap": "-2", "d": "3", "keywords": ["Devastating Wounds"] },
+    { "id": "mastercrafted_power_weapon", "name": "Master-Crafted Power Weapon", "kind": "melee", "a": "5", "skill": "2+", "s": "4", "ap": "-2", "d": "2", "keywords": [] },
+    { "id": "power_weapon_infantry", "name": "Power Weapon", "kind": "melee", "a": "3", "skill": "3+", "s": "3", "ap": "-2", "d": "1", "keywords": ["Anti-Infantry 3+"] },
+    { "id": "demiklaives_dual", "name": "Demiklaives (Dual)", "kind": "melee", "a": "6", "skill": "3+", "s": "4", "ap": "-2", "d": "1", "keywords": [] },
+    { "id": "demiklaives_single", "name": "Demiklaives (Single)", "kind": "melee", "a": "4", "skill": "3+", "s": "5", "ap": "-2", "d": "2", "keywords": [] },
+    { "id": "klaive", "name": "Klaive", "kind": "melee", "a": "3", "skill": "3+", "s": "5", "ap": "-2", "d": "2", "keywords": [] },
+    { "id": "bladevanes_venom", "name": "Bladevanes", "kind": "melee", "a": "3", "skill": "4+", "s": "5", "ap": "-1", "d": "1", "keywords": [] },
+    { "id": "bladevanes_chainsnares_raider", "name": "Bladevanes and Chainsnares", "kind": "melee", "a": "D3+3", "skill": "4+", "s": "6", "ap": "-1", "d": "1", "keywords": [] }
+  ],
+  "abilities": [
+    { "id": "shadowfield", "name": "Shadowfield", "text": "This model has a 2+ invulnerable save. The first time it fails a saving throw made using this ability, it loses the Shadowfield for the rest of the battle (the save reverts to its profile)." },
+    { "id": "overlord", "name": "Overlord", "text": "While this model is leading a unit, each time a model in that unit makes an attack, re-roll a Hit roll of 1." },
+    { "id": "tormentors", "name": "Tormentors", "text": "Each time a model in this unit makes a melee attack, an unmodified Wound roll of 6 inflicts a mortal wound in addition to normal damage." },
+    { "id": "rapid_deployment", "name": "Rapid Deployment", "text": "Pain token ability — see Pain reference." }
+  ],
+  "datasheets": [
+    {
+      "id": "archon",
+      "name": "Archon",
+      "role": "Character",
+      "keywords": ["CHARACTER", "INFANTRY", "DRUKHARI", "KABAL", "ARCHON"],
+      "stats": { "m": "7\"", "t": 3, "sv": "4+, 2++", "w": 4, "ld": "6+", "oc": 1 },
+      "composition": { "min": 1, "max": 1, "note": "1 Archon" },
+      "weapons": ["splinter_pistol", "blast_pistol_archon", "agoniser", "huskblade", "mastercrafted_power_weapon"],
+      "abilities": ["Devious Mastermind", "overlord", "shadowfield", "Soul Trap"],
+      "pain": "Hatred Eternal",
+      "points": [{ "models": 1, "pts": 75, "verified": false }],
+      "canLead": ["kabalite_warriors", "incubi"]
+    },
+    {
+      "id": "incubi",
+      "name": "Incubi",
+      "role": "Infantry",
+      "keywords": ["INFANTRY", "DRUKHARI", "INCUBI"],
+      "stats": { "m": "7\"", "t": 3, "sv": "3+, 5++", "w": 1, "ld": "6+", "oc": 1 },
+      "composition": { "min": 3, "max": 10, "note": "1 Klaivex + 2-9 Incubi" },
+      "weapons": ["demiklaives_dual", "demiklaives_single", "klaive"],
+      "abilities": ["tormentors", "Incubi Shrine Token"],
+      "pain": "Decapitating Strikes",
+      "points": [
+        { "models": 3, "pts": 75, "verified": false },
+        { "models": 6, "pts": 150, "verified": false },
+        { "models": 9, "pts": 225, "verified": false }
+      ],
+      "splittable": false
+    },
+    {
+      "id": "kabalite_warriors",
+      "name": "Kabalite Warriors",
+      "role": "Battleline",
+      "keywords": ["BATTLELINE", "INFANTRY", "DRUKHARI", "KABAL"],
+      "stats": { "m": "7\"", "t": 3, "sv": "4+, 6++", "w": 1, "ld": "7+", "oc": 2 },
+      "composition": { "min": 5, "max": 10, "note": "1 Sybarite + 4 or 9 Kabalite Warriors" },
+      "weapons": ["splinter_pistol", "splinter_rifle", "blast_pistol_kabalite", "blaster", "dark_lance_infantry", "shredder", "splinter_cannon_infantry", "close_combat_weapon", "power_weapon_infantry"],
+      "abilities": ["Cruel Enforcers", "Kabalite Icon", "Phantasm Grenade Launcher"],
+      "pain": "Sadistic Raiders",
+      "points": [
+        { "models": 5, "pts": 100, "verified": false },
+        { "models": 10, "pts": 200, "verified": false }
+      ],
+      "splittable": true
+    },
+    {
+      "id": "venom",
+      "name": "Venom",
+      "role": "Transport",
+      "keywords": ["VEHICLE", "TRANSPORT", "FLY", "DRUKHARI"],
+      "stats": { "m": "14\"", "t": 6, "sv": "4+, 6++", "w": 6, "ld": "7+", "oc": 1 },
+      "composition": { "min": 1, "max": 1, "note": "1 Venom" },
+      "weapons": ["splinter_cannon_venom", "twin_splinter_rifle", "bladevanes_venom"],
+      "abilities": ["Aerialists", "Deadly Demise 1"],
+      "pain": "Rapid Deployment",
+      "points": [{ "models": 1, "pts": 70, "verified": false }],
+      "transport": { "capacity": 5, "splitGroupSize": 5, "notes": "Can carry one DRUKHARI INFANTRY unit; a unit may embark split into groups of 5." }
+    },
+    {
+      "id": "raider",
+      "name": "Raider",
+      "role": "Transport",
+      "keywords": ["VEHICLE", "TRANSPORT", "DRUKHARI"],
+      "stats": { "m": "14\"", "t": 8, "sv": "4+, 6++", "w": 10, "ld": "7+", "oc": 2 },
+      "composition": { "min": 1, "max": 1, "note": "1 Raider" },
+      "weapons": ["dark_lance_vehicle", "disintegrator_cannon", "bladevanes_chainsnares_raider"],
+      "abilities": ["Aethersails", "Deadly Demise D3"],
+      "pain": "Splinter Racks",
+      "points": [{ "models": 1, "pts": 85, "verified": false }],
+      "transport": { "capacity": 11, "notes": "Can carry one DRUKHARI INFANTRY unit of up to 11 models." }
+    }
+  ]
+}
