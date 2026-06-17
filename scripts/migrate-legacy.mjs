@@ -1,6 +1,11 @@
 // One-shot migration: parse legacy/index.html into data/catalog.json.
 // Legacy data is weapon-keyed (weapon -> list of units); we invert it to
 // datasheet-keyed (unit -> weapon ids) and capture abilities/pain rules text.
+//
+// ⚠️  data/catalog.json is now the HAND-MAINTAINED source of truth. This script
+// was the one-time bootstrap. Re-running it OVERWRITES manual edits (points,
+// merged model profiles like Klaivex→Incubi, images). Don't run it without a
+// plan to re-apply those edits.
 import { readFileSync, writeFileSync } from 'node:fs';
 
 const html = readFileSync('legacy/index.html', 'utf8');

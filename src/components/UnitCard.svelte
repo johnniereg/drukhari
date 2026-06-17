@@ -10,6 +10,7 @@
   const ranged = $derived(weaponsFor(unit, 'ranged'));
   const melee = $derived(weaponsFor(unit, 'melee'));
   const abilities = $derived(unit.abilities.map(resolveAbility));
+  const painAbility = $derived(unit.pain ? resolveAbility(unit.pain) : null);
 </script>
 
 <div class="card">
@@ -28,6 +29,21 @@
 
   {#if open}
     <div class="body">
+      {#if unit.image}
+        <img class="ref-photo" src={unit.image} alt={unit.name} loading="lazy" />
+      {/if}
+
+      {#if unit.modelProfiles?.length}
+        <div class="profiles">
+          {#each unit.modelProfiles as p}
+            <div class="profile-row">
+              <span class="pname small-caps">{p.name}</span>
+              <span class="pstats">M {p.m} · T {p.t} · SV {p.sv} · W {p.w} · LD {p.ld} · OC {p.oc}</span>
+            </div>
+          {/each}
+        </div>
+      {/if}
+
       <WeaponTable weapons={ranged} kind="ranged" />
       <WeaponTable weapons={melee} kind="melee" />
 
@@ -40,7 +56,10 @@
         </ul>
       {/if}
 
-      {#if unit.pain}<p class="pain"><strong>Pain:</strong> {unit.pain}</p>{/if}
+      {#if painAbility}
+        <h3>Pain — {painAbility.name}</h3>
+        <p class="pain">{#if painAbility.text}{painAbility.text}{:else}<span class="dim">No description on file.</span>{/if}</p>
+      {/if}
 
       {#if unit.transport}
         <p class="transport">
@@ -65,6 +84,11 @@
   h3 { font-size: 12px; text-transform: uppercase; color: var(--text-dim); margin: 12px 0 4px; }
   .abilities { margin: 0; padding-left: 18px; font-size: 13px; line-height: 1.4; }
   .abilities li { margin-bottom: 4px; }
-  .pain, .transport { font-size: 13px; margin: 8px 0 0; }
+  .pain, .transport { font-size: 13px; margin: 4px 0 0; line-height: 1.4; }
   .dim { color: var(--text-dim); }
+  .ref-photo { width: 100%; max-height: 240px; object-fit: contain; border-radius: 8px; background: var(--surface-2); margin-bottom: 8px; }
+  .profiles { margin: 4px 0 2px; }
+  .profile-row { display: flex; flex-direction: column; padding: 4px 0; border-bottom: 1px solid var(--border); }
+  .pname { font-size: 13px; font-weight: 700; }
+  .pstats { font-size: 12px; color: var(--text-dim); }
 </style>

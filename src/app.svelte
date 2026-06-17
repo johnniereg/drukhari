@@ -50,16 +50,24 @@
   h1 { font-size: 22px; margin: 0; color: var(--accent); }
   .meta { font-size: 12px; color: var(--text-dim); }
   main { padding: 12px 14px 40px; max-width: 720px; margin: 0 auto; }
+  /* Secondary: with ~20 units, scanning is primary; search is a fallback. */
   .search {
     width: 100%;
-    min-height: var(--tap);
-    background: var(--surface-2);
+    height: 34px;
+    background: transparent;
     border: 1px solid var(--border);
-    border-radius: var(--radius);
+    border-radius: 8px;
+    color: var(--text-dim);
+    padding: 0 12px;
+    font-size: 13px;
+    margin-bottom: 10px;
+    opacity: 0.7;
+  }
+  .search:focus {
+    outline: none;
+    opacity: 1;
     color: var(--text);
-    padding: 0 14px;
-    font: inherit;
-    margin-bottom: 8px;
+    border-color: var(--accent);
   }
   .empty { color: var(--text-dim); text-align: center; padding: 20px; }
   .footnote { color: var(--text-dim); font-size: 11px; margin-top: 20px; text-align: center; }

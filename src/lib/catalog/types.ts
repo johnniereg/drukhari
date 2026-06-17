@@ -88,6 +88,8 @@ export interface Datasheet {
   composition?: UnitComposition;
   /** Additional model statlines (champions, etc.). */
   modelProfiles?: ModelProfile[];
+  /** Optional reference photo (path under /public, e.g. "/units/archon.jpg"). */
+  image?: string;
   /** Weapon ids this datasheet can field. */
   weapons: string[];
   /** Ability ids + free-text ability names not yet modelled. */

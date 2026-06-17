@@ -1375,6 +1375,9 @@
         "demiklaives_single",
         "klaive"
       ],
+      "modelProfiles": [
+        { "name": "Klaivex", "m": "7\"", "t": "3", "sv": "3+, 5++", "w": "2", "ld": "6+", "oc": "1" }
+      ],
       "role": "Infantry",
       "points": [
         {
@@ -1437,26 +1440,6 @@
         }
       ],
       "splittable": true
-    },
-    {
-      "id": "klaivex",
-      "name": "Klaivex",
-      "stats": {
-        "m": "7\"",
-        "t": 3,
-        "sv": "3+, 5++",
-        "w": 2,
-        "ld": "6+",
-        "oc": 1
-      },
-      "abilities": [
-        "Incubi Shrine Token",
-        "Tormentors"
-      ],
-      "pain": "Decapitating Strikes",
-      "weapons": [],
-      "role": "Infantry",
-      "points": []
     },
     {
       "id": "lady_malys",
