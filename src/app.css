@@ -1,0 +1,47 @@
+:root {
+  /* OLED-black, low-power palette. True #000 background = dark pixels off on OLED. */
+  --bg: #000000;
+  --surface: #0e0e12;
+  --surface-2: #16161d;
+  --border: #2a2a34;
+  --text: #e6e6ea;
+  --text-dim: #9a9aa6;
+  --accent: #7c3aed;        /* drukhari violet */
+  --accent-dim: #4c2a8a;
+  --danger: #b1324a;
+  --ok: #2f9e6f;
+  --radius: 10px;
+  --tap: 44px;              /* minimum touch target */
+  font-family: -apple-system, system-ui, "Segoe UI", Roboto, sans-serif;
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html, body {
+  margin: 0;
+  background: var(--bg);
+  color: var(--text);
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  /* respect iPhone safe areas in standalone PWA */
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+h1, h2, h3 { font-weight: 700; line-height: 1.15; }
+
+.small-caps { font-variant: small-caps; letter-spacing: 0.02em; }
+
+button {
+  font: inherit;
+  color: inherit;
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  min-height: var(--tap);
+  padding: 0 14px;
+  cursor: pointer;
+}
+button.active { background: var(--accent-dim); border-color: var(--accent); }
