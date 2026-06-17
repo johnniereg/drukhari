@@ -33,3 +33,18 @@ export function weaponsFor(d: Datasheet, kind: 'ranged' | 'melee'): Weapon[] {
 export function startingPoints(d: Datasheet): number {
   return d.points[0]?.pts ?? 0;
 }
+
+/** Valid model counts for a datasheet (its points brackets), or [1] if none defined. */
+export function validSizes(d: Datasheet): number[] {
+  return d.points.length ? d.points.map((p) => p.models) : [1];
+}
+
+/** Points for a given model count; 0 (unknown) if no matching bracket. */
+export function pointsForSize(d: Datasheet, size: number): number {
+  return d.points.find((p) => p.models === size)?.pts ?? 0;
+}
+
+/** True if every bracket used by the list has confirmed points. */
+export function pointsConfirmed(d: Datasheet, size: number): boolean {
+  return d.points.find((p) => p.models === size)?.verified ?? false;
+}
