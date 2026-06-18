@@ -28,6 +28,16 @@ export function canTakeEnhancement(d: Datasheet): boolean {
   return d.role === 'Character';
 }
 
+/** Is this datasheet a transport (has embark capacity)? */
+export function isTransport(d: Datasheet): boolean {
+  return !!d.transport?.capacity;
+}
+
+/** Eligible to be carried in a transport? (infantry/characters, not vehicles/transports) */
+export function canEmbark(d: Datasheet): boolean {
+  return d.role === 'Infantry' || d.role === 'Character';
+}
+
 const slug = (s: string) =>
   s.toLowerCase().trim().replace(/[’']/g, '').replace(/[^a-z0-9]+/g, '_').replace(/^_+|_+$/g, '');
 

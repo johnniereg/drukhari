@@ -11,10 +11,26 @@
 
   const det = $derived(getDetachment(list.detachment));
 
-  function rows() {
-    return list.units
-      .map((u) => ({ u, d: getDatasheet(u.datasheetId) }))
-      .filter((r) => r.d);
+  function transportName(uid: string) {
+    return getDatasheet(list.units.find((u) => u.uid === uid)?.datasheetId ?? '')?.name ?? '?';
+  }
+
+  // One display row per whole unit, or per split group (so a 2×5 reads as two rows
+  // with their own size + equipped weapons).
+  function displayRows() {
+    const out: { key: string; datasheetId: string; size: number; loadout?: string[]; enhId?: string; tag: string; loc: string | null }[] = [];
+    for (const u of list.units) {
+      const d = getDatasheet(u.datasheetId);
+      if (!d) continue;
+      if (u.groups?.length) {
+        u.groups.forEach((g, i) =>
+          out.push({ key: `${u.uid}:${g.id}`, datasheetId: u.datasheetId, size: g.size, loadout: g.loadout, tag: ` ▸ grp ${i + 1}`, loc: g.transportUid ? transportName(g.transportUid) : null })
+        );
+      } else {
+        out.push({ key: u.uid, datasheetId: u.datasheetId, size: u.size, loadout: u.loadout, enhId: u.enhancementId, tag: '', loc: u.transportUid ? transportName(u.transportUid) : null });
+      }
+    }
+    return out;
   }
 
   function weapons(loadout: string[] | undefined, datasheetId: string, kind: 'ranged' | 'melee'): Weapon[] {
@@ -24,14 +40,12 @@
     return ids.map((id) => getWeapon(id)).filter((w): w is Weapon => !!w && w.kind === kind);
   }
 
-  // Armour save big, secondary saves (invuln/FNP) small — same idiom as the cards.
   function saveParts(sv: string) {
     const parts = sv.split(',').map((s) => s.trim());
     return { primary: parts[0], rest: parts.slice(1).join(' ') };
   }
 </script>
 
-<!-- Quick list switcher + summary -->
 <div class="bar">
   {#if listStore.lists.length > 1}
     <select class="list-pick" value={list.id} onchange={(e) => (listStore.activeId = (e.target as HTMLSelectElement).value)}>
@@ -59,30 +73,29 @@
       <tr><th class="u">Unit</th><th>M</th><th>T</th><th>SV</th><th>W</th><th>LD</th><th>OC</th></tr>
     </thead>
     <tbody>
-      {#each rows() as { u, d } (u.uid)}
-        {@const sv = saveParts(d!.stats.sv)}
-        {@const enh = getEnhancement(u.enhancementId)}
-        <tr class="srow" onclick={() => (expanded = expanded === u.uid ? null : u.uid)}>
+      {#each displayRows() as r (r.key)}
+        {@const d = getDatasheet(r.datasheetId)!}
+        {@const sv = saveParts(d.stats.sv)}
+        {@const enh = getEnhancement(r.enhId)}
+        <tr class="srow" onclick={() => (expanded = expanded === r.key ? null : r.key)}>
           <td class="u">
-            <span class="uname small-caps">{d!.name}</span>
-            <span class="umeta">{u.size}{#if enh} · {enh.name}{/if}</span>
+            <span class="uname small-caps">{d.name}<span class="rtag">{r.tag}</span></span>
+            <span class="umeta">{r.size}{#if enh} · {enh.name}{/if}{#if r.loc} · in {r.loc}{/if}</span>
           </td>
-          <td>{d!.stats.m}</td>
-          <td>{d!.stats.t}</td>
+          <td>{d.stats.m}</td>
+          <td>{d.stats.t}</td>
           <td class="sv"><span class="svp">{sv.primary}</span>{#if sv.rest}<span class="svs">{sv.rest}</span>{/if}</td>
-          <td>{d!.stats.w}</td>
-          <td>{d!.stats.ld}</td>
-          <td>{d!.stats.oc}</td>
+          <td>{d.stats.w}</td>
+          <td>{d.stats.ld}</td>
+          <td>{d.stats.oc}</td>
         </tr>
-        {#if expanded === u.uid}
+        {#if expanded === r.key}
           <tr class="detail-row">
             <td colspan="7">
-              <WeaponTable weapons={weapons(u.loadout, u.datasheetId, 'ranged')} kind="ranged" />
-              <WeaponTable weapons={weapons(u.loadout, u.datasheetId, 'melee')} kind="melee" />
-              {#if d!.abilities.length}
-                <div class="abil"><strong>Abilities:</strong> {d!.abilities.map((a) => resolveAbility(a).name).join(', ')}</div>
-              {/if}
-              {#if d!.pain}<div class="abil"><strong>Pain:</strong> {resolveAbility(d!.pain).name}</div>{/if}
+              <WeaponTable weapons={weapons(r.loadout, r.datasheetId, 'ranged')} kind="ranged" />
+              <WeaponTable weapons={weapons(r.loadout, r.datasheetId, 'melee')} kind="melee" />
+              {#if d.abilities.length}<div class="abil"><strong>Abilities:</strong> {d.abilities.map((a) => resolveAbility(a).name).join(', ')}</div>{/if}
+              {#if d.pain}<div class="abil"><strong>Pain:</strong> {resolveAbility(d.pain).name}</div>{/if}
               {#if enh}<div class="abil enh"><strong>{enh.name}:</strong> {enh.text}</div>{/if}
             </td>
           </tr>
@@ -90,7 +103,7 @@
       {/each}
     </tbody>
   </table>
-  <p class="hint">Tap a unit for its equipped weapons &amp; abilities.</p>
+  <p class="hint">Tap a unit for its equipped weapons &amp; abilities. Split groups show separately.</p>
 {/if}
 
 <style>
@@ -113,6 +126,7 @@
   .srow td { padding: 7px 2px; text-align: center; border-top: 1px solid var(--border); font-size: 14px; font-weight: 700; }
   .srow td.u { text-align: left; font-weight: 400; }
   .uname { display: block; font-size: 14px; font-weight: 700; }
+  .rtag { color: var(--text-dim); font-weight: 400; font-size: 11px; }
   .umeta { display: block; font-size: 11px; color: var(--text-dim); }
   .sv { line-height: 1.05; }
   .svp { display: block; }
