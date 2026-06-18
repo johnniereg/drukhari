@@ -1,5 +1,6 @@
 <script lang="ts">
   import { listStore } from '../lib/store/lists.svelte';
+  import GameMode from '../components/GameMode.svelte';
   let { gotoLists }: { gotoLists: () => void } = $props();
   const active = $derived(listStore.active);
 </script>
@@ -11,13 +12,7 @@
     <button class="primary" onclick={gotoLists}>Go to Lists</button>
   </div>
 {:else}
-  <div class="gate">
-    <p class="big">“{active.name}” is selected.</p>
-    <p class="dim">
-      Game Mode view is coming next: a dense statline table for the {active.units.length} unit(s) in this list,
-      with transport assignments and Venom split groups reflected so you read the right profile.
-    </p>
-  </div>
+  <GameMode list={active} />
 {/if}
 
 <style>
